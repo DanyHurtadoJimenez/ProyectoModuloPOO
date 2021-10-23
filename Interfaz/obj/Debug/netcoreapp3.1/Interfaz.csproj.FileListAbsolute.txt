@@ -1,0 +1,16 @@
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\Interfaz.exe
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\Interfaz.deps.json
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\Interfaz.runtimeconfig.json
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\Interfaz.runtimeconfig.dev.json
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\Interfaz.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\Interfaz.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.csproj.AssemblyReference.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmMenu.resources
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.csproj.GenerateResource.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.GeneratedMSBuildEditorConfig.editorconfig
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.AssemblyInfoInputs.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.AssemblyInfo.cs
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.csproj.CoreCompileInputs.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.genruntimeconfig.cache
