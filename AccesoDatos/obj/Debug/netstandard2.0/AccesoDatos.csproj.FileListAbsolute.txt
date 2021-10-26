@@ -1,0 +1,13 @@
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\AccesoDatos.deps.json
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\AccesoDatos.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\AccesoDatos.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\Entidades.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\Entidades.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.csproj.AssemblyReference.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.GeneratedMSBuildEditorConfig.editorconfig
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.AssemblyInfoInputs.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.AssemblyInfo.cs
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.csproj.CoreCompileInputs.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.csproj.CopyComplete
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.pdb

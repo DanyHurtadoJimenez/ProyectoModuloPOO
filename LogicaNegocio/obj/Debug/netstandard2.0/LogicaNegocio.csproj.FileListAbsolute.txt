@@ -1,0 +1,15 @@
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\LogicaNegocio.deps.json
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\LogicaNegocio.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\LogicaNegocio.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\AccesoDatos.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\Entidades.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\AccesoDatos.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\Entidades.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.csproj.AssemblyReference.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.GeneratedMSBuildEditorConfig.editorconfig
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.AssemblyInfoInputs.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.AssemblyInfo.cs
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.csproj.CoreCompileInputs.cache
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.csproj.CopyComplete
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.pdb

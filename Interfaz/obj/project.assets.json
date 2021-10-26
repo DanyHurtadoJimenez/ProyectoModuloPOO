@@ -1,11 +1,68 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "AccesoDatos/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Entidades": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/AccesoDatos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AccesoDatos.dll": {}
+        }
+      },
+      "Entidades/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Entidades.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entidades.dll": {}
+        }
+      },
+      "LogicaNegocio/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "AccesoDatos": "1.0.0",
+          "Entidades": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/LogicaNegocio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LogicaNegocio.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "AccesoDatos/1.0.0": {
+      "type": "project",
+      "path": "../AccesoDatos/AccesoDatos.csproj",
+      "msbuildProject": "../AccesoDatos/AccesoDatos.csproj"
+    },
+    "Entidades/1.0.0": {
+      "type": "project",
+      "path": "../Entidades/Entidades.csproj",
+      "msbuildProject": "../Entidades/Entidades.csproj"
+    },
+    "LogicaNegocio/1.0.0": {
+      "type": "project",
+      "path": "../LogicaNegocio/LogicaNegocio.csproj",
+      "msbuildProject": "../LogicaNegocio/LogicaNegocio.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "Entidades >= 1.0.0",
+      "LogicaNegocio >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Dany\\.nuget\\packages\\": {},
@@ -38,7 +95,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
+              "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj"
+            },
+            "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj": {
+              "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

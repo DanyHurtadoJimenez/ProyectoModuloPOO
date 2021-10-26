@@ -22,3 +22,10 @@ C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreap
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmAgregarMateriaAbierta.resources
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmDespliegueCostos.resources
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmMatricular.resources
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\AccesoDatos.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\Entidades.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\LogicaNegocio.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\Entidades.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\LogicaNegocio.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\AccesoDatos.pdb
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.csproj.CopyComplete
