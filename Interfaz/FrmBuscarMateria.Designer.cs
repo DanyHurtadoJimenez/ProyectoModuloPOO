@@ -1,7 +1,7 @@
 ﻿
 namespace Interfaz
 {
-    partial class BuscarMateria
+    partial class FrmBuscarMateria
     {
         /// <summary>
         /// Required designer variable.
@@ -83,7 +83,7 @@ namespace Interfaz
             this.btnAgregarMateria.Text = "Agregar";
             this.btnAgregarMateria.UseVisualStyleBackColor = true;
             // 
-            // BuscarMateria
+            // FrmBuscarMateria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -93,7 +93,7 @@ namespace Interfaz
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvBuscarMateria);
             this.MaximizeBox = false;
-            this.Name = "BuscarMateria";
+            this.Name = "FrmBuscarMateria";
             this.Text = "Buscar Materia";
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarMateria)).EndInit();
             this.ResumeLayout(false);

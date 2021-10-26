@@ -30,15 +30,26 @@ namespace Interfaz
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.abrirMateriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirMateriasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // abrirMateriasToolStripMenuItem
+            // 
+            this.abrirMateriasToolStripMenuItem.Name = "abrirMateriasToolStripMenuItem";
+            this.abrirMateriasToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.abrirMateriasToolStripMenuItem.Text = "Abrir Cursos";
+            this.abrirMateriasToolStripMenuItem.Click += new System.EventHandler(this.abrirMateriasToolStripMenuItem_Click);
             // 
             // FrmMenu
             // 
@@ -52,6 +63,8 @@ namespace Interfaz
             this.Name = "FrmMenu";
             this.Text = "Menu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -60,6 +73,7 @@ namespace Interfaz
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem abrirMateriasToolStripMenuItem;
     }
 }
 

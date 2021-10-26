@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Interfaz
 {
-    public partial class BuscarMateria : Form
+    public partial class FrmBuscarMateria : Form
     {
-        public BuscarMateria()
+        public FrmBuscarMateria()
         {
             InitializeComponent();
         }

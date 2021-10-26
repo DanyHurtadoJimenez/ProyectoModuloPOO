@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Interfaz
 {
-    public partial class AperturaCursos : Form
+    public partial class FrmAgregarMateriaAbierta : Form
     {
-        public AperturaCursos()
+        public FrmAgregarMateriaAbierta()
         {
             InitializeComponent();
         }
