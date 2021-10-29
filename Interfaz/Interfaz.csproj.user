@@ -10,7 +10,13 @@
     <Compile Update="FrmAperturaCursos.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FrmBuscarAula.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FrmBuscarMateria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmBuscarProfesor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FrmDespliegueCostos.cs">

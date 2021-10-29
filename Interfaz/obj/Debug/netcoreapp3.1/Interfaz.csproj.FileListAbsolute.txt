@@ -29,3 +29,11 @@ C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreap
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\LogicaNegocio.pdb
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\AccesoDatos.pdb
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.csproj.CopyComplete
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmBuscarProfesor.resources
+C:\TareasC#\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmBuscarAula.resources

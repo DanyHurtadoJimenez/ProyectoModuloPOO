@@ -35,7 +35,7 @@ namespace Entidades
             codigoMateria = null;
             requisito = null;
             corequisito = null;
-            estado = string.Empty;
+            estado = "VIGENTE";
             borrado = 0;
         }
         #endregion
