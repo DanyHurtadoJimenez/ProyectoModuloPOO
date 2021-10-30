@@ -9,12 +9,12 @@ namespace Entidades
         #region Atributos
         private MateriasAbiertas codigoMateriaAbierta;
         private string dia;
-        private string horaInicio; //////////////////////////////
-        private string horaFin; ///////////////////////////////////
+        private DateTime horaInicio; //////////////////////////////
+        private DateTime horaFin; ///////////////////////////////////
         #endregion
 
         #region Constructores
-        public Horarios(MateriasAbiertas codigoMA, string diaH, string horaInicioH, string horaFinH)
+        public Horarios(MateriasAbiertas codigoMA, string diaH, DateTime horaInicioH, DateTime horaFinH)
         {
             codigoMateriaAbierta = codigoMA;
             dia = diaH;
@@ -26,16 +26,16 @@ namespace Entidades
         {
             codigoMateriaAbierta = null;
             dia = string.Empty;
-            horaInicio = string.Empty;
-            horaFin = string.Empty;
+            horaInicio = DateTime.Today;
+            horaFin = DateTime.Today;
         }
         #endregion
 
         #region Propiedades
         public MateriasAbiertas CodigoMateriaAbierta { get => codigoMateriaAbierta; set => codigoMateriaAbierta = value; }
         public string Dia { get => dia; set => dia = value; }
-        public string HoraInicio { get => horaInicio; set => horaInicio = value; }
-        public string HoraFin { get => horaFin; set => horaFin = value; }
+        public DateTime HoraInicio { get => horaInicio; set => horaInicio = value; }
+        public DateTime HoraFin { get => horaFin; set => horaFin = value; }
         #endregion
 
         #region Metodos

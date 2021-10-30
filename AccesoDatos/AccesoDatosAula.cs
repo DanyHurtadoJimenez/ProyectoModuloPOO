@@ -89,12 +89,11 @@ namespace AccesoDatos
                 if (dataReader.HasRows)
                 {
                     dataReader.Read();//lee fila por fila del data reader
-                    aula.CodigoAula = dataReader.GetByte(0); //esta columna es de tipo integer y esta en la posicion 0
+                    aula.CodigoAula = dataReader.GetInt32(0); //esta columna es de tipo integer y esta en la posicion 0
                     aula.TipoAula = dataReader.GetString(1);
-                    aula.NumeroAula = dataReader.GetByte(2);
-                    aula.Capacidad = dataReader.GetByte(3);
-                    aula.Disponibilidad = dataReader.GetInt32(4);
-
+                    aula.NumeroAula = dataReader.GetInt32(2);
+                    aula.Capacidad = dataReader.GetInt32(3);
+                    aula.Disponibilidad = dataReader.GetBoolean(4);
                 }
                 conexion.Close();
 

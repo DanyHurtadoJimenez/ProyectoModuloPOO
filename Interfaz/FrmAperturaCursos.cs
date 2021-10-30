@@ -18,6 +18,8 @@ namespace Interfaz
         }
 
         //variables globales
+        
+
 
         List<Horarios> lista = new List<Horarios>();//la lista donde se almacenaran los horarios de la materia
 
@@ -48,6 +50,44 @@ namespace Interfaz
                 throw;
             }
         }
+
+
+        private MateriasAbiertas GenerarEntidad()
+        { //genera entidad para crear o modificar la informacion 
+            MateriasAbiertas materiaA;
+            MateriasAbiertas materiaAbierta = new MateriasAbiertas();
+            materiaAbierta.CodigoMateriaCarrera = new MateriasCarreras();
+            materiaAbierta.CodigoProfesor = new Profesores();
+            materiaAbierta.CodigoAula = new Aulas();
+
+            if (!string.IsNullOrEmpty(txtCodigoMateria.Text))
+            {
+                
+                materiaA = new MateriasAbiertas();
+                materiaA.CodigoMateriaCarrera = new MateriasCarreras();
+                materiaA.CodigoProfesor = new Profesores();
+                materiaA.CodigoAula = new Aulas();
+                materiaA = materiaAbierta;
+            }
+            else
+            {
+                materiaA = new MateriasAbiertas();
+                materiaA.CodigoMateriaCarrera = new MateriasCarreras();
+                materiaA.CodigoProfesor = new Profesores();
+                materiaA.CodigoAula = new Aulas();
+            }
+
+            materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = int.Parse(txtCodigoMateria.Text);
+            //materiaA.CodigoProfesor.CodigoProfesor = int.Parse(txtCodProfe.Text);
+            materiaA.CodigoAula.CodigoAula = int.Parse(txtCodigaAula.Text);
+            materiaA.Grupo = byte.Parse(txtGrupo.Text);
+            materiaA.Cupo = byte.Parse(txtCupo.Text);
+            materiaA.Costo = Convert.ToDecimal(txtCosto.Text);
+            materiaA.Periodo = Convert.ToByte(nudPeriodo.Value);
+            materiaA.Anio = Int16.Parse(txtAnio.Text);
+            return materiaA;
+        }
+
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
@@ -82,24 +122,26 @@ namespace Interfaz
 
                 horario.CodigoMateriaAbierta = new MateriasAbiertas();
                 horario.Dia = comboDiasSemana.SelectedItem.ToString();
+                horario.HoraInicio = dtpHoraInicio.Value;
+                horario.HoraFin = dtpHoraFinal.Value;
 
-                if (dtpHoraInicio.Value.Minute < 10) // formateando la horas y los minutos
-                {
-                    horario.HoraInicio = dtpHoraInicio.Value.Hour.ToString() + ":" + 0 + dtpHoraInicio.Value.Minute.ToString();
-                }
-                else
-                {
-                    horario.HoraInicio = dtpHoraInicio.Value.Hour.ToString() + ":" + dtpHoraInicio.Value.Minute.ToString();
-                }
+                //if (dtpHoraInicio.Value.Minute < 10) // formateando la horas y los minutos
+                //{
+                //    horario.HoraInicio = dtpHoraInicio.Value;
+                //}
+                //else
+                //{
+                //    horario.HoraInicio = dtpHoraInicio.Value.;
+                //}
 
-                if (dtpHoraFinal.Value.Minute < 10)
-                {
-                    horario.HoraFin = dtpHoraFinal.Value.Hour.ToString() + ":" + 0 + dtpHoraFinal.Value.Minute.ToString();
-                }
-                else
-                {
-                    horario.HoraFin = dtpHoraFinal.Value.Hour.ToString() + ":" + dtpHoraFinal.Value.Minute.ToString();
-                }
+                //if (dtpHoraFinal.Value.Minute < 10)
+                //{
+                //    horario.HoraFin = dtpHoraFinal.Value;
+                //}
+                //else
+                //{
+                //    horario.HoraFin = dtpHoraFinal.Value.Hour.ToString() + ":" + dtpHoraFinal.Value.Minute.ToString();
+                //}
 
                 lista.Add(horario); //se va guardando en una lista el horario para pasarlo a un data table y poder cargar el data grid
 
@@ -235,6 +277,87 @@ namespace Interfaz
 
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnAbrirMateria_Click(object sender, EventArgs e)
+        {
+            LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+            MateriasAbiertas materiaAB;
+            int idMateriaAbierta,ingresoProfesor = -1;
+            try
+            {
+                if (!string.IsNullOrEmpty(txtCodigoMateria.Text) && !string.IsNullOrEmpty(txtNombreMateria.Text) &&
+                    !string.IsNullOrEmpty(txtCreditos.Text) && !string.IsNullOrEmpty(txtCodigoCarrera.Text)&&
+                    !string.IsNullOrEmpty(txtNombreCarrera.Text))
+                {
+                    if (!string.IsNullOrEmpty(txtGrupo.Text) && !string.IsNullOrEmpty(txtCupo.Text) &&
+                        !string.IsNullOrEmpty(txtCosto.Text) && nudPeriodo.Value != 0 &&
+                        !string.IsNullOrEmpty(txtAnio.Text))
+                    {
+                        if (comboDiasSemana.SelectedIndex != -1 && dtgvMostrarHorario.Rows.Count > 0)
+                        {
+                            materiaAB = GenerarEntidad();
+                            if (materiaAB.Existe)
+                            {
+                                idMateriaAbierta = logicaMA.InsertarMateriaAbierta(materiaAB, lista);
+                            }
+                            else 
+                            {
+                                idMateriaAbierta = -1;//se llamaria al metodo modificar                            
+                            }
+
+                            if (idMateriaAbierta > 0 )
+                            {
+                                //llamarMetodoLimpiar
+                                MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                if (!string.IsNullOrEmpty(txtCodProfe.Text))
+                                {
+                                    int codProfesor = int.Parse(txtCodProfe.Text);
+                                    
+                                    ingresoProfesor = logicaMA.AsignarProfesor(materiaAB,codProfesor,idMateriaAbierta,lista); //se trata de ingresar al profesor
+                                }
+
+                                if (ingresoProfesor == 0)
+                                {
+                                    MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(logicaMA.Mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("No fue posible abrir la materia", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Debe introducir un horario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe introducir la informacion de los periodos y cupos de la materia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe realizar la busqueda de la informacion de la materia primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
         }
     }
 }

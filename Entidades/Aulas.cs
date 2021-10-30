@@ -11,7 +11,7 @@ namespace Entidades
         private string tipoAula;
         private int numeroAula;
         private int capacidad;
-        private int disponibilidad;
+        private bool disponibilidad;
         #endregion
 
         #region Constructores
@@ -21,7 +21,7 @@ namespace Entidades
             tipoAula = tipoA;
             numeroAula = numeroA;
             capacidad = capacidadA;
-            disponibilidad = 1;
+            disponibilidad = true;
         }
 
         public Aulas()
@@ -30,16 +30,16 @@ namespace Entidades
             tipoAula = string.Empty;
             numeroAula = 0;
             capacidad = 0;
-            disponibilidad = 1;
+            disponibilidad = true;
         }
         #endregion
 
-        #region Atributos
+        #region Propiedades
         public int CodigoAula { get => codigoAula; set => codigoAula = value; }
         public string TipoAula { get => tipoAula; set => tipoAula = value; }
         public int NumeroAula { get => numeroAula; set => numeroAula = value; }
         public int Capacidad { get => capacidad; set => capacidad = value; }
-        public int Disponibilidad { get => disponibilidad; set => disponibilidad = value; }
+        public bool Disponibilidad { get => disponibilidad; set => disponibilidad = value; }
         #endregion
 
         #region Metodos

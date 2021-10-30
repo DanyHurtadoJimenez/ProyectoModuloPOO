@@ -46,7 +46,7 @@ namespace Interfaz
 
             if (dgvBuscarAula.SelectedRows.Count > 0) //si ha seleccionado una fila
             {
-                codAula = Convert.ToInt32(dgvBuscarAula.SelectedRows[0].Cells[0].Value);////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                codAula = (int)(dgvBuscarAula.SelectedRows[0].Cells[0].Value);////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 MandarAula(codAula, null);//le manda el id al evento  que esta en el otro form
                 Close();//se cierra la ventana
             }

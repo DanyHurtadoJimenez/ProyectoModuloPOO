@@ -69,6 +69,13 @@ namespace Interfaz
             this.btnBuscarProfesor = new System.Windows.Forms.Button();
             this.txtCodProfe = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtCapacidad = new System.Windows.Forms.TextBox();
+            this.txtNumAula = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtTipoAula = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lblCodigoAula = new System.Windows.Forms.Label();
             this.btnQuitarAula = new System.Windows.Forms.Button();
             this.btnBuscarAula = new System.Windows.Forms.Button();
             this.txtCodigaAula = new System.Windows.Forms.TextBox();
@@ -85,15 +92,8 @@ namespace Interfaz
             this.txtGrupo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnAbrirMateria = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.lblCodigoAula = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txtTipoAula = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.txtNumAula = new System.Windows.Forms.TextBox();
-            this.txtCapacidad = new System.Windows.Forms.TextBox();
             this.GrbBuscarMateria.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvMostrarHorario)).BeginInit();
@@ -526,6 +526,70 @@ namespace Interfaz
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Asignar Aula";
             // 
+            // txtCapacidad
+            // 
+            this.txtCapacidad.Enabled = false;
+            this.txtCapacidad.Location = new System.Drawing.Point(470, 96);
+            this.txtCapacidad.Name = "txtCapacidad";
+            this.txtCapacidad.ReadOnly = true;
+            this.txtCapacidad.Size = new System.Drawing.Size(189, 23);
+            this.txtCapacidad.TabIndex = 9;
+            this.txtCapacidad.TextChanged += new System.EventHandler(this.txtCapacidad_TextChanged);
+            // 
+            // txtNumAula
+            // 
+            this.txtNumAula.Enabled = false;
+            this.txtNumAula.Location = new System.Drawing.Point(470, 40);
+            this.txtNumAula.Name = "txtNumAula";
+            this.txtNumAula.ReadOnly = true;
+            this.txtNumAula.Size = new System.Drawing.Size(189, 23);
+            this.txtNumAula.TabIndex = 8;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(372, 98);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(90, 15);
+            this.label22.TabIndex = 7;
+            this.label22.Text = "Capacidad Aula";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(372, 43);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(78, 15);
+            this.label21.TabIndex = 6;
+            this.label21.Text = "Numero Aula";
+            // 
+            // txtTipoAula
+            // 
+            this.txtTipoAula.Enabled = false;
+            this.txtTipoAula.Location = new System.Drawing.Point(107, 95);
+            this.txtTipoAula.Name = "txtTipoAula";
+            this.txtTipoAula.ReadOnly = true;
+            this.txtTipoAula.Size = new System.Drawing.Size(180, 23);
+            this.txtTipoAula.TabIndex = 5;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(11, 98);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(57, 15);
+            this.label20.TabIndex = 4;
+            this.label20.Text = "Tipo Aula";
+            // 
+            // lblCodigoAula
+            // 
+            this.lblCodigoAula.AutoSize = true;
+            this.lblCodigoAula.Location = new System.Drawing.Point(11, 43);
+            this.lblCodigoAula.Name = "lblCodigoAula";
+            this.lblCodigoAula.Size = new System.Drawing.Size(73, 15);
+            this.lblCodigoAula.TabIndex = 3;
+            this.lblCodigoAula.Text = "Código Aula";
+            // 
             // btnQuitarAula
             // 
             this.btnQuitarAula.Location = new System.Drawing.Point(740, 95);
@@ -692,88 +756,25 @@ namespace Interfaz
             this.label9.TabIndex = 0;
             this.label9.Text = "Grupo:";
             // 
-            // button2
+            // btnAbrirMateria
             // 
-            this.button2.Location = new System.Drawing.Point(52, 31);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(102, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Abrir Materia";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnAbrirMateria.Location = new System.Drawing.Point(52, 31);
+            this.btnAbrirMateria.Name = "btnAbrirMateria";
+            this.btnAbrirMateria.Size = new System.Drawing.Size(102, 23);
+            this.btnAbrirMateria.TabIndex = 7;
+            this.btnAbrirMateria.Text = "Abrir Materia";
+            this.btnAbrirMateria.UseVisualStyleBackColor = true;
+            this.btnAbrirMateria.Click += new System.EventHandler(this.btnAbrirMateria_Click);
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.button2);
+            this.groupBox5.Controls.Add(this.btnAbrirMateria);
             this.groupBox5.Location = new System.Drawing.Point(805, 690);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(200, 75);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Abrir Materia";
-            // 
-            // lblCodigoAula
-            // 
-            this.lblCodigoAula.AutoSize = true;
-            this.lblCodigoAula.Location = new System.Drawing.Point(11, 43);
-            this.lblCodigoAula.Name = "lblCodigoAula";
-            this.lblCodigoAula.Size = new System.Drawing.Size(73, 15);
-            this.lblCodigoAula.TabIndex = 3;
-            this.lblCodigoAula.Text = "Código Aula";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(11, 98);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(57, 15);
-            this.label20.TabIndex = 4;
-            this.label20.Text = "Tipo Aula";
-            // 
-            // txtTipoAula
-            // 
-            this.txtTipoAula.Enabled = false;
-            this.txtTipoAula.Location = new System.Drawing.Point(107, 95);
-            this.txtTipoAula.Name = "txtTipoAula";
-            this.txtTipoAula.ReadOnly = true;
-            this.txtTipoAula.Size = new System.Drawing.Size(180, 23);
-            this.txtTipoAula.TabIndex = 5;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(372, 43);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(78, 15);
-            this.label21.TabIndex = 6;
-            this.label21.Text = "Numero Aula";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(372, 98);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(90, 15);
-            this.label22.TabIndex = 7;
-            this.label22.Text = "Capacidad Aula";
-            // 
-            // txtNumAula
-            // 
-            this.txtNumAula.Enabled = false;
-            this.txtNumAula.Location = new System.Drawing.Point(470, 40);
-            this.txtNumAula.Name = "txtNumAula";
-            this.txtNumAula.ReadOnly = true;
-            this.txtNumAula.Size = new System.Drawing.Size(189, 23);
-            this.txtNumAula.TabIndex = 8;
-            // 
-            // txtCapacidad
-            // 
-            this.txtCapacidad.Enabled = false;
-            this.txtCapacidad.Location = new System.Drawing.Point(470, 96);
-            this.txtCapacidad.Name = "txtCapacidad";
-            this.txtCapacidad.ReadOnly = true;
-            this.txtCapacidad.Size = new System.Drawing.Size(189, 23);
-            this.txtCapacidad.TabIndex = 9;
-            this.txtCapacidad.TextChanged += new System.EventHandler(this.txtCapacidad_TextChanged);
             // 
             // FrmAperturaCursos
             // 
@@ -859,7 +860,7 @@ namespace Interfaz
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown nudPeriodo;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAbrirMateria;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox txtCupo;
         private System.Windows.Forms.Label label14;

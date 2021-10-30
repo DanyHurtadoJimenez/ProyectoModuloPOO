@@ -17,6 +17,7 @@ namespace Entidades
         private int periodo;
         private int anio;
         private int disponible;
+        private bool existe;
         #endregion
 
         #region Constructores
@@ -32,7 +33,8 @@ namespace Entidades
             periodo = periodoMA;
             anio = anioMA;
             disponible = 1;
-        }
+            existe = true;
+    }
 
         public MateriasAbiertas()
         {
@@ -46,6 +48,7 @@ namespace Entidades
             periodo = 0;
             anio = 0; ////////////////////////////////////////////////////////////
             disponible = 1;
+            existe = true;
         }
         #endregion
 
@@ -60,6 +63,7 @@ namespace Entidades
         public int Periodo { get => periodo; set => periodo = value; }
         public int Anio { get => anio; set => anio = value; }
         public int Disponible { get => disponible; set => disponible = value; }
+        public bool Existe { get => existe; set => existe = value; }
         #endregion
 
         #region Metodos
