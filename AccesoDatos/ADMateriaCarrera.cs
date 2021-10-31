@@ -50,11 +50,11 @@ namespace AccesoDatos
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlDataAdapter adapter;
-            string sentencia = "select CodMateriaCarrera,MC.CodigoMateria,NombreMateria,CreditosMateria,NombreCarrera,C.CodigoCarrera from TBL_MateriasCarreras MC inner join TBL_Materias M on MC.CodigoMateria = M.CodigoMateria inner join TBL_Carreras C on MC.CodigoCarrera = C.CodigoCarrera";
+            string sentencia = "select CodMateriaCarrera,MC.CodigoMateria,NombreMateria,CreditosMateria,NombreCarrera,C.CodigoCarrera from TBL_MateriasCarreras MC inner join TBL_Materias M on MC.CodigoMateria = M.CodigoMateria inner join TBL_Carreras C on MC.CodigoCarrera = C.CodigoCarrera where Estado = 'NO VIGENTE'";
 
             if (!string.IsNullOrEmpty(condicion))
             { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia
-                sentencia = string.Format("{0} where {1}", sentencia, condicion);
+                sentencia = string.Format("{0} and {1}", sentencia, condicion);
             }
 
             try
@@ -114,16 +114,8 @@ namespace AccesoDatos
                     materiaC.CodigoCarreras.NombreCarrera = dataReader.GetString(8);
                     materiaC.CodigoMateria.CreditosMateria = dataReader.GetByte(9);
 
-                    //if (!dataReader.IsDBNull(3)) //SE HACE ASI PARA EVITAR LOS NULOSVERIFICA PRIMERO SI HAY NULOS
-                    //{
-                    //    materiaC.CodigoCarreras.CodigoCarrera = dataReader.GetInt32(3);
-                    //}
-
                 }
                 conexion.Close();
-
-                //con un while y si quiero obtener una lista de clientes seria asi
-                //while (dataReader.HasRows) al igual que en el if lea los datos crea una instancia y metala en una lista para devovleer una lista de clientes
 
             }
             catch (Exception)

@@ -43,9 +43,6 @@ namespace Interfaz
             this.txtCodigoMateria = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dtgvMostrarHorario = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnModificarHorario = new System.Windows.Forms.Button();
             this.btnAgregarHorario = new System.Windows.Forms.Button();
             this.dtpHoraFinal = new System.Windows.Forms.DateTimePicker();
@@ -82,18 +79,21 @@ namespace Interfaz
             this.button1 = new System.Windows.Forms.Button();
             this.grbEliminarMateria = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtCupo = new System.Windows.Forms.TextBox();
             this.nudPeriodo = new System.Windows.Forms.NumericUpDown();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.txtCosto = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtGrupo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnAbrirMateria = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nudCupo = new System.Windows.Forms.NumericUpDown();
+            this.nudGrupo = new System.Windows.Forms.NumericUpDown();
             this.GrbBuscarMateria.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvMostrarHorario)).BeginInit();
@@ -103,6 +103,8 @@ namespace Interfaz
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPeriodo)).BeginInit();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCupo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGrupo)).BeginInit();
             this.SuspendLayout();
             // 
             // GrbBuscarMateria
@@ -236,9 +238,9 @@ namespace Interfaz
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.comboDiasSemana);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(557, 131);
+            this.groupBox1.Location = new System.Drawing.Point(384, 131);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(448, 214);
+            this.groupBox1.Size = new System.Drawing.Size(621, 214);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Definir Horario para la materia";
@@ -259,34 +261,13 @@ namespace Interfaz
             this.dtgvMostrarHorario.RowTemplate.Height = 25;
             this.dtgvMostrarHorario.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dtgvMostrarHorario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgvMostrarHorario.Size = new System.Drawing.Size(241, 136);
+            this.dtgvMostrarHorario.Size = new System.Drawing.Size(420, 136);
             this.dtgvMostrarHorario.TabIndex = 2;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "dia";
-            this.Column1.HeaderText = "Día";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 35;
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "horainicio";
-            this.Column7.HeaderText = "Hora de Inicio";
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 80;
-            // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "horafin";
-            this.Column8.HeaderText = "Hora de Fin";
-            this.Column8.Name = "Column8";
-            this.Column8.Width = 80;
             // 
             // btnModificarHorario
             // 
             this.btnModificarHorario.Enabled = false;
-            this.btnModificarHorario.Location = new System.Drawing.Point(300, 178);
+            this.btnModificarHorario.Location = new System.Drawing.Point(470, 178);
             this.btnModificarHorario.Name = "btnModificarHorario";
             this.btnModificarHorario.Size = new System.Drawing.Size(136, 23);
             this.btnModificarHorario.TabIndex = 7;
@@ -534,7 +515,6 @@ namespace Interfaz
             this.txtCapacidad.ReadOnly = true;
             this.txtCapacidad.Size = new System.Drawing.Size(189, 23);
             this.txtCapacidad.TabIndex = 9;
-            this.txtCapacidad.TextChanged += new System.EventHandler(this.txtCapacidad_TextChanged);
             // 
             // txtNumAula
             // 
@@ -592,6 +572,7 @@ namespace Interfaz
             // 
             // btnQuitarAula
             // 
+            this.btnQuitarAula.Enabled = false;
             this.btnQuitarAula.Location = new System.Drawing.Point(740, 95);
             this.btnQuitarAula.Name = "btnQuitarAula";
             this.btnQuitarAula.Size = new System.Drawing.Size(238, 23);
@@ -639,35 +620,26 @@ namespace Interfaz
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.txtCupo);
+            this.groupBox4.Controls.Add(this.nudGrupo);
+            this.groupBox4.Controls.Add(this.nudCupo);
             this.groupBox4.Controls.Add(this.nudPeriodo);
             this.groupBox4.Controls.Add(this.txtAnio);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.txtCosto);
             this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.txtGrupo);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Location = new System.Drawing.Point(12, 131);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(527, 214);
+            this.groupBox4.Size = new System.Drawing.Size(350, 214);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Informacion Periodos";
             // 
-            // txtCupo
-            // 
-            this.txtCupo.Enabled = false;
-            this.txtCupo.Location = new System.Drawing.Point(100, 121);
-            this.txtCupo.Name = "txtCupo";
-            this.txtCupo.ReadOnly = true;
-            this.txtCupo.Size = new System.Drawing.Size(100, 23);
-            this.txtCupo.TabIndex = 11;
-            // 
             // nudPeriodo
             // 
-            this.nudPeriodo.Location = new System.Drawing.Point(350, 96);
+            this.nudPeriodo.Location = new System.Drawing.Point(234, 99);
             this.nudPeriodo.Maximum = new decimal(new int[] {
             3,
             0,
@@ -691,7 +663,7 @@ namespace Interfaz
             // txtAnio
             // 
             this.txtAnio.Enabled = false;
-            this.txtAnio.Location = new System.Drawing.Point(350, 149);
+            this.txtAnio.Location = new System.Drawing.Point(234, 152);
             this.txtAnio.Name = "txtAnio";
             this.txtAnio.ReadOnly = true;
             this.txtAnio.Size = new System.Drawing.Size(100, 23);
@@ -700,7 +672,7 @@ namespace Interfaz
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(300, 152);
+            this.label13.Location = new System.Drawing.Point(184, 155);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(32, 15);
             this.label13.TabIndex = 8;
@@ -709,7 +681,7 @@ namespace Interfaz
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(300, 98);
+            this.label12.Location = new System.Drawing.Point(184, 101);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(51, 15);
             this.label12.TabIndex = 6;
@@ -717,7 +689,8 @@ namespace Interfaz
             // 
             // txtCosto
             // 
-            this.txtCosto.Location = new System.Drawing.Point(350, 41);
+            this.txtCosto.Location = new System.Drawing.Point(234, 44);
+            this.txtCosto.MaxLength = 7;
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(100, 23);
             this.txtCosto.TabIndex = 5;
@@ -725,23 +698,16 @@ namespace Interfaz
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(300, 44);
+            this.label11.Location = new System.Drawing.Point(184, 47);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(41, 15);
             this.label11.TabIndex = 4;
             this.label11.Text = "Costo:";
             // 
-            // txtGrupo
-            // 
-            this.txtGrupo.Location = new System.Drawing.Point(100, 72);
-            this.txtGrupo.Name = "txtGrupo";
-            this.txtGrupo.Size = new System.Drawing.Size(100, 23);
-            this.txtGrupo.TabIndex = 2;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(33, 124);
+            this.label10.Location = new System.Drawing.Point(8, 123);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(39, 15);
             this.label10.TabIndex = 1;
@@ -750,7 +716,7 @@ namespace Interfaz
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(33, 75);
+            this.label9.Location = new System.Drawing.Point(8, 74);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(43, 15);
             this.label9.TabIndex = 0;
@@ -775,6 +741,53 @@ namespace Interfaz
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Abrir Materia";
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "dia";
+            this.Column1.HeaderText = "Día";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 35;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "horainicio";
+            this.Column7.HeaderText = "Hora de Inicio";
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 170;
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "horafin";
+            this.Column8.HeaderText = "Hora de Fin";
+            this.Column8.Name = "Column8";
+            this.Column8.Width = 170;
+            // 
+            // nudCupo
+            // 
+            this.nudCupo.Location = new System.Drawing.Point(75, 121);
+            this.nudCupo.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudCupo.Name = "nudCupo";
+            this.nudCupo.ReadOnly = true;
+            this.nudCupo.Size = new System.Drawing.Size(100, 23);
+            this.nudCupo.TabIndex = 14;
+            // 
+            // nudGrupo
+            // 
+            this.nudGrupo.Location = new System.Drawing.Point(75, 72);
+            this.nudGrupo.Maximum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.nudGrupo.Name = "nudGrupo";
+            this.nudGrupo.ReadOnly = true;
+            this.nudGrupo.Size = new System.Drawing.Size(100, 23);
+            this.nudGrupo.TabIndex = 9;
             // 
             // FrmAperturaCursos
             // 
@@ -808,6 +821,8 @@ namespace Interfaz
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPeriodo)).EndInit();
             this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudCupo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGrupo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -847,22 +862,17 @@ namespace Interfaz
         private System.Windows.Forms.TextBox txtNombreCarrera;
         private System.Windows.Forms.TextBox txtCodigoCarrera;
         private System.Windows.Forms.TextBox txtCreditos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox txtAnio;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtCosto;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtGrupo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown nudPeriodo;
         private System.Windows.Forms.Button btnAbrirMateria;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox txtCupo;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtApellido2;
         private System.Windows.Forms.TextBox txtApellido1;
@@ -879,5 +889,10 @@ namespace Interfaz
         private System.Windows.Forms.TextBox txtTipoAula;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label lblCodigoAula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.NumericUpDown nudGrupo;
+        private System.Windows.Forms.NumericUpDown nudCupo;
     }
 }

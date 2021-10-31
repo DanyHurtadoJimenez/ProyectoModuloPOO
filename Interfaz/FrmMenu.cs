@@ -20,7 +20,7 @@ namespace Interfaz
         private void abrirMateriasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmAperturaCursos formularioAperturaCursos = new FrmAperturaCursos();
-            formularioAperturaCursos.Show(this);
+            formularioAperturaCursos.ShowDialog(this);
         }
     }
 }

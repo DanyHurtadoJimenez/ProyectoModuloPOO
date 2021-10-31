@@ -109,5 +109,44 @@ namespace Interfaz
             MandarProfe(-1, null);//evento aceptar
             Close();
         }
+
+        private void txtCondicionProfesor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (rdnNombreProfe.Checked)
+            {
+                if (!char.IsLetter(e.KeyChar) && (e.KeyChar != (char)Keys.Space) && (e.KeyChar != (char)Keys.Back))
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(txtCondicionProfesor, "Debe ingresar solamente letras");
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCondicionProfesor, string.Empty);
+                }
+            }
+
+            if (rdnCodProfe.Checked)
+            {
+                if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(txtCondicionProfesor, "Debe ingresar un valor numerico");
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCondicionProfesor, string.Empty);
+                }
+            }
+        }
+
+        private void rdnCodProfe_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCondicionProfesor.Enabled = true;
+        }
+
+        private void rdnNombreProfe_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCondicionProfesor.Enabled = true;
+        }
     }
 }

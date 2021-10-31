@@ -21,7 +21,7 @@ namespace Interfaz
         
 
 
-        List<Horarios> lista = new List<Horarios>();//la lista donde se almacenaran los horarios de la materia
+        List<Horarios> listaHorarios = new List<Horarios>();//la lista donde se almacenaran los horarios de la materia
 
         private void CargarMateriaCarrera(int codMateriaCarrera)
         {
@@ -80,8 +80,8 @@ namespace Interfaz
             materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = int.Parse(txtCodigoMateria.Text);
             //materiaA.CodigoProfesor.CodigoProfesor = int.Parse(txtCodProfe.Text);
             materiaA.CodigoAula.CodigoAula = int.Parse(txtCodigaAula.Text);
-            materiaA.Grupo = byte.Parse(txtGrupo.Text);
-            materiaA.Cupo = byte.Parse(txtCupo.Text);
+            materiaA.Grupo = Convert.ToByte(nudGrupo.Value);
+            materiaA.Cupo = Convert.ToByte(nudCupo.Value);
             materiaA.Costo = Convert.ToDecimal(txtCosto.Text);
             materiaA.Periodo = Convert.ToByte(nudPeriodo.Value);
             materiaA.Anio = Int16.Parse(txtAnio.Text);
@@ -125,32 +125,47 @@ namespace Interfaz
                 horario.HoraInicio = dtpHoraInicio.Value;
                 horario.HoraFin = dtpHoraFinal.Value;
 
-                //if (dtpHoraInicio.Value.Minute < 10) // formateando la horas y los minutos
-                //{
-                //    horario.HoraInicio = dtpHoraInicio.Value;
-                //}
-                //else
-                //{
-                //    horario.HoraInicio = dtpHoraInicio.Value.;
-                //}
+                if (listaHorarios.Count > 0)
+                {
+                    int i=0;
+                    int contador = 0;
 
-                //if (dtpHoraFinal.Value.Minute < 10)
-                //{
-                //    horario.HoraFin = dtpHoraFinal.Value;
-                //}
-                //else
-                //{
-                //    horario.HoraFin = dtpHoraFinal.Value.Hour.ToString() + ":" + dtpHoraFinal.Value.Minute.ToString();
-                //}
+                    while (i < listaHorarios.Count) //con este while se impide que el usuario escoja horarios que choquen antes de ingresarlos al arreglo
+                    {
+                        if ((listaHorarios[i].HoraInicio <= horario.HoraFin) && (listaHorarios[i].HoraFin >= horario.HoraInicio) && listaHorarios[i].Dia == horario.Dia)
+                        {
+                            contador += 1;
+                        }
+                        i++;
+                    }
 
-                lista.Add(horario); //se va guardando en una lista el horario para pasarlo a un data table y poder cargar el data grid
+                    if (contador == 0)
+                    {
+                        listaHorarios.Add(horario); //se va guardando en una lista el horario para pasarlo a un data table y poder cargar el data grid
 
-                DataSet datos = new DataSet();
+                        DataSet datos = new DataSet();
 
-                datos = GenerarDataSet(lista); //llena el data grid view con la lista que se le envía
+                        datos = GenerarDataSet(listaHorarios); //llena el data grid view con la lista que se le envía
 
-                dtgvMostrarHorario.DataSource = datos; //se carga el datagrid con el dataset
-                dtgvMostrarHorario.DataMember = datos.Tables[0].TableName;
+                        dtgvMostrarHorario.DataSource = datos; //se carga el datagrid con el dataset
+                        dtgvMostrarHorario.DataMember = datos.Tables[0].TableName;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe ingresar un horario diferente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                else
+                {
+                    listaHorarios.Add(horario); //se va guardando en una lista el horario para pasarlo a un data table y poder cargar el data grid
+                    DataSet datos = new DataSet();
+
+                    datos = GenerarDataSet(listaHorarios); //llena el data grid view con la lista que se le envía
+
+                    dtgvMostrarHorario.DataSource = datos; //se carga el datagrid con el dataset
+                    dtgvMostrarHorario.DataMember = datos.Tables[0].TableName;
+                }
 
             }
         }
@@ -235,11 +250,6 @@ namespace Interfaz
             }
         }
 
-        private void txtCapacidad_TextChanged(object sender, EventArgs e)
-        {
-            txtCupo.Text = txtCapacidad.Text;
-        }
-
         private void btnBuscarAula_Click(object sender, EventArgs e)
         {
             FrmBuscarAula buscarAula = new FrmBuscarAula();
@@ -283,14 +293,14 @@ namespace Interfaz
         {
             LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
             MateriasAbiertas materiaAB;
-            int idMateriaAbierta,ingresoProfesor = -1;
+            int idMateriaAbierta,ingresoProfesor = -1, ingresoAula = -1;
             try
             {
                 if (!string.IsNullOrEmpty(txtCodigoMateria.Text) && !string.IsNullOrEmpty(txtNombreMateria.Text) &&
                     !string.IsNullOrEmpty(txtCreditos.Text) && !string.IsNullOrEmpty(txtCodigoCarrera.Text)&&
                     !string.IsNullOrEmpty(txtNombreCarrera.Text))
                 {
-                    if (!string.IsNullOrEmpty(txtGrupo.Text) && !string.IsNullOrEmpty(txtCupo.Text) &&
+                    if (nudGrupo.Value != 0 && nudCupo.Value != 0 &&
                         !string.IsNullOrEmpty(txtCosto.Text) && nudPeriodo.Value != 0 &&
                         !string.IsNullOrEmpty(txtAnio.Text))
                     {
@@ -299,7 +309,7 @@ namespace Interfaz
                             materiaAB = GenerarEntidad();
                             if (materiaAB.Existe)
                             {
-                                idMateriaAbierta = logicaMA.InsertarMateriaAbierta(materiaAB, lista);
+                                idMateriaAbierta = logicaMA.InsertarMateriaAbierta(materiaAB, listaHorarios);
                             }
                             else 
                             {
@@ -311,23 +321,39 @@ namespace Interfaz
                                 //llamarMetodoLimpiar
                                 MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+
                                 if (!string.IsNullOrEmpty(txtCodProfe.Text))
                                 {
                                     int codProfesor = int.Parse(txtCodProfe.Text);
                                     
-                                    ingresoProfesor = logicaMA.AsignarProfesor(materiaAB,codProfesor,idMateriaAbierta,lista); //se trata de ingresar al profesor
+                                    ingresoProfesor = logicaMA.AsignarProfesor(codProfesor,idMateriaAbierta); //se trata de ingresar al profesor
+
+                                    if (ingresoProfesor == 0)
+                                    {
+                                        MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(logicaMA.Mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+
                                 }
 
-                                if (ingresoProfesor == 0)
+                                if (!string.IsNullOrEmpty(txtCodigaAula.Text))
                                 {
-                                    MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
-                                else
-                                {
-                                    MessageBox.Show(logicaMA.Mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
+                                    int codAula = int.Parse(txtCodigaAula.Text);
 
+                                    ingresoAula = logicaMA.AsignarAula(codAula, idMateriaAbierta);//se trata de ingresar el aula
 
+                                    if (ingresoAula == 0)
+                                    {
+                                        MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(logicaMA.Mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
                             }
                             else
                             {

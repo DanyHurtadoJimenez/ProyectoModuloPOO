@@ -110,5 +110,47 @@ namespace Interfaz
             MandarAula(-1, null);//evento aceptar
             Close();
         }
+
+        private void txtCondicionAula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (rdnTipoAula.Checked)
+            {
+                if (!char.IsLetter(e.KeyChar) && (e.KeyChar != (char)Keys.Space) && (e.KeyChar != (char)Keys.Back))
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(txtCondicionAula, "Debe ingresar solamente letras");
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCondicionAula, string.Empty);
+                }
+            }
+
+            if (rdnCodAula.Checked)
+            {
+                if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(txtCondicionAula, "Debe ingresar un valor numerico");
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCondicionAula, string.Empty);
+                }
+            }
+
+            
+        }
+
+        private void rdnCodAula_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCondicionAula.Enabled = true;
+        }
+
+        private void rdnTipoAula_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCondicionAula.Enabled = true;
+        }
     }
 }

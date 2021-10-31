@@ -46,7 +46,7 @@ namespace Interfaz
 
             if (dgvBuscarMateria.SelectedRows.Count > 0) //si ha seleccionado una fila
             {
-                CodMateriaCarrera = (int)dgvBuscarMateria.SelectedRows[0].Cells[0].Value;////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                CodMateriaCarrera = (int)dgvBuscarMateria.SelectedRows[0].Cells[0].Value;
                 Aceptar(CodMateriaCarrera, null);//le manda el id al evento aceptar que esta en el otro form
                 Close();//se cierra la ventana
             }
@@ -111,9 +111,43 @@ namespace Interfaz
             Seleccionar();
         }
 
-        private void dgvBuscarMateria_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void txtCondicion_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (rdnNombreMateria.Checked)
+            {
+                if (!char.IsLetter(e.KeyChar) && (e.KeyChar != (char)Keys.Space) && (e.KeyChar != (char)Keys.Back))
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(txtCondicion, "Debe ingresar solamente letras");
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCondicion, string.Empty);
+                }
+            }
 
+            if (rdnCodMateria.Checked)
+            {
+                if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(txtCondicion, "Debe ingresar un valor numerico");
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCondicion, string.Empty);
+                }
+            }
+        }
+
+        private void rdnCodMateria_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCondicion.Enabled = true;
+        }
+
+        private void rdnNombreMateria_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCondicion.Enabled = true;
         }
     }
 }

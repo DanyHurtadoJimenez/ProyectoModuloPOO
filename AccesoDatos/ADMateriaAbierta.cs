@@ -93,39 +93,68 @@ namespace AccesoDatos
 
         }
 
-        public int InsertarProfesor(MateriasAbiertas materiaAbierta,int codProfesor,int idMateriaAbierta, List<Horarios> horarios)
+        public int InsertarProfesor(int codProfesor,int idMateriaAbierta)
         { //insertar el profesor mediante un stored Procedure en la tabla de materias Abiertas
             int resultado = -1;
-            DataTable dtaHorarios = convertirArregloAdatatable(horarios);//los horarios se convierten en un datatable para enviarlo como parametro al procedimiento del SQL
-            dtaHorarios.TableName = "dbo.HorarioType";
 
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
 
-            comando.CommandText = "SP_INSERTARPROFESORES"; //nombre del procedimiento almacenado
+            comando.CommandText = "SP_ASIGNAR_PROFE_MA"; //nombre del procedimiento almacenado
             comando.CommandType = CommandType.StoredProcedure;
             comando.Connection = conexion;
 
             //parametros de entrada para el SP
-            comando.Parameters.AddWithValue("@CodMateriaAbierta", idMateriaAbierta);
-            comando.Parameters.AddWithValue("@codProfesor", codProfesor);
-            SqlParameter dataTable = new SqlParameter();
-            dataTable.SqlDbType = SqlDbType.Structured;
-            dataTable.TypeName = "dbo.HorarioType";
-            dataTable.Value = dtaHorarios;
-            comando.Parameters.AddWithValue("@Horario", dataTable.Value);
-            comando.Parameters.AddWithValue("@periodo", Convert.ToByte(materiaAbierta.Periodo));
-            comando.Parameters.AddWithValue("@anio", (Int16)materiaAbierta.Anio);
-
+            comando.Parameters.AddWithValue("@codMateriaAbierta", idMateriaAbierta);
+            comando.Parameters.AddWithValue("@idProfesor", codProfesor);
+ 
             //parametro de salida del SP
             comando.Parameters.Add("@msj", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
-            comando.Parameters.Add("@bandera", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
+            comando.Parameters.Add("@existeChoque", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
 
             try
             {
                 conexion.Open();
                 comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
-                resultado = Convert.ToInt32(comando.Parameters["@bandera"].Value); //obtengo la variable de retorno
+                resultado = Convert.ToInt32(comando.Parameters["@existeChoque"].Value); //obtengo la variable de retorno
+                //se va a leer el parametro de salida del SP
+                _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+
+        }
+
+        public int InsertarAula(int codAula, int idMateriaAbierta)
+        { //insertar el profesor mediante un stored Procedure en la tabla de materias Abiertas
+            int resultado = -1;
+
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = "SP_ASIGNAR_AULA_MA"; //nombre del procedimiento almacenado
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Connection = conexion;
+
+            //parametros de entrada para el SP
+            comando.Parameters.AddWithValue("@codMateriaAbierta", idMateriaAbierta);
+            comando.Parameters.AddWithValue("@idAula", codAula);
+
+            //parametro de salida del SP
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+            comando.Parameters.Add("@existeChoque", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
+
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
+                resultado = Convert.ToInt32(comando.Parameters["@existeChoque"].Value); //obtengo la variable de retorno
                 //se va a leer el parametro de salida del SP
                 _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
                 conexion.Close();

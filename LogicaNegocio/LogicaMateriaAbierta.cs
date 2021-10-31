@@ -60,13 +60,29 @@ namespace LogicaNegocio
             return codMateriaA;
         }
 
-        public int AsignarProfesor(MateriasAbiertas materiaA, int codProfesor,int idMateriaA, List<Horarios> horario)
+        public int AsignarProfesor(int codProfesor,int idMateriaA)
         {
             int resultado = 0;
             ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
             try
             {
-                resultado = accesoDatosMA.InsertarProfesor(materiaA,codProfesor,idMateriaA, horario);
+                resultado = accesoDatosMA.InsertarProfesor(codProfesor,idMateriaA);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            _mensaje = accesoDatosMA.Mensaje;
+            return resultado;
+        }
+
+        public int AsignarAula(int codAula, int idMateriaA)
+        {
+            int resultado = 0;
+            ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMA.InsertarAula(codAula, idMateriaA);
             }
             catch (Exception)
             {

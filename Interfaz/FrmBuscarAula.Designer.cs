@@ -29,6 +29,7 @@ namespace Interfaz
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBuscarAula = new System.Windows.Forms.Button();
@@ -42,8 +43,10 @@ namespace Interfaz
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarAula)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancelar
@@ -81,10 +84,12 @@ namespace Interfaz
             // 
             // txtCondicionAula
             // 
+            this.txtCondicionAula.Enabled = false;
             this.txtCondicionAula.Location = new System.Drawing.Point(193, 24);
             this.txtCondicionAula.Name = "txtCondicionAula";
             this.txtCondicionAula.Size = new System.Drawing.Size(146, 23);
             this.txtCondicionAula.TabIndex = 5;
+            this.txtCondicionAula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCondicionAula_KeyPress);
             // 
             // rdnTipoAula
             // 
@@ -96,6 +101,7 @@ namespace Interfaz
             this.rdnTipoAula.TabStop = true;
             this.rdnTipoAula.Text = "Tipo Aula";
             this.rdnTipoAula.UseVisualStyleBackColor = true;
+            this.rdnTipoAula.CheckedChanged += new System.EventHandler(this.rdnTipoAula_CheckedChanged);
             // 
             // rdnCodAula
             // 
@@ -107,6 +113,7 @@ namespace Interfaz
             this.rdnCodAula.TabStop = true;
             this.rdnCodAula.Text = "Código Aula";
             this.rdnCodAula.UseVisualStyleBackColor = true;
+            this.rdnCodAula.CheckedChanged += new System.EventHandler(this.rdnCodAula_CheckedChanged);
             // 
             // btnAgregarMateria
             // 
@@ -173,6 +180,10 @@ namespace Interfaz
             this.Column4.HeaderText = "Capacidad";
             this.Column4.Name = "Column4";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FrmBuscarAula
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -189,6 +200,7 @@ namespace Interfaz
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarAula)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,5 +221,6 @@ namespace Interfaz
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

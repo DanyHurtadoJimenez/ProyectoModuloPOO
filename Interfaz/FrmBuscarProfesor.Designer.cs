@@ -29,6 +29,7 @@ namespace Interfaz
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBuscarProfe = new System.Windows.Forms.Button();
@@ -44,8 +45,10 @@ namespace Interfaz
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarProfesor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancelar
@@ -83,10 +86,12 @@ namespace Interfaz
             // 
             // txtCondicionProfesor
             // 
+            this.txtCondicionProfesor.Enabled = false;
             this.txtCondicionProfesor.Location = new System.Drawing.Point(308, 21);
             this.txtCondicionProfesor.Name = "txtCondicionProfesor";
             this.txtCondicionProfesor.Size = new System.Drawing.Size(191, 23);
             this.txtCondicionProfesor.TabIndex = 5;
+            this.txtCondicionProfesor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCondicionProfesor_KeyPress);
             // 
             // rdnNombreProfe
             // 
@@ -98,6 +103,7 @@ namespace Interfaz
             this.rdnNombreProfe.TabStop = true;
             this.rdnNombreProfe.Text = "Nombre Profesor";
             this.rdnNombreProfe.UseVisualStyleBackColor = true;
+            this.rdnNombreProfe.CheckedChanged += new System.EventHandler(this.rdnNombreProfe_CheckedChanged);
             // 
             // rdnCodProfe
             // 
@@ -109,6 +115,7 @@ namespace Interfaz
             this.rdnCodProfe.TabStop = true;
             this.rdnCodProfe.Text = "Código Profesor";
             this.rdnCodProfe.UseVisualStyleBackColor = true;
+            this.rdnCodProfe.CheckedChanged += new System.EventHandler(this.rdnCodProfe_CheckedChanged);
             // 
             // btnAgregarMateria
             // 
@@ -191,6 +198,10 @@ namespace Interfaz
             this.Column6.HeaderText = "Teléfono";
             this.Column6.Name = "Column6";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FrmBuscarProfesor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -209,6 +220,7 @@ namespace Interfaz
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarProfesor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,5 +243,6 @@ namespace Interfaz
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
