@@ -31,12 +31,6 @@ namespace Interfaz
         {
             this.components = new System.ComponentModel.Container();
             this.dgvBuscarMateria = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAgregarMateria = new System.Windows.Forms.Button();
             this.rdnCodMateria = new System.Windows.Forms.RadioButton();
@@ -46,6 +40,10 @@ namespace Interfaz
             this.txtCondicion = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarMateria)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -59,61 +57,18 @@ namespace Interfaz
             this.dgvBuscarMateria.AllowUserToResizeRows = false;
             this.dgvBuscarMateria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBuscarMateria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
             this.Column2,
             this.Column3,
             this.Column4,
-            this.Column5,
-            this.Column6});
+            this.Column5});
             this.dgvBuscarMateria.Location = new System.Drawing.Point(12, 116);
             this.dgvBuscarMateria.Name = "dgvBuscarMateria";
             this.dgvBuscarMateria.RowTemplate.Height = 25;
             this.dgvBuscarMateria.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvBuscarMateria.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBuscarMateria.Size = new System.Drawing.Size(655, 446);
+            this.dgvBuscarMateria.Size = new System.Drawing.Size(624, 446);
             this.dgvBuscarMateria.TabIndex = 0;
             this.dgvBuscarMateria.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBuscarMateria_CellDoubleClick);
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "CodMateriaCarrera";
-            this.Column1.HeaderText = "CodMateriaCarrera";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 110;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "CodigoMateria";
-            this.Column2.HeaderText = "Codigo Materia";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "NombreMateria";
-            this.Column3.HeaderText = "Nombre Materia";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 130;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "CreditosMateria";
-            this.Column4.HeaderText = "Creditos";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 80;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "NombreCarrera";
-            this.Column5.HeaderText = "Carrera";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 120;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "CodigoCarrera";
-            this.Column6.HeaderText = "Codigo Carrera";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 80;
             // 
             // label1
             // 
@@ -126,7 +81,7 @@ namespace Interfaz
             // 
             // btnAgregarMateria
             // 
-            this.btnAgregarMateria.Location = new System.Drawing.Point(377, 581);
+            this.btnAgregarMateria.Location = new System.Drawing.Point(354, 581);
             this.btnAgregarMateria.Name = "btnAgregarMateria";
             this.btnAgregarMateria.Size = new System.Drawing.Size(135, 34);
             this.btnAgregarMateria.TabIndex = 2;
@@ -139,17 +94,17 @@ namespace Interfaz
             this.rdnCodMateria.AutoSize = true;
             this.rdnCodMateria.Location = new System.Drawing.Point(20, 22);
             this.rdnCodMateria.Name = "rdnCodMateria";
-            this.rdnCodMateria.Size = new System.Drawing.Size(148, 19);
+            this.rdnCodMateria.Size = new System.Drawing.Size(107, 19);
             this.rdnCodMateria.TabIndex = 4;
             this.rdnCodMateria.TabStop = true;
-            this.rdnCodMateria.Text = "Codigo Materia Carrera";
+            this.rdnCodMateria.Text = "Codigo Materia";
             this.rdnCodMateria.UseVisualStyleBackColor = true;
             this.rdnCodMateria.CheckedChanged += new System.EventHandler(this.rdnCodMateria_CheckedChanged);
             // 
             // rdnNombreMateria
             // 
             this.rdnNombreMateria.AutoSize = true;
-            this.rdnNombreMateria.Location = new System.Drawing.Point(181, 21);
+            this.rdnNombreMateria.Location = new System.Drawing.Point(144, 22);
             this.rdnNombreMateria.Name = "rdnNombreMateria";
             this.rdnNombreMateria.Size = new System.Drawing.Size(112, 19);
             this.rdnNombreMateria.TabIndex = 4;
@@ -166,14 +121,14 @@ namespace Interfaz
             this.groupBox1.Controls.Add(this.rdnCodMateria);
             this.groupBox1.Location = new System.Drawing.Point(12, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(655, 62);
+            this.groupBox1.Size = new System.Drawing.Size(624, 62);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar Por:";
             // 
             // btnBuscarMateria
             // 
-            this.btnBuscarMateria.Location = new System.Drawing.Point(518, 21);
+            this.btnBuscarMateria.Location = new System.Drawing.Point(497, 21);
             this.btnBuscarMateria.Name = "btnBuscarMateria";
             this.btnBuscarMateria.Size = new System.Drawing.Size(121, 23);
             this.btnBuscarMateria.TabIndex = 6;
@@ -184,7 +139,7 @@ namespace Interfaz
             // txtCondicion
             // 
             this.txtCondicion.Enabled = false;
-            this.txtCondicion.Location = new System.Drawing.Point(308, 21);
+            this.txtCondicion.Location = new System.Drawing.Point(286, 21);
             this.txtCondicion.Name = "txtCondicion";
             this.txtCondicion.Size = new System.Drawing.Size(191, 23);
             this.txtCondicion.TabIndex = 5;
@@ -192,7 +147,7 @@ namespace Interfaz
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(531, 581);
+            this.btnCancelar.Location = new System.Drawing.Point(501, 581);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(135, 34);
             this.btnCancelar.TabIndex = 4;
@@ -204,12 +159,39 @@ namespace Interfaz
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "CodigoMateria";
+            this.Column2.HeaderText = "Codigo Materia";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "NombreMateria";
+            this.Column3.HeaderText = "Nombre Materia";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 200;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "CreditosMateria";
+            this.Column4.HeaderText = "Creditos";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 80;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "NombreCarrera";
+            this.Column5.HeaderText = "Carrera";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 200;
+            // 
             // FrmBuscarMateria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(680, 627);
+            this.ClientSize = new System.Drawing.Size(651, 627);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.groupBox1);
@@ -240,12 +222,10 @@ namespace Interfaz
         private System.Windows.Forms.Button btnBuscarMateria;
         private System.Windows.Forms.TextBox txtCondicion;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

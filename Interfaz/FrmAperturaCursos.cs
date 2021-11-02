@@ -18,25 +18,29 @@ namespace Interfaz
         }
 
         //variables globales
-        
 
 
+        int idMateriaCarrera;
         List<Horarios> listaHorarios = new List<Horarios>();//la lista donde se almacenaran los horarios de la materia
 
         private void CargarMateriaCarrera(int codMateriaCarrera)
         {
             MateriasCarreras MateriaC;
             LogicaMateriaCarrera traerMateriaCarrera = new LogicaMateriaCarrera(Configuracion.getConnectionString);
+            
             try
             {
+                int numeroGrupo = traerMateriaCarrera.generarGrupo(codMateriaCarrera); //se genera el numero del grupo
                 MateriaC = traerMateriaCarrera.ObtenerMateriaCarrera(codMateriaCarrera);
                 if (MateriaC != null)
                 {
-                    txtCodigoMateria.Text = MateriaC.CodigoMateriaCarrera.ToString();
+                    FrmBuscarMateria formularioBuscarM = new FrmBuscarMateria();
+                    idMateriaCarrera = MateriaC.CodigoMateriaCarrera;
+                    txtCodigoMateria.Text = MateriaC.CodigoMateria.CodigoMateria;
                     txtNombreMateria.Text = MateriaC.CodigoMateria.NombreMateria;
                     txtCreditos.Text = MateriaC.CodigoMateria.CreditosMateria.ToString();
-                    txtCodigoCarrera.Text = MateriaC.CodigoCarreras.CodigoCarrera.ToString();
                     txtNombreCarrera.Text = MateriaC.CodigoCarreras.NombreCarrera;
+                    txtGrupo.Text = numeroGrupo.ToString();
                     //clienteRegistrado = MateriaC; //se setea el cliente registrado para poder darle la opcion al usuario de modificar la informacion del cliente
                 }
                 else
@@ -77,14 +81,12 @@ namespace Interfaz
                 materiaA.CodigoAula = new Aulas();
             }
 
-            materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = int.Parse(txtCodigoMateria.Text);
-            //materiaA.CodigoProfesor.CodigoProfesor = int.Parse(txtCodProfe.Text);
-            materiaA.CodigoAula.CodigoAula = int.Parse(txtCodigaAula.Text);
-            materiaA.Grupo = Convert.ToByte(nudGrupo.Value);
+            materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = idMateriaCarrera;
+            materiaA.Grupo = Convert.ToByte(txtGrupo.Text);
             materiaA.Cupo = Convert.ToByte(nudCupo.Value);
             materiaA.Costo = Convert.ToDecimal(txtCosto.Text);
             materiaA.Periodo = Convert.ToByte(nudPeriodo.Value);
-            materiaA.Anio = Int16.Parse(txtAnio.Text);
+            materiaA.Anio = Int16.Parse(comboAnio.SelectedItem.ToString());
             return materiaA;
         }
 
@@ -200,8 +202,8 @@ namespace Interfaz
         {
             FormatearHoras(dtpHoraInicio);
             FormatearHoras(dtpHoraFinal);
-            txtAnio.Text = DateTime.Today.Year.ToString();
-
+            comboAnio.Items.Add(DateTime.Today.Year.ToString());
+            comboAnio.Items.Add(DateTime.Today.AddYears(1).Year.ToString());
         }
 
         private void dtpHoraInicio_ValueChanged(object sender, EventArgs e)
@@ -231,10 +233,7 @@ namespace Interfaz
                     if (profe != null)
                     {
                         txtCodProfe.Text = profe.CodigoProfesor.ToString();
-                        txtNombreProfe.Text = profe.NombreProfesor;
-                        txtIdProfe.Text = profe.IdProfesor.ToString();
-                        txtApellido1.Text = profe.Apellido1Profesor;
-                        txtApellido2.Text = profe.Apellido2Profesor;
+                        txtNombreProfe.Text = string.Format("{0} {1} {2}", profe.NombreProfesor,profe.Apellido1Profesor,profe.Apellido2Profesor);
                     }
                     else
                     {
@@ -245,7 +244,7 @@ namespace Interfaz
             }
             catch (Exception ex)
             {
-
+                
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -297,12 +296,11 @@ namespace Interfaz
             try
             {
                 if (!string.IsNullOrEmpty(txtCodigoMateria.Text) && !string.IsNullOrEmpty(txtNombreMateria.Text) &&
-                    !string.IsNullOrEmpty(txtCreditos.Text) && !string.IsNullOrEmpty(txtCodigoCarrera.Text)&&
-                    !string.IsNullOrEmpty(txtNombreCarrera.Text))
+                    !string.IsNullOrEmpty(txtCreditos.Text) && !string.IsNullOrEmpty(txtNombreCarrera.Text))
                 {
-                    if (nudGrupo.Value != 0 && nudCupo.Value != 0 &&
+                    if (!string.IsNullOrEmpty(txtGrupo.Text) && nudCupo.Value != 0 &&
                         !string.IsNullOrEmpty(txtCosto.Text) && nudPeriodo.Value != 0 &&
-                        !string.IsNullOrEmpty(txtAnio.Text))
+                        comboAnio.SelectedIndex != -1)
                     {
                         if (comboDiasSemana.SelectedIndex != -1 && dtgvMostrarHorario.Rows.Count > 0)
                         {
@@ -384,6 +382,19 @@ namespace Interfaz
 
 
 
+        }
+
+        private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+            {
+                e.Handled = true;
+                errorProvider1.SetError(txtCosto, "Debe ingresar un valor numérico");
+            }
+            else
+            {
+                errorProvider1.SetError(txtCosto, string.Empty);
+            }
         }
     }
 }

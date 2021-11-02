@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Entidades;
 using AccesoDatos;
+using System.Data;
 
 namespace LogicaNegocio
 {
@@ -43,6 +44,24 @@ namespace LogicaNegocio
         #endregion
 
         #region Metodos
+
+        public DataSet ListarMateriasAbiertas(string condicion)
+        {
+            DataSet DS;
+            ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);//se instancia el acceso a los datos
+
+            try
+            {
+                DS = accesoDatosMA.ListarMateriasAbiertas(condicion);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return DS;//se devuelve el dataset
+        }
 
         public int InsertarMateriaAbierta(MateriasAbiertas materiaA,List<Horarios> horario)
         {

@@ -17,14 +17,13 @@ namespace Entidades
         #endregion
 
         #region Constructores
-        public MateriasCarreras(int codigoMC, Carreras codigoC, Materias codigoM, Materias requisitoC, Materias corequisitoMC, string estadoMC)
+        public MateriasCarreras(int codigoMC, Carreras codigoC, Materias codigoM, Materias requisitoC, Materias corequisitoMC)
         {
             codigoMateriaCarrera = codigoMC;
             codigoCarreras = codigoC;
             codigoMateria = codigoM;
             requisito = requisitoC;
             corequisito = corequisitoMC;
-            estado = estadoMC;
             borrado = 0;
         }
 
@@ -35,7 +34,6 @@ namespace Entidades
             codigoMateria = null;
             requisito = null;
             corequisito = null;
-            estado = "VIGENTE";
             borrado = 0;
         }
         #endregion

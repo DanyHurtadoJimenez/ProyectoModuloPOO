@@ -186,11 +186,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
+      "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
       "projectName": "Entidades",
-      "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
+      "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
       "packagesPath": "C:\\Users\\Dany\\.nuget\\packages\\",
-      "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\obj\\",
+      "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

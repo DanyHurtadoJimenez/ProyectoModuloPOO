@@ -43,6 +43,38 @@ namespace AccesoDatos
 
         #region Metodos
 
+        public DataSet ListarMateriasAbiertas(string condicion)
+        {  //devuelve un dataset de Aulas para mostrarlo en un datagridView
+
+            DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlDataAdapter adapter;
+            string sentencia = "select CodMateriaAbierta, NombreMateria, NombreCarrera,NombreProfesor,Apellido1Profesor," +
+                               " CodigoAula, Grupo,Cupo,Costo, Periodo, Anio from TBL_MateriasAbiertas MA inner join "+
+                               " TBL_MateriasCarreras MC on MA.CodMateriaCarrera = MC.CodMateriaCarrera inner join "+
+                               " TBL_Materias M on M.CodigoMateria = MC.CodigoMateria inner join "+
+                               " TBL_Carreras C on C.CodigoCarrera = MC.CodigoCarrera inner join "+
+                               " TBL_Profesores P on P.CodigoProfesor = MA.CodigoProfesor";
+
+            if (!string.IsNullOrEmpty(condicion))
+            { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia
+                sentencia = string.Format("{0} and {1}", sentencia, condicion);
+            }
+
+            try
+            {
+                adapter = new SqlDataAdapter(sentencia, conexion);//se realiza la conexion y se prepara el adaptador para ejecutar la sentencia
+                adapter.Fill(datos, "Materias Abiertas");//el adaptador llena el dataset y le pone nombre 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return datos; //devuelve el dataset
+        }
+
+
         public int InsertarMateriaAConSP(MateriasAbiertas materiaAbierta, List<Horarios> horarios)
         { 
             int resultado = -1;
@@ -67,8 +99,6 @@ namespace AccesoDatos
             dataTable.TypeName = "dbo.HorarioType";
             dataTable.Value = dtaHorarios;
             comando.Parameters.AddWithValue("@Horario", dataTable.Value);
-
-
 
             //parametro de salida del SP
             comando.Parameters.Add("@msj", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado

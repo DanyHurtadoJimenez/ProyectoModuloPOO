@@ -11,14 +11,17 @@ namespace Interfaz
 {
     public partial class FrmBuscarMateria : Form
     {
+
         public event EventHandler Aceptar;//se crea el evento nuevo
 
-        int CodMateriaCarrera = 0;//variable que se usara para mandar el id al evento
+        int CodMateriaCarrera;//variable que se usara para mandar el id al evento
 
         public FrmBuscarMateria()
         {
             InitializeComponent();
         }
+
+
 
         private void CargarDataSet(string condicion = "")
         { //carga el datagridview con el dataset
@@ -75,7 +78,7 @@ namespace Interfaz
                 {
                     if (rdnCodMateria.Checked)
                     {
-                        condicion = string.Format("CodMateriaCarrera like '%{0}%'", txtCondicion.Text.Trim()); //donde en el nombre sea algo como lo que se escriba en el txtNombre el trim lo usa para quitar espacios
+                        condicion = string.Format("M.CodigoMateria like '%{0}%'", txtCondicion.Text.Trim()); //donde en el nombre sea algo como lo que se escriba en el txtNombre el trim lo usa para quitar espacios
                     }
 
                     if (rdnNombreMateria.Checked)
@@ -128,10 +131,10 @@ namespace Interfaz
 
             if (rdnCodMateria.Checked)
             {
-                if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                if (!char.IsDigit(e.KeyChar) && (!char.IsLetter(e.KeyChar) && (e.KeyChar != (char)Keys.Back)))
                 {
                     e.Handled = true;
-                    errorProvider1.SetError(txtCondicion, "Debe ingresar un valor numerico");
+                    errorProvider1.SetError(txtCondicion, "Debe ingresar un valor alfanumérico");
                 }
                 else
                 {

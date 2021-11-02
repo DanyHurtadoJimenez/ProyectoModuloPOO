@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JgRZ+uKQxBDdDRukPVPpVN1/sSZgFcbBqqOKIZzgO1r2dDX8HJCJ4iUc15dJy1N3a610nQkpJSNMwOzgviBxjA==",
+  "dgSpecHash": "QwoRmY5IuU9mArcxVnjYdGtM+pxZWB9KBVSLfNexqLEC0vIIlcoKb9/GoKtfE3CbtFciiKWE96y3seEcwNpFNQ==",
   "success": true,
-  "projectFilePath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj",
+  "projectFilePath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dany\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Dany\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

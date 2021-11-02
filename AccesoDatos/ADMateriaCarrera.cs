@@ -50,11 +50,11 @@ namespace AccesoDatos
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlDataAdapter adapter;
-            string sentencia = "select CodMateriaCarrera,MC.CodigoMateria,NombreMateria,CreditosMateria,NombreCarrera,C.CodigoCarrera from TBL_MateriasCarreras MC inner join TBL_Materias M on MC.CodigoMateria = M.CodigoMateria inner join TBL_Carreras C on MC.CodigoCarrera = C.CodigoCarrera where Estado = 'NO VIGENTE'";
+            string sentencia = "select CodMateriaCarrera,MC.CodigoMateria,NombreMateria,CreditosMateria,NombreCarrera,C.CodigoCarrera from TBL_MateriasCarreras MC inner join TBL_Materias M on MC.CodigoMateria = M.CodigoMateria inner join TBL_Carreras C on MC.CodigoCarrera = C.CodigoCarrera";
 
             if (!string.IsNullOrEmpty(condicion))
             { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia
-                sentencia = string.Format("{0} and {1}", sentencia, condicion);
+                sentencia = string.Format("{0} where {1}", sentencia, condicion);
             }
 
             try
@@ -76,7 +76,7 @@ namespace AccesoDatos
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
             SqlDataReader dataReader;//el data reader no tiene constructor para llenarlo es mediante un execute
-            string sentencia = string.Format("select CodMateriaCarrera,C.CodigoCarrera,M.CodigoMateria, MC.Requisito,MC.corequisito,MC.Estado,MC.Borrado,M.NombreMateria,C.NombreCarrera, M.CreditosMateria" +
+            string sentencia = string.Format("select CodMateriaCarrera,C.CodigoCarrera,M.CodigoMateria, MC.Requisito,MC.corequisito,M.NombreMateria,C.NombreCarrera, M.CreditosMateria" +
                                              " from TBL_MateriasCarreras MC inner join TBL_Materias M on "+
                                              " MC.CodigoMateria = M.CodigoMateria inner join TBL_Carreras C "+
                                              " on MC.CodigoCarrera = C.CodigoCarrera "+
@@ -108,11 +108,9 @@ namespace AccesoDatos
                     {
                         materiaC.Corequisito.CodigoMateria = dataReader.GetString(4);
                     }
-                    materiaC.Estado = dataReader.GetString(5);
-                    materiaC.Borrado = 0;
-                    materiaC.CodigoMateria.NombreMateria = dataReader.GetString(7);
-                    materiaC.CodigoCarreras.NombreCarrera = dataReader.GetString(8);
-                    materiaC.CodigoMateria.CreditosMateria = dataReader.GetByte(9);
+                    materiaC.CodigoMateria.NombreMateria = dataReader.GetString(5);
+                    materiaC.CodigoCarreras.NombreCarrera = dataReader.GetString(6);
+                    materiaC.CodigoMateria.CreditosMateria = dataReader.GetByte(7);
 
                 }
                 conexion.Close();
@@ -123,6 +121,42 @@ namespace AccesoDatos
                 throw;
             }
             return materiaC;
+
+        }
+
+        public int generarGrupo(int codMateriaCarrera)
+        {
+            int numGrupo;
+            
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = "SP_ASIGNAR_GRUPO"; //nombre del procedimiento almacenado
+            comando.CommandType = CommandType.StoredProcedure;//se especifica que tipo de comando es, en este caso es un procedimiento almacenado
+            comando.Connection = conexion;
+            //parametro de entrada para el SP
+            comando.Parameters.AddWithValue("@codMateriaCarrera",codMateriaCarrera);
+
+            //parametro de salida del SP
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+            comando.Parameters.Add("@numGrupo", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
+
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
+                numGrupo = Convert.ToInt32(comando.Parameters["@numGrupo"].Value); //obtengo la variable de retorno
+                //se va a leer el parametro de salida del SP
+                _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return numGrupo;
 
         }
 

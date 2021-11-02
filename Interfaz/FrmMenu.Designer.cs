@@ -31,13 +31,15 @@ namespace Interfaz
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.abrirMateriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.matricularEstudianteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.abrirMateriasToolStripMenuItem});
+            this.abrirMateriasToolStripMenuItem,
+            this.matricularEstudianteToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -50,6 +52,13 @@ namespace Interfaz
             this.abrirMateriasToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.abrirMateriasToolStripMenuItem.Text = "Abrir Cursos";
             this.abrirMateriasToolStripMenuItem.Click += new System.EventHandler(this.abrirMateriasToolStripMenuItem_Click);
+            // 
+            // matricularEstudianteToolStripMenuItem
+            // 
+            this.matricularEstudianteToolStripMenuItem.Name = "matricularEstudianteToolStripMenuItem";
+            this.matricularEstudianteToolStripMenuItem.Size = new System.Drawing.Size(131, 20);
+            this.matricularEstudianteToolStripMenuItem.Text = "Matricular Estudiante";
+            this.matricularEstudianteToolStripMenuItem.Click += new System.EventHandler(this.matricularEstudianteToolStripMenuItem_Click);
             // 
             // FrmMenu
             // 
@@ -74,6 +83,7 @@ namespace Interfaz
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem abrirMateriasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem matricularEstudianteToolStripMenuItem;
     }
 }
 

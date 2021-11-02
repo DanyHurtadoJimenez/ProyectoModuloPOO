@@ -22,5 +22,11 @@ namespace Interfaz
             FrmAperturaCursos formularioAperturaCursos = new FrmAperturaCursos();
             formularioAperturaCursos.ShowDialog(this);
         }
+
+        private void matricularEstudianteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmMatricular formularioMatricular = new FrmMatricular();
+            formularioMatricular.ShowDialog(this);
+        }
     }
 }

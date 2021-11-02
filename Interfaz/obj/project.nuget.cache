@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GweNzdFrjoi5s05GUdFOJU4rZhJgUFZoOWFQS85SQlsrsk+7mC6ylR5kVJWMLbhx86EyiSmT8CSvr+Qx2zhnwQ==",
+  "dgSpecHash": "2umICvAKQz1deFzbgrs8XK3XA6ROT8IPCoJZ8Ru9cL923HmJGiio8Q4VYsPDCLs3n1KY/IAiUxCXBSpz6zI4WA==",
   "success": true,
-  "projectFilePath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
+  "projectFilePath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dany\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Dany\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
