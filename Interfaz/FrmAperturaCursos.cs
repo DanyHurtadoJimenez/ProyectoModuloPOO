@@ -237,7 +237,7 @@ namespace Interfaz
                     if (profe != null)
                     {
                         txtCodProfe.Text = profe.CodigoProfesor.ToString();
-                        txtNombreProfe.Text = string.Format("{0} {1} {2}", profe.NombreProfesor,profe.Apellido1Profesor,profe.Apellido2Profesor);
+                        txtNombreProfe.Text = string.Format("{0} {1} {2}", profe.Nombre,profe.Apellido1,profe.Apellido2);
                     }
                     else
                     {

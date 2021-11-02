@@ -44,9 +44,9 @@ namespace Interfaz
                     if (estudiante != null)
                     {
                         txtCarnetEstudiante.Text = estudiante.CarnetEstudiante;
-                        txtCedulaEstudiante.Text = estudiante.IdEstudiante;
-                        txtNombreEstudiante.Text = string.Format("{0} {1} {2}", estudiante.NombreEstudiante,estudiante.Apellido1Estudiante,estudiante.Apellido2Estudiante);
-                        txtEmailE.Text = estudiante.CorreoEstudiante;
+                        txtCedulaEstudiante.Text = estudiante.Cedula;
+                        txtNombreEstudiante.Text = string.Format("{0} {1} {2}", estudiante.Nombre,estudiante.Apellido1,estudiante.Apellido2);
+                        txtEmailE.Text = estudiante.CorreoElectronico;
                         txtDescuentoE.Text = estudiante.Descuento.ToString();
                     }
                     else
@@ -69,6 +69,8 @@ namespace Interfaz
             {
                 FrmBuscarMateriaAbierta FrmBuscarMateriaA = new FrmBuscarMateriaAbierta(Convert.ToInt32(nudPeriodo.Value),Convert.ToInt32(comboAnio.SelectedItem));
                 FrmBuscarMateriaA.MandarMateria += new EventHandler(TraerMateria);
+                nudPeriodo.Enabled = false;
+                comboAnio.Enabled = false;
                 FrmBuscarMateriaA.ShowDialog();
             }
             else
@@ -92,6 +94,12 @@ namespace Interfaz
                     if (materiaAbierta != null)
                     {
                         listaMateriasA.Add(materiaAbierta);
+                        DataSet datos = new DataSet();
+
+                        datos = GenerarDataSet(listaMateriasA); //llena el data grid view con la lista que se le envía
+
+                        dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
+                        dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
                     }
                     else
                     {
@@ -112,5 +120,51 @@ namespace Interfaz
             comboAnio.Items.Add(DateTime.Today.Year.ToString());
             comboAnio.Items.Add(DateTime.Today.AddYears(1).Year.ToString());
         }
-    }
-}
+
+        public DataSet GenerarDataSet(List<MateriasAbiertas> materiasAbiertas) //genera un dataset con el horario que se le manda
+        {
+            DataSet dataSet = new DataSet();
+            DataTable dataTable = new DataTable();
+
+            dataSet.Tables.Add(dataTable);
+            dataTable.Columns.Add("CodMateriaAbierta");
+            dataTable.Columns.Add("CodMateria");
+            dataTable.Columns.Add("nombreMateria");
+            dataTable.Columns.Add("nombreProfesor");
+            dataTable.Columns.Add("numAula");
+            dataTable.Columns.Add("grupo");
+            dataTable.Columns.Add("costo");
+
+            foreach (var Item in materiasAbiertas)
+            {
+                dataTable.Rows.Add(new object[] { 
+                    Item.CodigoMateriaAbierta, 
+                    Item.CodigoMateriaCarrera.CodigoMateria.CodigoMateria, 
+                    Item.CodigoMateriaCarrera.CodigoMateria.NombreMateria,
+                    Item.CodigoProfesor.Nombre,
+                    Item.CodigoAula.NumeroAula,
+                    Item.Grupo,
+                    Item.Costo
+                });
+            }
+
+            return dataSet;
+        }
+
+        private void dtgvVerMateriaAbierta_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            if (dtgvVerMateriaAbierta.SelectedRows.Count > 0) //si ha seleccionado una fila
+            {
+                int codMateriaAbierta;
+                codMateriaAbierta = Convert.ToInt32((dtgvVerMateriaAbierta.SelectedRows[0].Cells[0].Value));//se obtiene el codigo de la materia carrera de la materia seleccionada
+                FrmMostrarHorarios mostrarHorarios = new FrmMostrarHorarios(codMateriaAbierta);
+                mostrarHorarios.ShowDialog();
+            }
+        }
+
+
+
+
+    }//fin del form
+}//fin del namespace

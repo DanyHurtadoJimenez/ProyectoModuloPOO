@@ -84,15 +84,15 @@ namespace AccesoDatos
                 {
                     dataReader.Read();//lee fila por fila del data reader
                     estudiante.CarnetEstudiante = dataReader.GetString(0); //esta columna es de tipo integer y esta en la posicion 0
-                    estudiante.IdEstudiante = dataReader.GetString(1);
-                    estudiante.NombreEstudiante = dataReader.GetString(2);
-                    estudiante.Apellido1Estudiante = dataReader.GetString(3);
+                    estudiante.Cedula = dataReader.GetString(1);
+                    estudiante.Nombre = dataReader.GetString(2);
+                    estudiante.Apellido1 = dataReader.GetString(3);
                     if (!dataReader.IsDBNull(4))
                     {
-                        estudiante.Apellido2Estudiante = dataReader.GetString(4); //el apellido2 puede ser nulo
+                        estudiante.Apellido2 = dataReader.GetString(4); //el apellido2 puede ser nulo
                     }
-                    estudiante.TelefonoEstudiante = dataReader.GetString(5);
-                    estudiante.CorreoEstudiante = dataReader.GetString(6);
+                    estudiante.Telefono = dataReader.GetString(5);
+                    estudiante.CorreoElectronico = dataReader.GetString(6);
                     if (!dataReader.IsDBNull(7))
                     {
                         estudiante.ProvinciaEstudiante = dataReader.GetString(7); //la provincia puede ser nula

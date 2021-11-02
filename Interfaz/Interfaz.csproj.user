@@ -40,5 +40,8 @@
     <Compile Update="FrmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FrmMostrarHorarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

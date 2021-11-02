@@ -90,15 +90,15 @@ namespace AccesoDatos
                 {
                     dataReader.Read();//lee fila por fila del data reader
                     profesor.CodigoProfesor = dataReader.GetInt32(0); //esta columna es de tipo integer y esta en la posicion 0
-                    profesor.IdProfesor = dataReader.GetString(1);
-                    profesor.NombreProfesor = dataReader.GetString(2);
-                    profesor.Apellido1Profesor = dataReader.GetString(3);
+                    profesor.Cedula = dataReader.GetString(1);
+                    profesor.Nombre = dataReader.GetString(2);
+                    profesor.Apellido1 = dataReader.GetString(3);
                     if (!dataReader.IsDBNull(4))
                     {
-                        profesor.Apellido2Profesor = dataReader.GetString(4); //el apellido2 puede ser nulo
+                        profesor.Apellido2 = dataReader.GetString(4); //el apellido2 puede ser nulo
                     }
-                    profesor.TelefonoProfesor = dataReader.GetString(5);
-                    profesor.CorreoProfesor = dataReader.GetString(6);
+                    profesor.Telefono = dataReader.GetString(5);
+                    profesor.CorreoElectronico = dataReader.GetString(6);
 
                 }
                 conexion.Close();

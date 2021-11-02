@@ -51,10 +51,10 @@ namespace AccesoDatos
             SqlDataAdapter adapter;
             string sentencia = string.Format("SELECT CodMateriaAbierta, M.CodigoMateria, M.NombreMateria, "+
                                " concat(NombreProfesor, ' ', Apellido1Profesor, ' ', Apellido2Profesor) as 'nombreProfesor', "+
-                               " A.NumeroAula, Grupo, Cupo, Costo FROM TBL_MateriasAbiertas MA inner join TBL_MateriasCarreras MC on " +
-                               " MA.CodMateriaCarrera = MC.CodMateriaCarrera inner join TBL_Materias M on "+
-                               " M.CodigoMateria = MC.CodigoMateria inner join TBL_Profesores P on "+
-                               " P.CodigoProfesor = MA.CodigoProfesor inner join TBL_Aulas A on A.CodigoAula = MA.CodigoAula where Periodo = {0} and Anio = {1}", periodo,anio);
+                               " A.NumeroAula, Grupo, Cupo, Costo FROM TBL_MateriasAbiertas MA left join TBL_MateriasCarreras MC on " +
+                               " MA.CodMateriaCarrera = MC.CodMateriaCarrera left join TBL_Materias M on " +
+                               " M.CodigoMateria = MC.CodigoMateria left join TBL_Profesores P on " +
+                               " P.CodigoProfesor = MA.CodigoProfesor left join TBL_Aulas A on A.CodigoAula = MA.CodigoAula where Periodo = {0} and Anio = {1}", periodo,anio);
 
             if (!string.IsNullOrEmpty(condicion))
             { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia
@@ -228,17 +228,22 @@ namespace AccesoDatos
         }
 
         public MateriasAbiertas ObtenerMateriaAbierta(int codMateriaAbierta)
-        { //devuelve una materia carrera cuando se busca
+        { //devuelve una materia abierta cuando se busca
             MateriasAbiertas materiaA = new MateriasAbiertas();
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
             SqlDataReader dataReader;//el data reader no tiene constructor para llenarlo es mediante un execute
-            string sentencia = string.Format("select CodMateriaAbierta,CodMateriaCarrera,CodigoProfesor,CodigoAula,Grupo,Cupo,Costo,Periodo,Anio "+
-                                             " from TBL_MateriasAbiertas  where CodMateriaAbierta = {0}", codMateriaAbierta);
-
+            string sentencia = string.Format("select CodMateriaAbierta,MC.CodMateriaCarrera,MC.CodigoMateria,M.NombreMateria,P.CodigoProfesor,"+
+                                             "concat(P.NombreProfesor, ' ', P.Apellido1Profesor, ' ', P.Apellido2Profesor) as 'NombreProfesor'," +
+                                             "A.CodigoAula,A.NumeroAula,Grupo,Cupo,Costo,Periodo,Anio from "+
+                                             " TBL_MateriasAbiertas MA left join TBL_MateriasCarreras MC on MA.CodMateriaCarrera = MC.CodMateriaCarrera "+
+                                             " left join TBL_Materias M on M.CodigoMateria = MC.CodigoMateria left join "+
+                                             " TBL_Profesores P on P.CodigoProfesor = MA.CodigoProfesor left join "+
+                                             " TBL_Aulas A on A.CodigoAula = MA.CodigoAula where CodMateriaAbierta = {0}", codMateriaAbierta);
             comando.Connection = conexion;
             comando.CommandText = sentencia;
             materiaA.CodigoMateriaCarrera = new MateriasCarreras();
+            materiaA.CodigoMateriaCarrera.CodigoMateria = new Materias();
             materiaA.CodigoProfesor = new Profesores();
             materiaA.CodigoAula = new Aulas();
 
@@ -252,19 +257,29 @@ namespace AccesoDatos
                     dataReader.Read();//lee fila por fila del data reader
                     materiaA.CodigoMateriaAbierta = dataReader.GetInt32(0); //esta columna es de tipo integer y esta en la posicion 0
                     materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = dataReader.GetInt32(1);
-                    if (!dataReader.IsDBNull(2))
+                    materiaA.CodigoMateriaCarrera.CodigoMateria.CodigoMateria = dataReader.GetString(2);
+                    materiaA.CodigoMateriaCarrera.CodigoMateria.NombreMateria = dataReader.GetString(3);
+                    if (!dataReader.IsDBNull(4))
                     {
-                        materiaA.CodigoProfesor.CodigoProfesor = dataReader.GetInt32(2); 
+                        materiaA.CodigoProfesor.CodigoProfesor = dataReader.GetInt32(4);
                     }
-                    if (!dataReader.IsDBNull(3))
+                    if (!dataReader.IsDBNull(5))
                     {
-                        materiaA.CodigoAula.CodigoAula = dataReader.GetInt32(3);
+                        materiaA.CodigoProfesor.Nombre = dataReader.GetString(5);
                     }
-                    materiaA.Grupo = dataReader.GetByte(4);
-                    materiaA.Cupo = dataReader.GetByte(5);
-                    materiaA.Costo = dataReader.GetDecimal(6);
-                    materiaA.Periodo = dataReader.GetByte(7);
-                    materiaA.Anio = dataReader.GetInt16(8);
+                    if (!dataReader.IsDBNull(6))
+                    {
+                        materiaA.CodigoAula.CodigoAula = dataReader.GetInt32(6);
+                    }
+                    if (!dataReader.IsDBNull(7))
+                    {
+                        materiaA.CodigoAula.NumeroAula = dataReader.GetInt32(7);
+                    }
+                    materiaA.Grupo = dataReader.GetByte(8);
+                    materiaA.Cupo = dataReader.GetByte(9);
+                    materiaA.Costo = dataReader.GetDecimal(10);
+                    materiaA.Periodo = dataReader.GetByte(11);
+                    materiaA.Anio = dataReader.GetInt16(12);
                 }
                 conexion.Close();
 

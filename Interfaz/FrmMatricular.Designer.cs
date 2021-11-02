@@ -29,6 +29,7 @@ namespace Interfaz
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDescuentoE = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -45,8 +46,8 @@ namespace Interfaz
             this.button1 = new System.Windows.Forms.Button();
             this.dtgvVerMateriaAbierta = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +57,7 @@ namespace Interfaz
             this.nudPeriodo = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvVerMateriaAbierta)).BeginInit();
@@ -212,8 +214,8 @@ namespace Interfaz
             this.dtgvVerMateriaAbierta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvVerMateriaAbierta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
+            this.Column1,
             this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
@@ -222,49 +224,65 @@ namespace Interfaz
             this.dtgvVerMateriaAbierta.Name = "dtgvVerMateriaAbierta";
             this.dtgvVerMateriaAbierta.RowTemplate.Height = 25;
             this.dtgvVerMateriaAbierta.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dtgvVerMateriaAbierta.Size = new System.Drawing.Size(823, 243);
+            this.dtgvVerMateriaAbierta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgvVerMateriaAbierta.Size = new System.Drawing.Size(816, 243);
             this.dtgvVerMateriaAbierta.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.dtgvVerMateriaAbierta, "Da doble click en cualquiera de las materias para ver su respectivo horario");
+            this.dtgvVerMateriaAbierta.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvVerMateriaAbierta_CellDoubleClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Cod Materia";
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CodMateriaAbierta";
+            this.dataGridViewTextBoxColumn1.HeaderText = "codMA";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
             this.dataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "CodMateria";
+            this.Column1.HeaderText = "Cod Materia";
+            this.Column1.Name = "Column1";
+            this.Column1.ToolTipText = "Da doble click para ver el horario de esta materia";
             // 
             // dataGridViewTextBoxColumn2
             // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "nombreMateria";
             this.dataGridViewTextBoxColumn2.HeaderText = "Nombre Materia";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 130;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Nombre Carrera";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 130;
+            this.dataGridViewTextBoxColumn2.ToolTipText = "Da doble click para ver el horario de esta materia";
+            this.dataGridViewTextBoxColumn2.Width = 200;
             // 
             // dataGridViewTextBoxColumn4
             // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "nombreProfesor";
             this.dataGridViewTextBoxColumn4.HeaderText = "Nombre Profesor";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 200;
+            this.dataGridViewTextBoxColumn4.ToolTipText = "Da doble click para ver el horario de esta materia";
+            this.dataGridViewTextBoxColumn4.Width = 235;
             // 
             // dataGridViewTextBoxColumn5
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Codigo Aula";
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "numAula";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Número Aula";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ToolTipText = "Da doble click para ver el horario de esta materia";
             this.dataGridViewTextBoxColumn5.Width = 80;
             // 
             // dataGridViewTextBoxColumn6
             // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "grupo";
             this.dataGridViewTextBoxColumn6.HeaderText = "Grupo";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ToolTipText = "Da doble click para ver el horario de esta materia";
             this.dataGridViewTextBoxColumn6.Width = 80;
             // 
             // dataGridViewTextBoxColumn8
             // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "costo";
             this.dataGridViewTextBoxColumn8.HeaderText = "Costo";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ToolTipText = "Da doble click para ver el horario de esta materia";
             this.dataGridViewTextBoxColumn8.Width = 80;
             // 
             // grbMateriasMatriculadas
@@ -327,12 +345,16 @@ namespace Interfaz
             this.label5.TabIndex = 7;
             this.label5.Text = "Año";
             // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            // 
             // FrmMatricular
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(873, 514);
+            this.ClientSize = new System.Drawing.Size(873, 602);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.nudPeriodo);
@@ -374,16 +396,17 @@ namespace Interfaz
         private System.Windows.Forms.TextBox txtCedulaEstudiante;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.ComboBox comboAnio;
         private System.Windows.Forms.NumericUpDown nudPeriodo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
     }
 }
