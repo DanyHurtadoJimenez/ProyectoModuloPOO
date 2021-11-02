@@ -40,9 +40,8 @@ namespace AccesoDatos
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlDataAdapter adapter;
-            string sentencia = "SELECT CarnetEstudiante, IdEstudiante, NombreEstudiante, Apellido1Estudiante, Apellido2Estudiante, "+
-                               " TelefonoEstudiante, CorreoEstudiante, ProvinciaEstudiante, OtrasSenias, FechaIngresso, Descuento "+
-                               "FROM TBL_Estudiantes WHERE Borrado = 0";
+            string sentencia = "SELECT CarnetEstudiante, IdEstudiante,concat(NombreEstudiante, ' ', Apellido1Estudiante, ' ', Apellido2Estudiante) as 'NombreEstudiante'"+
+                               ",TelefonoEstudiante,CorreoEstudiante,FechaIngresso,Descuento FROM TBL_Estudiantes WHERE Borrado = 0";
 
             if (!string.IsNullOrEmpty(condicion))
             { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia

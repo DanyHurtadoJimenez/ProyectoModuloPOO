@@ -204,6 +204,10 @@ namespace Interfaz
             FormatearHoras(dtpHoraFinal);
             comboAnio.Items.Add(DateTime.Today.Year.ToString());
             comboAnio.Items.Add(DateTime.Today.AddYears(1).Year.ToString());
+            dtpHoraInicio.MinDate = DateTime.Parse("7:00:00");
+            dtpHoraInicio.MaxDate = DateTime.Parse("20:00:00");
+            dtpHoraFinal.MinDate = DateTime.Parse("8:00:00");
+            dtpHoraFinal.MaxDate = DateTime.Parse("22:00:00");
         }
 
         private void dtpHoraInicio_ValueChanged(object sender, EventArgs e)

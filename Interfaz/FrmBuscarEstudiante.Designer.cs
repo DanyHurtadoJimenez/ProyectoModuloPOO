@@ -40,18 +40,14 @@ namespace Interfaz
             this.btnAgregarMateria = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBuscarEstudiante = new System.Windows.Forms.DataGridView();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.carnetEstudiante = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idestudiante = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarEstudiante)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -59,7 +55,7 @@ namespace Interfaz
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(1021, 574);
+            this.btnCancelar.Location = new System.Drawing.Point(683, 574);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(135, 34);
             this.btnCancelar.TabIndex = 19;
@@ -76,7 +72,7 @@ namespace Interfaz
             this.groupBox1.Controls.Add(this.rdnCodEstudiante);
             this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1144, 62);
+            this.groupBox1.Size = new System.Drawing.Size(806, 62);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar Por:";
@@ -96,9 +92,9 @@ namespace Interfaz
             // btnBuscarEstudiante
             // 
             this.btnBuscarEstudiante.Enabled = false;
-            this.btnBuscarEstudiante.Location = new System.Drawing.Point(814, 24);
+            this.btnBuscarEstudiante.Location = new System.Drawing.Point(649, 24);
             this.btnBuscarEstudiante.Name = "btnBuscarEstudiante";
-            this.btnBuscarEstudiante.Size = new System.Drawing.Size(304, 23);
+            this.btnBuscarEstudiante.Size = new System.Drawing.Size(145, 23);
             this.btnBuscarEstudiante.TabIndex = 6;
             this.btnBuscarEstudiante.Text = "Buscar Estudiante";
             this.btnBuscarEstudiante.UseVisualStyleBackColor = true;
@@ -107,9 +103,9 @@ namespace Interfaz
             // txtCondicionEstudiante
             // 
             this.txtCondicionEstudiante.Enabled = false;
-            this.txtCondicionEstudiante.Location = new System.Drawing.Point(433, 24);
+            this.txtCondicionEstudiante.Location = new System.Drawing.Point(412, 24);
             this.txtCondicionEstudiante.Name = "txtCondicionEstudiante";
-            this.txtCondicionEstudiante.Size = new System.Drawing.Size(329, 23);
+            this.txtCondicionEstudiante.Size = new System.Drawing.Size(224, 23);
             this.txtCondicionEstudiante.TabIndex = 5;
             this.txtCondicionEstudiante.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCondicionEstudiante_KeyPress);
             // 
@@ -139,7 +135,7 @@ namespace Interfaz
             // 
             // btnAgregarMateria
             // 
-            this.btnAgregarMateria.Location = new System.Drawing.Point(871, 574);
+            this.btnAgregarMateria.Location = new System.Drawing.Point(542, 574);
             this.btnAgregarMateria.Name = "btnAgregarMateria";
             this.btnAgregarMateria.Size = new System.Drawing.Size(135, 34);
             this.btnAgregarMateria.TabIndex = 17;
@@ -167,12 +163,8 @@ namespace Interfaz
             this.carnetEstudiante,
             this.idestudiante,
             this.Column3,
-            this.Column4,
-            this.Column5,
             this.Column6,
             this.Column7,
-            this.Column8,
-            this.Column11,
             this.Column12,
             this.Column13});
             this.dgvBuscarEstudiante.Location = new System.Drawing.Point(12, 122);
@@ -180,15 +172,20 @@ namespace Interfaz
             this.dgvBuscarEstudiante.RowTemplate.Height = 25;
             this.dgvBuscarEstudiante.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvBuscarEstudiante.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBuscarEstudiante.Size = new System.Drawing.Size(1144, 446);
+            this.dgvBuscarEstudiante.Size = new System.Drawing.Size(806, 446);
             this.dgvBuscarEstudiante.TabIndex = 15;
             this.dgvBuscarEstudiante.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBuscarEstudiante_CellDoubleClick);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // carnetEstudiante
             // 
             this.carnetEstudiante.DataPropertyName = "carnetEstudiante";
             this.carnetEstudiante.HeaderText = "No. Carnet";
             this.carnetEstudiante.Name = "carnetEstudiante";
+            this.carnetEstudiante.Width = 80;
             // 
             // idestudiante
             // 
@@ -198,21 +195,10 @@ namespace Interfaz
             // 
             // Column3
             // 
-            this.Column3.DataPropertyName = "nombreEstudiante";
+            this.Column3.DataPropertyName = "NombreEstudiante";
             this.Column3.HeaderText = "Nombre ";
             this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "apellido1estudiante";
-            this.Column4.HeaderText = "Apellido 1";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "apellido2estudiante";
-            this.Column5.HeaderText = "Apellido 2";
-            this.Column5.Name = "Column5";
+            this.Column3.Width = 190;
             // 
             // Column6
             // 
@@ -226,18 +212,6 @@ namespace Interfaz
             this.Column7.HeaderText = "Correo Estudiante";
             this.Column7.Name = "Column7";
             // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "provinciaestudiante";
-            this.Column8.HeaderText = "Provincia";
-            this.Column8.Name = "Column8";
-            // 
-            // Column11
-            // 
-            this.Column11.DataPropertyName = "otrassenias";
-            this.Column11.HeaderText = "Otras Senias";
-            this.Column11.Name = "Column11";
-            // 
             // Column12
             // 
             this.Column12.DataPropertyName = "FechaIngresso";
@@ -250,15 +224,11 @@ namespace Interfaz
             this.Column13.HeaderText = "Descuento";
             this.Column13.Name = "Column13";
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // FrmBuscarEstudiante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 615);
+            this.ClientSize = new System.Drawing.Size(836, 615);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.groupBox1);
@@ -289,17 +259,13 @@ namespace Interfaz
         private System.Windows.Forms.Button btnAgregarMateria;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvBuscarEstudiante;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.DataGridViewTextBoxColumn carnetEstudiante;
         private System.Windows.Forms.DataGridViewTextBoxColumn idestudiante;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

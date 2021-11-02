@@ -39,22 +39,20 @@ namespace Interfaz
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBuscarMateriaA = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarMateriaA)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(974, 589);
+            this.btnCancelar.Location = new System.Drawing.Point(811, 589);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(92, 34);
             this.btnCancelar.TabIndex = 24;
@@ -70,7 +68,7 @@ namespace Interfaz
             this.groupBox1.Controls.Add(this.rdnCodMateriaA);
             this.groupBox1.Location = new System.Drawing.Point(12, 50);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(944, 62);
+            this.groupBox1.Size = new System.Drawing.Size(891, 62);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar Por:";
@@ -85,13 +83,14 @@ namespace Interfaz
             this.rdnNombreMateriaA.TabStop = true;
             this.rdnNombreMateriaA.Text = "Nombre Materia";
             this.rdnNombreMateriaA.UseVisualStyleBackColor = true;
+            this.rdnNombreMateriaA.CheckedChanged += new System.EventHandler(this.rdnNombreMateriaA_CheckedChanged);
             // 
             // btnBuscarMateriaAbierta
             // 
             this.btnBuscarMateriaAbierta.Enabled = false;
-            this.btnBuscarMateriaAbierta.Location = new System.Drawing.Point(568, 24);
+            this.btnBuscarMateriaAbierta.Location = new System.Drawing.Point(645, 24);
             this.btnBuscarMateriaAbierta.Name = "btnBuscarMateriaAbierta";
-            this.btnBuscarMateriaAbierta.Size = new System.Drawing.Size(304, 23);
+            this.btnBuscarMateriaAbierta.Size = new System.Drawing.Size(192, 23);
             this.btnBuscarMateriaAbierta.TabIndex = 6;
             this.btnBuscarMateriaAbierta.Text = "Buscar Materia Abierta";
             this.btnBuscarMateriaAbierta.UseVisualStyleBackColor = true;
@@ -110,15 +109,16 @@ namespace Interfaz
             this.rdnCodMateriaA.AutoSize = true;
             this.rdnCodMateriaA.Location = new System.Drawing.Point(6, 25);
             this.rdnCodMateriaA.Name = "rdnCodMateriaA";
-            this.rdnCodMateriaA.Size = new System.Drawing.Size(148, 19);
+            this.rdnCodMateriaA.Size = new System.Drawing.Size(107, 19);
             this.rdnCodMateriaA.TabIndex = 4;
             this.rdnCodMateriaA.TabStop = true;
-            this.rdnCodMateriaA.Text = "Codigo Materia Abierta";
+            this.rdnCodMateriaA.Text = "Codigo Materia";
             this.rdnCodMateriaA.UseVisualStyleBackColor = true;
+            this.rdnCodMateriaA.CheckedChanged += new System.EventHandler(this.rdnCodMateriaA_CheckedChanged);
             // 
             // btnAgregarMateria
             // 
-            this.btnAgregarMateria.Location = new System.Drawing.Point(864, 589);
+            this.btnAgregarMateria.Location = new System.Drawing.Point(701, 589);
             this.btnAgregarMateria.Name = "btnAgregarMateria";
             this.btnAgregarMateria.Size = new System.Drawing.Size(92, 34);
             this.btnAgregarMateria.TabIndex = 22;
@@ -144,29 +144,34 @@ namespace Interfaz
             this.dgvBuscarMateriaA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBuscarMateriaA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
+            this.Column8,
             this.Column2,
             this.Column3,
-            this.Column10,
             this.Column4,
             this.Column5,
             this.Column6,
-            this.Column7,
-            this.Column8,
-            this.Column9});
+            this.Column7});
             this.dgvBuscarMateriaA.Location = new System.Drawing.Point(12, 130);
             this.dgvBuscarMateriaA.Name = "dgvBuscarMateriaA";
             this.dgvBuscarMateriaA.RowTemplate.Height = 25;
             this.dgvBuscarMateriaA.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvBuscarMateriaA.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBuscarMateriaA.Size = new System.Drawing.Size(1054, 446);
+            this.dgvBuscarMateriaA.Size = new System.Drawing.Size(891, 446);
             this.dgvBuscarMateriaA.TabIndex = 20;
             this.dgvBuscarMateriaA.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBuscarMateriaA_CellDoubleClick);
             // 
             // Column1
             // 
             this.Column1.DataPropertyName = "CodMateriaAbierta";
-            this.Column1.HeaderText = "Cod Materia Abierta";
+            this.Column1.HeaderText = "Cod MateriaA ";
             this.Column1.Name = "Column1";
+            this.Column1.Visible = false;
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "CodigoMateria";
+            this.Column8.HeaderText = "Cod Materia";
+            this.Column8.Name = "Column8";
             // 
             // Column2
             // 
@@ -177,20 +182,15 @@ namespace Interfaz
             // 
             // Column3
             // 
-            this.Column3.DataPropertyName = "NombreProfesor";
+            this.Column3.DataPropertyName = "nombreProfesor";
             this.Column3.HeaderText = "Nombre Profesor";
             this.Column3.Name = "Column3";
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "Apellido1Profesor";
-            this.Column10.HeaderText = "Apellido Profesor";
-            this.Column10.Name = "Column10";
+            this.Column3.Width = 200;
             // 
             // Column4
             // 
-            this.Column4.DataPropertyName = "CodigoAula";
-            this.Column4.HeaderText = "Codigo Aula";
+            this.Column4.DataPropertyName = "NumeroAula";
+            this.Column4.HeaderText = "Numero Aula";
             this.Column4.Name = "Column4";
             this.Column4.Width = 80;
             // 
@@ -214,25 +214,11 @@ namespace Interfaz
             this.Column7.HeaderText = "Costo";
             this.Column7.Name = "Column7";
             // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "Periodo";
-            this.Column8.HeaderText = "Periodo";
-            this.Column8.Name = "Column8";
-            this.Column8.Width = 80;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "Anio";
-            this.Column9.HeaderText = "Año";
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 80;
-            // 
             // FrmBuscarMateriaAbierta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1087, 635);
+            this.ClientSize = new System.Drawing.Size(922, 635);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.groupBox1);
@@ -262,14 +248,12 @@ namespace Interfaz
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvBuscarMateriaA;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
     }
 }

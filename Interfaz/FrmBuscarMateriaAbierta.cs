@@ -12,14 +12,25 @@ namespace Interfaz
 {
     public partial class FrmBuscarMateriaAbierta : Form
     {
-        public FrmBuscarMateriaAbierta()
+
+        private int periodo;
+        private int anio;
+
+        public int Periodo { get => periodo; set => periodo = value; }
+        public int Anio { get => anio; set => anio = value; }
+
+        public FrmBuscarMateriaAbierta(int periodoMA, int anioMA)
         {
+            periodo = periodoMA;
+            anio = anioMA;
             InitializeComponent();
         }
 
         public event EventHandler MandarMateria;//se crea el evento nuevo
 
         int codMateriaAbierta = 0;//variable que se usara para mandar el id al evento
+
+
 
         private void CargarDataSet(string condicion = "")
         { //carga el datagridview con el dataset
@@ -28,7 +39,7 @@ namespace Interfaz
 
             try
             {
-                dsMateriasAbiertas = logicaMateriaAbierta.ListarMateriasAbiertas(condicion);
+                dsMateriasAbiertas = logicaMateriaAbierta.ListarMateriasAbiertas(condicion,periodo,anio);
                 if (dsMateriasAbiertas.Tables[0].Rows.Count > 0) //si tiene algo el data set entonces carguelo en el datagridview
                 {
                     dgvBuscarMateriaA.DataSource = dsMateriasAbiertas;
@@ -76,7 +87,7 @@ namespace Interfaz
                 {
                     if (rdnCodMateriaA.Checked)
                     {
-                        condicion = string.Format("CodMateriaAbierta like '%{0}%'", txtCondicionMateriaA.Text.Trim()); //donde en el nombre sea algo como lo que se escriba en el txtNombre el trim lo usa para quitar espacios
+                        condicion = string.Format("CodigoMateria like '%{0}%'", txtCondicionMateriaA.Text.Trim()); //donde en el nombre sea algo como lo que se escriba en el txtNombre el trim lo usa para quitar espacios
                     }
 
                     if (rdnNombreMateriaA.Checked)
@@ -110,6 +121,18 @@ namespace Interfaz
         {
             MandarMateria(-1, null);//evento aceptar
             Close();
+        }
+
+        private void rdnCodMateriaA_CheckedChanged(object sender, EventArgs e)
+        {
+            btnBuscarMateriaAbierta.Enabled = true;
+            txtCondicionMateriaA.Enabled = true;
+        }
+
+        private void rdnNombreMateriaA_CheckedChanged(object sender, EventArgs e)
+        {
+            btnBuscarMateriaAbierta.Enabled = true;
+            txtCondicionMateriaA.Enabled = true;
         }
     }
 }

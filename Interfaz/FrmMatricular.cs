@@ -19,6 +19,7 @@ namespace Interfaz
 
         public FrmMatricular()
         {
+
             InitializeComponent();
         }
 
@@ -44,11 +45,8 @@ namespace Interfaz
                     {
                         txtCarnetEstudiante.Text = estudiante.CarnetEstudiante;
                         txtCedulaEstudiante.Text = estudiante.IdEstudiante;
-                        txtNombreEstudiante.Text = estudiante.NombreEstudiante;
-                        txtApellido1E.Text = estudiante.Apellido1Estudiante;
-                        txtApellido2E.Text = estudiante.Apellido2Estudiante;
+                        txtNombreEstudiante.Text = string.Format("{0} {1} {2}", estudiante.NombreEstudiante,estudiante.Apellido1Estudiante,estudiante.Apellido2Estudiante);
                         txtEmailE.Text = estudiante.CorreoEstudiante;
-                        txtProvinciaE.Text = estudiante.ProvinciaEstudiante;
                         txtDescuentoE.Text = estudiante.Descuento.ToString();
                     }
                     else
@@ -67,42 +65,52 @@ namespace Interfaz
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FrmBuscarMateriaAbierta  FrmBuscarMateriaA = new FrmBuscarMateriaAbierta();
-            FrmBuscarMateriaA.MandarMateria += new EventHandler(TraerMateria);
-            FrmBuscarMateriaA.ShowDialog();
+            if (nudPeriodo.Value != 0 && comboAnio.SelectedIndex != -1)
+            {
+                FrmBuscarMateriaAbierta FrmBuscarMateriaA = new FrmBuscarMateriaAbierta(Convert.ToInt32(nudPeriodo.Value),Convert.ToInt32(comboAnio.SelectedItem));
+                FrmBuscarMateriaA.MandarMateria += new EventHandler(TraerMateria);
+                FrmBuscarMateriaA.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Debe escoger primero el periodo y el año para buscar las materias disponibles en ese periodo y año", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
-        private void TraerMateria(object sender, EventArgs e)///////////////////////////////////////////////////////////////////////////////////////////
+        private void TraerMateria(object codMateriaAbierta, EventArgs e)///////////////////////////////////////////////////////////////////////////////////////////
         {
-            //try
-            //{
-            //    int codProfesor = (int)codProfe;
-            //    if (codProfesor != -1)
-            //    {
-            //        Profesores profe;
-            //        LogicaProfesores traerProfe = new LogicaProfesores(Configuracion.getConnectionString);
-            //        profe = traerProfe.ObtenerProfesor(codProfesor);
+            try
+            {
+                int codMA = (int)codMateriaAbierta;
+                if (codMA != -1)
+                {
+                    MateriasAbiertas materiaAbierta;
+                    LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+                    materiaAbierta = logicaMA.ObtenerMateriaAbierta(codMA);
 
-            //        if (profe != null)
-            //        {
-            //            txtCodProfe.Text = profe.CodigoProfesor.ToString();
-            //            txtNombreProfe.Text = profe.NombreProfesor;
-            //            txtIdProfe.Text = profe.IdProfesor.ToString();
-            //            txtApellido1.Text = profe.Apellido1Profesor;
-            //            txtApellido2.Text = profe.Apellido2Profesor;
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("El profesor no se encuentra en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
+                    if (materiaAbierta != null)
+                    {
+                        listaMateriasA.Add(materiaAbierta);
+                    }
+                    else
+                    {
+                        MessageBox.Show("La materia no se encuentra en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
+                }
+            }
+            catch (Exception ex)
+            {
 
-            //    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void FrmMatricular_Load(object sender, EventArgs e)
+        {
+            comboAnio.Items.Add(DateTime.Today.Year.ToString());
+            comboAnio.Items.Add(DateTime.Today.AddYears(1).Year.ToString());
         }
     }
 }
