@@ -94,6 +94,7 @@ namespace Interfaz
             this.Controls.Add(this.dgvVerHorarios);
             this.Controls.Add(this.btnSalir);
             this.Name = "FrmMostrarHorarios";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mostrar Horarios";
             this.Load += new System.EventHandler(this.FrmMostrarHorarios_Load);

@@ -696,6 +696,7 @@ namespace Interfaz
             this.Controls.Add(this.GrbBuscarMateria);
             this.MaximizeBox = false;
             this.Name = "FrmAperturaCursos";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Apertura de Cursos";
             this.Load += new System.EventHandler(this.FrmAperturaCursos_Load);

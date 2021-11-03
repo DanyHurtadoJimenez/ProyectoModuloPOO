@@ -65,22 +65,12 @@ namespace Interfaz
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (nudPeriodo.Value != 0 && comboAnio.SelectedIndex != -1)
-            {
-                FrmBuscarMateriaAbierta FrmBuscarMateriaA = new FrmBuscarMateriaAbierta(Convert.ToInt32(nudPeriodo.Value),Convert.ToInt32(comboAnio.SelectedItem));
+                FrmBuscarMateriaAbierta FrmBuscarMateriaA = new FrmBuscarMateriaAbierta(int.Parse(txtPeriodo.Text),int.Parse(txtAnio.Text));
                 FrmBuscarMateriaA.MandarMateria += new EventHandler(TraerMateria);
-                nudPeriodo.Enabled = false;
-                comboAnio.Enabled = false;
                 FrmBuscarMateriaA.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Debe escoger primero el periodo y el año para buscar las materias disponibles en ese periodo y año", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
         }
 
-        private void TraerMateria(object codMateriaAbierta, EventArgs e)///////////////////////////////////////////////////////////////////////////////////////////
+        private void TraerMateria(object codMateriaAbierta, EventArgs e)
         {
             try
             {
@@ -93,13 +83,49 @@ namespace Interfaz
 
                     if (materiaAbierta != null)
                     {
-                        listaMateriasA.Add(materiaAbierta);
-                        DataSet datos = new DataSet();
 
-                        datos = GenerarDataSet(listaMateriasA); //llena el data grid view con la lista que se le envía
+                        if (listaMateriasA.Count > 0)
+                        {
+                            int i = 0;
+                            int contador = 0;
 
-                        dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
-                        dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
+                            while (i < listaMateriasA.Count) //con este while se impide que el usuario escoja otra materia igual a la que ya tiene escogida
+                            {
+                                if (listaMateriasA[i].CodigoMateriaCarrera.CodigoMateriaCarrera == materiaAbierta.CodigoMateriaCarrera.CodigoMateriaCarrera)//se fija si ya escogio esa materia
+                                {
+                                    contador += 1;
+                                }
+                                i++;
+                            }
+
+                            if (contador == 0)
+                            {
+                                listaMateriasA.Add(materiaAbierta);
+                                DataSet datos = new DataSet();
+
+                                datos = GenerarDataSet(listaMateriasA); //llena el data grid view con la lista que se le envía
+
+                                dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
+                                dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Debe ingresar una materia diferente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            listaMateriasA.Add(materiaAbierta);
+                            DataSet datos = new DataSet();
+
+                            datos = GenerarDataSet(listaMateriasA); //llena el data grid view con la lista que se le envía
+
+                            dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
+                            dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
+                        }
+
+                        txtTotalPagar.Text = string.Format("₡ {0}", calcularCostos(Convert.ToDecimal(txtDescuentoE.Text), listaMateriasA));///////////////////////////////////////////////////////////////
+
                     }
                     else
                     {
@@ -117,8 +143,13 @@ namespace Interfaz
 
         private void FrmMatricular_Load(object sender, EventArgs e)
         {
-            comboAnio.Items.Add(DateTime.Today.Year.ToString());
-            comboAnio.Items.Add(DateTime.Today.AddYears(1).Year.ToString());
+            dtpFechaMatricula.Value = DateTime.Today;
+            LogicaValoresReferencia logicaValores = new LogicaValoresReferencia(Configuracion.getConnectionString);
+            ValoresReferencia valoresR = new ValoresReferencia();
+            valoresR =  logicaValores.RecuperarPeriodoAnio();
+            txtPeriodo.Text = valoresR.Periodo.ToString();
+            txtAnio.Text = valoresR.Anio.ToString();
+            txtMontoMatricula.Text = valoresR.MontoMatricula.ToString();
         }
 
         public DataSet GenerarDataSet(List<MateriasAbiertas> materiasAbiertas) //genera un dataset con el horario que se le manda
@@ -163,8 +194,21 @@ namespace Interfaz
             }
         }
 
+        private void btnQuitarMateria_Click(object sender, EventArgs e)
+        {
+            if (dtgvVerMateriaAbierta.Rows.Count > 0)
+            {
+                int indiceMateria = dtgvVerMateriaAbierta.SelectedRows[0].Cells[0].RowIndex; //selecciona el indice de la fila del datagrid para poder quitar la materia
+                listaMateriasA.RemoveAt(indiceMateria);//remueve la materia de la lista
+                DataSet datos = new DataSet();
 
+                datos = GenerarDataSet(listaMateriasA); //llena el data grid view con la lista que se le envía
 
-
+                dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
+                dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
+                txtTotalPagar.Text = string.Format("₡ {0}", calcularCostos(Convert.ToDecimal(txtDescuentoE.Text), listaMateriasA));//vuelve a calcular los costos///////////////////////////////////////////////////////
+            }
+           
+        }
     }//fin del form
 }//fin del namespace
