@@ -41,6 +41,10 @@ namespace Interfaz
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,7 +56,7 @@ namespace Interfaz
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(811, 589);
+            this.btnCancelar.Location = new System.Drawing.Point(715, 589);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(92, 34);
             this.btnCancelar.TabIndex = 24;
@@ -98,7 +102,6 @@ namespace Interfaz
             // 
             // txtCondicionMateriaA
             // 
-            this.txtCondicionMateriaA.Enabled = false;
             this.txtCondicionMateriaA.Location = new System.Drawing.Point(293, 24);
             this.txtCondicionMateriaA.Name = "txtCondicionMateriaA";
             this.txtCondicionMateriaA.Size = new System.Drawing.Size(248, 23);
@@ -118,7 +121,7 @@ namespace Interfaz
             // 
             // btnAgregarMateria
             // 
-            this.btnAgregarMateria.Location = new System.Drawing.Point(701, 589);
+            this.btnAgregarMateria.Location = new System.Drawing.Point(605, 589);
             this.btnAgregarMateria.Name = "btnAgregarMateria";
             this.btnAgregarMateria.Size = new System.Drawing.Size(92, 34);
             this.btnAgregarMateria.TabIndex = 22;
@@ -146,6 +149,10 @@ namespace Interfaz
             this.Column1,
             this.Column8,
             this.Column2,
+            this.Column9,
+            this.Column10,
+            this.Column11,
+            this.Column12,
             this.Column3,
             this.Column4,
             this.Column5,
@@ -156,7 +163,7 @@ namespace Interfaz
             this.dgvBuscarMateriaA.RowTemplate.Height = 25;
             this.dgvBuscarMateriaA.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvBuscarMateriaA.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBuscarMateriaA.Size = new System.Drawing.Size(891, 446);
+            this.dgvBuscarMateriaA.Size = new System.Drawing.Size(1223, 446);
             this.dgvBuscarMateriaA.TabIndex = 20;
             this.dgvBuscarMateriaA.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBuscarMateriaA_CellDoubleClick);
             // 
@@ -172,20 +179,49 @@ namespace Interfaz
             this.Column8.DataPropertyName = "CodigoMateria";
             this.Column8.HeaderText = "Cod Materia";
             this.Column8.Name = "Column8";
+            this.Column8.Width = 80;
             // 
             // Column2
             // 
             this.Column2.DataPropertyName = "NombreMateria";
             this.Column2.HeaderText = "Nombre Materia";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 210;
+            this.Column2.Width = 180;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "requisito";
+            this.Column9.HeaderText = "Cod Requisito";
+            this.Column9.Name = "Column9";
+            this.Column9.Width = 80;
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "nombreRequisito";
+            this.Column10.HeaderText = "Nombre Requisito";
+            this.Column10.Name = "Column10";
+            this.Column10.Width = 120;
+            // 
+            // Column11
+            // 
+            this.Column11.DataPropertyName = "corequisito";
+            this.Column11.HeaderText = "Cod Corequisito";
+            this.Column11.Name = "Column11";
+            this.Column11.Width = 80;
+            // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "nombreCoRequisito";
+            this.Column12.HeaderText = "Nombre Corequisito";
+            this.Column12.Name = "Column12";
+            this.Column12.Width = 120;
             // 
             // Column3
             // 
             this.Column3.DataPropertyName = "nombreProfesor";
             this.Column3.HeaderText = "Nombre Profesor";
             this.Column3.Name = "Column3";
-            this.Column3.Width = 200;
+            this.Column3.Width = 180;
             // 
             // Column4
             // 
@@ -218,7 +254,7 @@ namespace Interfaz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(922, 635);
+            this.ClientSize = new System.Drawing.Size(1248, 635);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.groupBox1);
@@ -250,6 +286,10 @@ namespace Interfaz
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;

@@ -15,6 +15,8 @@ namespace Interfaz
 
         //variables globales 
 
+        Matricula matriculaERegistrado;
+
         List<MateriasAbiertas> listaMateriasA = new List<MateriasAbiertas>();
 
         public FrmMatricular()
@@ -51,7 +53,7 @@ namespace Interfaz
                     }
                     else
                     {
-                        MessageBox.Show("El profesor no se encuentra en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("El estudiante no se encuentra en la base de datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                 }
@@ -69,6 +71,7 @@ namespace Interfaz
                 FrmBuscarMateriaA.MandarMateria += new EventHandler(TraerMateria);
                 FrmBuscarMateriaA.ShowDialog();
         }
+
 
         private void TraerMateria(object codMateriaAbierta, EventArgs e)
         {
@@ -123,9 +126,7 @@ namespace Interfaz
                             dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
                             dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
                         }
-
-                        txtTotalPagar.Text = string.Format("₡ {0}", calcularCostos(Convert.ToDecimal(txtDescuentoE.Text), listaMateriasA));///////////////////////////////////////////////////////////////
-
+                        calcularCostos();
                     }
                     else
                     {
@@ -149,7 +150,7 @@ namespace Interfaz
             valoresR =  logicaValores.RecuperarPeriodoAnio();
             txtPeriodo.Text = valoresR.Periodo.ToString();
             txtAnio.Text = valoresR.Anio.ToString();
-            txtMontoMatricula.Text = valoresR.MontoMatricula.ToString();
+            lblMontoMatricula.Text = valoresR.MontoMatricula.ToString();
         }
 
         public DataSet GenerarDataSet(List<MateriasAbiertas> materiasAbiertas) //genera un dataset con el horario que se le manda
@@ -206,9 +207,210 @@ namespace Interfaz
 
                 dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
                 dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
-                txtTotalPagar.Text = string.Format("₡ {0}", calcularCostos(Convert.ToDecimal(txtDescuentoE.Text), listaMateriasA));//vuelve a calcular los costos///////////////////////////////////////////////////////
+                calcularCostos();
             }
            
+        }
+
+        private void calcularCostos() { //esta funcion permite calcular los costos de la matricula
+
+            LogicaMatricula costosM = new LogicaMatricula();
+            lblTotalPagar.Text = costosM.calcularCostos(Convert.ToDecimal(txtDescuentoE.Text), listaMateriasA, Convert.ToDouble(lblMontoMatricula.Text)).ToString();///////////////////////////////////////////////////////////////
+            lblSubtotal.Text = costosM.Subtotal.ToString();
+            lblDescuento.Text = txtDescuentoE.Text;
+            lblMontoDescuento.Text = costosM.MontoDescuento.ToString();
+            lblMontoIva.Text = costosM.MontoIVA.ToString();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
+            Matricula matricula;
+            int numFactura;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(txtCarnetEstudiante.Text) &&
+                    !string.IsNullOrEmpty(txtCedulaEstudiante.Text) &&
+                    !string.IsNullOrEmpty(txtNombreEstudiante.Text) &&
+                    !string.IsNullOrEmpty(txtEmailE.Text) &&
+                    !string.IsNullOrEmpty(txtDescuentoE.Text))
+                {
+                    if (listaMateriasA.Count > 0)
+                    {
+                        if (comboTipoPago.SelectedIndex != -1)
+                        {
+                            matricula = generarEntidad();
+                            if (matricula != null)
+                            {
+                                numFactura = logicaM.Insertar(matricula, listaMateriasA); //inserta matricula
+                            }
+                            else
+                            {
+                                numFactura = -1;
+                                //numFactura = logicaM.Modificar(cliente);////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            }
+
+                            if (numFactura > 0)
+                            {
+                                MessageBox.Show(logicaM.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Limpiar();    //Limpia el form
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se realizó ninguna modificación", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Debe escoger un tipo de pago", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Para poder matricular debe de escoger al menos 1 materia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Primero debe buscar al estudiante para poder matricular", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
+        private Matricula generarEntidad() {
+            LogicaValoresReferencia logicaVR = new LogicaValoresReferencia(Configuracion.getConnectionString);
+
+            Matricula matricula;
+            if (!string.IsNullOrEmpty(txtNumFactura.Text))
+            {
+                matricula = matriculaERegistrado;
+            }
+            else
+            {
+                matricula = new Matricula();
+                matricula.CarnetEstudiante = new Estudiantes();
+            }
+
+            matricula.CarnetEstudiante.CarnetEstudiante = txtCarnetEstudiante.Text;
+            matricula.FechaMatricula = dtpFechaMatricula.Value;
+            matricula.MontoMatricula = Convert.ToDecimal(lblTotalPagar.Text);
+            matricula.TipoPago = comboTipoPago.SelectedItem.ToString();
+
+            return matricula;
+        }
+
+        private void Limpiar() {
+            txtNumFactura.Text = string.Empty;
+            txtCarnetEstudiante.Text = string.Empty;
+            txtCedulaEstudiante.Text = string.Empty;
+            txtNombreEstudiante.Text = string.Empty;
+            txtEmailE.Text = string.Empty;
+            txtDescuentoE.Text = string.Empty;
+            comboTipoPago.SelectedIndex = -1;
+            listaMateriasA.Clear();
+            dtgvVerMateriaAbierta.Columns.Clear();
+            txtDescuentoE.Text = "0";
+            lblSubtotal.Text = string.Empty;
+            lblDescuento.Text = string.Empty;
+            lblMontoDescuento.Text = string.Empty;
+            lblMontoIva.Text = string.Empty;
+            lblTotalPagar.Text = string.Empty;
+        }
+
+        private void btnBuscarMatriculas_Click(object sender, EventArgs e)
+        {
+            FrmBuscarMatriculas frmBuscarMatricula = new FrmBuscarMatriculas();
+            frmBuscarMatricula.MandarMatricula += new EventHandler(TraerMatricula);
+            frmBuscarMatricula.ShowDialog();
+        }
+
+        private void CargarMatricula(int numFactura)
+        {
+            Matricula matriculaEstudiante;
+            DataSet materias;
+            LogicaMatricula traerMatricula = new LogicaMatricula(Configuracion.getConnectionString);
+            try
+            {
+                matriculaEstudiante = traerMatricula.ObtenerMatricula(numFactura);
+                if (matriculaEstudiante != null)
+                {
+                    txtNumFactura.Text = matriculaEstudiante.NumeroFactura.ToString();
+                    dtpFechaMatricula.Value = matriculaEstudiante.FechaMatricula;
+                    txtCarnetEstudiante.Text = matriculaEstudiante.CarnetEstudiante.CarnetEstudiante;
+                    txtCedulaEstudiante.Text = matriculaEstudiante.CarnetEstudiante.Cedula;
+                    txtNombreEstudiante.Text = matriculaEstudiante.CarnetEstudiante.Nombre;
+                    txtEmailE.Text = matriculaEstudiante.CarnetEstudiante.CorreoElectronico;
+                    txtDescuentoE.Text = matriculaEstudiante.CarnetEstudiante.Descuento.ToString();
+                    comboTipoPago.SelectedItem = matriculaEstudiante.TipoPago.ToString();
+                    materias = traerMatricula.ListarMateriasMatriculadas(matriculaEstudiante.NumeroFactura); //obtiene en un dataset las materias matriculadas pertenecientes al numero de factura respectivo
+
+                    if (materias.Tables[0].Rows.Count > 0) //si tiene algo el data set entonces carguelo en el datagridview
+                    {
+                        MateriasAbiertas materiaAbierta;
+                        LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+                        int codMateriaAbierta = 0;
+
+                        dtgvVerMateriaAbierta.DataSource = materias;
+                        dtgvVerMateriaAbierta.DataMember = materias.Tables[0].TableName; //se carga el dataset
+
+                        for (int i = 0; i < dtgvVerMateriaAbierta.Rows.Count; i++)
+                        {
+                            codMateriaAbierta = (int)(dtgvVerMateriaAbierta.Rows[i].Cells[0].Value); //tome el primer valor del data grid que son los codigos de materiasAbiertas y busquelos para insertarlos en el arreglo de materias abiertas
+
+                            materiaAbierta = logicaMA.ObtenerMateriaAbierta(codMateriaAbierta);
+                            listaMateriasA.Add(materiaAbierta);//se ingresa la materia abierta dentro del arreglo
+                        }
+                    }
+
+                    matriculaERegistrado = matriculaEstudiante; //se setea la matricula del estudiante registrado para poder darle la opcion al usuario de modificar la informacion de la matricula
+                    calcularCostos(); // se vuelven a calcular los costos
+                }
+                else
+                {
+                    MessageBox.Show("La matricula no existe en la base de datos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        private void TraerMatricula(object numeroFactura, EventArgs e)
+        {
+            try
+            {
+                int numFactura = (int)numeroFactura;
+                if (numFactura != -1)
+                {
+                    CargarMatricula(numFactura);
+                }
+                else
+                {
+                    Limpiar();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }//fin del form
 }//fin del namespace
