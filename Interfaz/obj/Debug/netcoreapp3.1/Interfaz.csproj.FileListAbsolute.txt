@@ -121,3 +121,4 @@ C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPO
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.genruntimeconfig.cache
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmMostrarHorarios.resources
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmBuscarMatriculas.resources
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.Properties.Resources.resources

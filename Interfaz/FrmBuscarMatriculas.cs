@@ -114,5 +114,66 @@ namespace Interfaz
         {
             SeleccionarMatricula();
         }
+
+        private void txtCondicionMatricula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (rdnCarnetEstudiante.Checked)
+            {
+                if (!char.IsLetter(e.KeyChar) && (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back)))
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(txtCondicionMatricula, "Debe ingresar valores alfanumericos");
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCondicionMatricula, string.Empty);
+                }
+            }
+
+            if (rdnCedulaEstudiante.Checked)
+            {
+                if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(txtCondicionMatricula, "Debe ingresar un valor numerico");
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCondicionMatricula, string.Empty);
+                }
+            }
+
+            if (rdnNombreEstudiante.Checked)
+            {
+                if (!char.IsLetter(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                {
+                    e.Handled = true;
+                    errorProvider1.SetError(txtCondicionMatricula, "Debe ingresar un valor numerico");
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCondicionMatricula, string.Empty);
+                }
+            }
+
+        }
+
+        private void rdnCarnetEstudiante_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCondicionMatricula.Enabled = true;
+            btnBuscarMatricula.Enabled = true;
+        }
+
+        private void rdnCedulaEstudiante_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCondicionMatricula.Enabled = true;
+            btnBuscarMatricula.Enabled = true;
+        }
+
+        private void rdnNombreEstudiante_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCondicionMatricula.Enabled = true;
+            btnBuscarMatricula.Enabled = true;
+        }
     }
 }

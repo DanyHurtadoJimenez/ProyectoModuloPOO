@@ -29,6 +29,7 @@ namespace Interfaz
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rdnNombreEstudiante = new System.Windows.Forms.RadioButton();
@@ -46,8 +47,10 @@ namespace Interfaz
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarMatriculas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancelar
@@ -84,6 +87,7 @@ namespace Interfaz
             this.rdnNombreEstudiante.TabStop = true;
             this.rdnNombreEstudiante.Text = "Nombre Estudiante";
             this.rdnNombreEstudiante.UseVisualStyleBackColor = true;
+            this.rdnNombreEstudiante.CheckedChanged += new System.EventHandler(this.rdnNombreEstudiante_CheckedChanged);
             // 
             // btnBuscarMatricula
             // 
@@ -102,6 +106,7 @@ namespace Interfaz
             this.txtCondicionMatricula.Name = "txtCondicionMatricula";
             this.txtCondicionMatricula.Size = new System.Drawing.Size(191, 23);
             this.txtCondicionMatricula.TabIndex = 5;
+            this.txtCondicionMatricula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCondicionMatricula_KeyPress);
             // 
             // rdnCedulaEstudiante
             // 
@@ -113,6 +118,7 @@ namespace Interfaz
             this.rdnCedulaEstudiante.TabStop = true;
             this.rdnCedulaEstudiante.Text = "Cédula Estudiante";
             this.rdnCedulaEstudiante.UseVisualStyleBackColor = true;
+            this.rdnCedulaEstudiante.CheckedChanged += new System.EventHandler(this.rdnCedulaEstudiante_CheckedChanged);
             // 
             // rdnCarnetEstudiante
             // 
@@ -124,6 +130,7 @@ namespace Interfaz
             this.rdnCarnetEstudiante.TabStop = true;
             this.rdnCarnetEstudiante.Text = "Carnet Estudiante";
             this.rdnCarnetEstudiante.UseVisualStyleBackColor = true;
+            this.rdnCarnetEstudiante.CheckedChanged += new System.EventHandler(this.rdnCarnetEstudiante_CheckedChanged);
             // 
             // btnSeleccionarMatricula
             // 
@@ -210,6 +217,10 @@ namespace Interfaz
             this.Column6.HeaderText = "Tipo Pago";
             this.Column6.Name = "Column6";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FrmBuscarMatriculas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -229,6 +240,7 @@ namespace Interfaz
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuscarMatriculas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,5 +265,6 @@ namespace Interfaz
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

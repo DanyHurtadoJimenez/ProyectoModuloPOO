@@ -44,8 +44,19 @@ namespace Interfaz
             this.txtCarnetEstudiante = new System.Windows.Forms.TextBox();
             this.dtpFechaMatricula = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnBuscarMateria = new System.Windows.Forms.Button();
             this.dtgvVerMateriaAbierta = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbMateriasMatriculadas = new System.Windows.Forms.GroupBox();
             this.btnQuitarMateria = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,21 +84,12 @@ namespace Interfaz
             this.label23 = new System.Windows.Forms.Label();
             this.lblTotalPagar = new System.Windows.Forms.Label();
             this.btnBuscarMatriculas = new System.Windows.Forms.Button();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvVerMateriaAbierta)).BeginInit();
             this.grbMateriasMatriculadas.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -109,7 +111,6 @@ namespace Interfaz
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar Estudiante";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // txtDescuentoE
             // 
@@ -230,15 +231,15 @@ namespace Interfaz
             this.label11.TabIndex = 26;
             this.label11.Text = "Fecha Matricula: ";
             // 
-            // button1
+            // btnBuscarMateria
             // 
-            this.button1.Location = new System.Drawing.Point(11, 215);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 42);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Buscar Materia";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnBuscarMateria.Location = new System.Drawing.Point(11, 215);
+            this.btnBuscarMateria.Name = "btnBuscarMateria";
+            this.btnBuscarMateria.Size = new System.Drawing.Size(110, 42);
+            this.btnBuscarMateria.TabIndex = 1;
+            this.btnBuscarMateria.Text = "Buscar Materia";
+            this.btnBuscarMateria.UseVisualStyleBackColor = true;
+            this.btnBuscarMateria.Click += new System.EventHandler(this.btnBuscarMateria_Click);
             // 
             // dtgvVerMateriaAbierta
             // 
@@ -270,9 +271,91 @@ namespace Interfaz
             this.toolTip1.SetToolTip(this.dtgvVerMateriaAbierta, "Da doble click en cualquiera de las materias para ver su respectivo horario");
             this.dtgvVerMateriaAbierta.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvVerMateriaAbierta_CellDoubleClick);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CodMateriaAbierta";
+            this.dataGridViewTextBoxColumn1.HeaderText = "codMA";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "CodigoMateria";
+            this.Column1.HeaderText = "Cod Materia";
+            this.Column1.Name = "Column1";
+            this.Column1.ToolTipText = "Da doble click para ver el horario de esta materia";
+            this.Column1.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "NombreMateria";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Nombre Materia";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ToolTipText = "Da doble click para ver el horario de esta materia";
+            this.dataGridViewTextBoxColumn2.Width = 150;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "Requisito";
+            this.Column2.HeaderText = "Cod Requisito";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 80;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "nombreRequisito";
+            this.Column3.HeaderText = "Nombre Requisito";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "corequisito";
+            this.Column4.HeaderText = "Cod Corequisito";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 80;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "nombreCoRequisito";
+            this.Column5.HeaderText = "Nombre Corequisito";
+            this.Column5.Name = "Column5";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "nombreProfesor";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Nombre Profesor";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ToolTipText = "Da doble click para ver el horario de esta materia";
+            this.dataGridViewTextBoxColumn4.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "NumeroAula";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Número Aula";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ToolTipText = "Da doble click para ver el horario de esta materia";
+            this.dataGridViewTextBoxColumn5.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Grupo";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Grupo";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ToolTipText = "Da doble click para ver el horario de esta materia";
+            this.dataGridViewTextBoxColumn6.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "Costo";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Costo";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ToolTipText = "Da doble click para ver el horario de esta materia";
+            this.dataGridViewTextBoxColumn8.Width = 80;
+            // 
             // grbMateriasMatriculadas
             // 
-            this.grbMateriasMatriculadas.Controls.Add(this.button1);
+            this.grbMateriasMatriculadas.Controls.Add(this.btnBuscarMateria);
             this.grbMateriasMatriculadas.Controls.Add(this.btnQuitarMateria);
             this.grbMateriasMatriculadas.Controls.Add(this.dtgvVerMateriaAbierta);
             this.grbMateriasMatriculadas.Location = new System.Drawing.Point(12, 147);
@@ -355,6 +438,7 @@ namespace Interfaz
             this.btnFacturar.TabIndex = 34;
             this.btnFacturar.Text = "Facturar Matricula";
             this.btnFacturar.UseVisualStyleBackColor = true;
+            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
             // 
             // groupBox3
             // 
@@ -527,87 +611,14 @@ namespace Interfaz
             this.btnBuscarMatriculas.UseVisualStyleBackColor = true;
             this.btnBuscarMatriculas.Click += new System.EventHandler(this.btnBuscarMatriculas_Click);
             // 
-            // dataGridViewTextBoxColumn1
+            // pictureBox1
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "CodMateriaAbierta";
-            this.dataGridViewTextBoxColumn1.HeaderText = "codMA";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            this.dataGridViewTextBoxColumn1.Width = 80;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "CodigoMateria";
-            this.Column1.HeaderText = "Cod Materia";
-            this.Column1.Name = "Column1";
-            this.Column1.ToolTipText = "Da doble click para ver el horario de esta materia";
-            this.Column1.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "NombreMateria";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Nombre Materia";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ToolTipText = "Da doble click para ver el horario de esta materia";
-            this.dataGridViewTextBoxColumn2.Width = 150;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "Requisito";
-            this.Column2.HeaderText = "Cod Requisito";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 80;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "nombreRequisito";
-            this.Column3.HeaderText = "Nombre Requisito";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "corequisito";
-            this.Column4.HeaderText = "Cod Corequisito";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 80;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "nombreCoRequisito";
-            this.Column5.HeaderText = "Nombre Corequisito";
-            this.Column5.Name = "Column5";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "nombreProfesor";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Nombre Profesor";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ToolTipText = "Da doble click para ver el horario de esta materia";
-            this.dataGridViewTextBoxColumn4.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "NumeroAula";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Número Aula";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ToolTipText = "Da doble click para ver el horario de esta materia";
-            this.dataGridViewTextBoxColumn5.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Grupo";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Grupo";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ToolTipText = "Da doble click para ver el horario de esta materia";
-            this.dataGridViewTextBoxColumn6.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Costo";
-            this.dataGridViewTextBoxColumn8.HeaderText = "Costo";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ToolTipText = "Da doble click para ver el horario de esta materia";
-            this.dataGridViewTextBoxColumn8.Width = 80;
+            this.pictureBox1.Image = global::Interfaz.Properties.Resources.matricula;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 464);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(691, 188);
+            this.pictureBox1.TabIndex = 51;
+            this.pictureBox1.TabStop = false;
             // 
             // FrmMatricular
             // 
@@ -615,6 +626,7 @@ namespace Interfaz
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1063, 665);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnBuscarMatriculas);
             this.Controls.Add(this.lblTotalPagar);
             this.Controls.Add(this.label23);
@@ -647,6 +659,7 @@ namespace Interfaz
             this.grbMateriasMatriculadas.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -657,7 +670,7 @@ namespace Interfaz
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBuscarEstudiante;
         private System.Windows.Forms.TextBox txtCarnetEstudiante;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnBuscarMateria;
         private System.Windows.Forms.DataGridView dtgvVerMateriaAbierta;
         private System.Windows.Forms.GroupBox grbMateriasMatriculadas;
         private System.Windows.Forms.TextBox txtDescuentoE;
@@ -708,5 +721,6 @@ namespace Interfaz
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

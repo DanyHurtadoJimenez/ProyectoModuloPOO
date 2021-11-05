@@ -15,6 +15,7 @@ namespace Entidades
         private string comprobantePago;
         private string estadoFactura;
         private string estadoMatricula;
+        private bool existe;
         #endregion
 
         #region Constructores
@@ -28,6 +29,7 @@ namespace Entidades
             comprobantePago = comprobantePagoMatri;
             estadoFactura = estadoFacturaMatri;
             estadoMatricula = estadoMatri;
+            existe = true;
         }
 
         public Matricula()
@@ -40,6 +42,7 @@ namespace Entidades
             comprobantePago = string.Empty;
             estadoFactura = "PEN";
             estadoMatricula = "ACT";
+            existe = false;
         }
         #endregion
 
@@ -52,6 +55,7 @@ namespace Entidades
         public string ComprobantePago { get => comprobantePago; set => comprobantePago = value; }
         public string EstadoFactura { get => estadoFactura; set => estadoFactura = value; }
         public string EstadoMatricula { get => estadoMatricula; set => estadoMatricula = value; }
+        public bool Existe { get => existe; set => existe = value;}
         #endregion
 
         #region Metodos

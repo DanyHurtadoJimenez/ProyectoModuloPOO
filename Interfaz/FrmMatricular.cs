@@ -18,6 +18,7 @@ namespace Interfaz
         Matricula matriculaERegistrado;
 
         List<MateriasAbiertas> listaMateriasA = new List<MateriasAbiertas>();
+        List<Horarios> horariosMaterias = new List<Horarios>();
 
         public FrmMatricular()
         {
@@ -67,65 +68,96 @@ namespace Interfaz
 
         private void button1_Click(object sender, EventArgs e)
         {
-                FrmBuscarMateriaAbierta FrmBuscarMateriaA = new FrmBuscarMateriaAbierta(int.Parse(txtPeriodo.Text),int.Parse(txtAnio.Text));
-                FrmBuscarMateriaA.MandarMateria += new EventHandler(TraerMateria);
-                FrmBuscarMateriaA.ShowDialog();
+
         }
+
 
 
         private void TraerMateria(object codMateriaAbierta, EventArgs e)
         {
+
             try
             {
                 int codMA = (int)codMateriaAbierta;
                 if (codMA != -1)
                 {
                     MateriasAbiertas materiaAbierta;
+                    DataSet horario;
                     LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
-                    materiaAbierta = logicaMA.ObtenerMateriaAbierta(codMA);
+                    LogicaHorarios logicaH = new LogicaHorarios(Configuracion.getConnectionString);
+                    materiaAbierta = logicaMA.ObtenerMateriaAbierta(codMA); //se busca la materia para pasarla a la lista y guardarla y para mostrarla en el datagrid
 
                     if (materiaAbierta != null)
                     {
 
-                        if (listaMateriasA.Count > 0)
+                        if (logicaMA.verificarChoquesMaterias(txtCarnetEstudiante.Text,materiaAbierta.CodigoMateriaCarrera.Requisito.CodigoMateria) ==1 )
                         {
-                            int i = 0;
-                            int contador = 0;
-
-                            while (i < listaMateriasA.Count) //con este while se impide que el usuario escoja otra materia igual a la que ya tiene escogida
+                            if (listaMateriasA.Count > 0)
                             {
-                                if (listaMateriasA[i].CodigoMateriaCarrera.CodigoMateriaCarrera == materiaAbierta.CodigoMateriaCarrera.CodigoMateriaCarrera)//se fija si ya escogio esa materia
+                                int i = 0;
+                                int contador = 0;
+
+                                while (i < listaMateriasA.Count) //con este while se impide que el usuario escoja otra materia igual a la que ya tiene escogida
                                 {
-                                    contador += 1;
+                                    if (listaMateriasA[i].CodigoMateriaCarrera.CodigoMateriaCarrera == materiaAbierta.CodigoMateriaCarrera.CodigoMateriaCarrera)//se fija si ya escogio esa materia
+                                    {
+                                        contador += 1;
+                                    }
+                                    i++;
                                 }
-                                i++;
-                            }
 
-                            if (contador == 0)
-                            {
-                                listaMateriasA.Add(materiaAbierta);
-                                DataSet datos = new DataSet();
+                                if (contador == 0)
+                                {
+                                    horario = logicaH.ListarHorarios(materiaAbierta.CodigoMateriaAbierta);//crea un dataset con los horarios de la materia abierta
+                                    if (logicaH.verificarChoqueMateria(horario, txtCarnetEstudiante.Text) != 1)
+                                    {
+                                        listaMateriasA.Add(materiaAbierta);
 
-                                datos = GenerarDataSet(listaMateriasA); //llena el data grid view con la lista que se le envía
 
-                                dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
-                                dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
+                                        DataSet datos = new DataSet();
+
+                                        datos = GenerarDataSet(listaMateriasA); //llena el data grid view con la lista que se le envía
+
+                                        dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
+                                        dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("No puede matricular esta materia porque tiene un choque de horarios con otra materia ya matriculada", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Debe ingresar una materia diferente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Debe ingresar una materia diferente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                horario = logicaH.ListarHorarios(materiaAbierta.CodigoMateriaAbierta);
+                                if (logicaH.verificarChoqueMateria(horario, txtCarnetEstudiante.Text) != 1)
+                                {
+                                    listaMateriasA.Add(materiaAbierta);
+
+
+                                    DataSet datos = new DataSet();
+
+                                    datos = GenerarDataSet(listaMateriasA); //llena el data grid view con la lista que se le envía
+
+                                    dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
+                                    dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
+                                }
+                                else
+                                {
+                                    MessageBox.Show(logicaH.Mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+
                             }
                         }
                         else
                         {
-                            listaMateriasA.Add(materiaAbierta);
-                            DataSet datos = new DataSet();
-
-                            datos = GenerarDataSet(listaMateriasA); //llena el data grid view con la lista que se le envía
-
-                            dtgvVerMateriaAbierta.DataSource = datos; //se carga el datagrid con el dataset
-                            dtgvVerMateriaAbierta.DataMember = datos.Tables[0].TableName;
+                            MessageBox.Show(logicaMA.Mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+
                         calcularCostos();
                     }
                     else
@@ -160,12 +192,16 @@ namespace Interfaz
 
             dataSet.Tables.Add(dataTable);
             dataTable.Columns.Add("CodMateriaAbierta");
-            dataTable.Columns.Add("CodMateria");
-            dataTable.Columns.Add("nombreMateria");
+            dataTable.Columns.Add("CodigoMateria");
+            dataTable.Columns.Add("NombreMateria");
+            dataTable.Columns.Add("Requisito");
+            dataTable.Columns.Add("nombreRequisito");
+            dataTable.Columns.Add("corequisito");
+            dataTable.Columns.Add("nombreCoRequisito");
             dataTable.Columns.Add("nombreProfesor");
-            dataTable.Columns.Add("numAula");
-            dataTable.Columns.Add("grupo");
-            dataTable.Columns.Add("costo");
+            dataTable.Columns.Add("NumeroAula");
+            dataTable.Columns.Add("Grupo");
+            dataTable.Columns.Add("Costo");
 
             foreach (var Item in materiasAbiertas)
             {
@@ -173,6 +209,10 @@ namespace Interfaz
                     Item.CodigoMateriaAbierta, 
                     Item.CodigoMateriaCarrera.CodigoMateria.CodigoMateria, 
                     Item.CodigoMateriaCarrera.CodigoMateria.NombreMateria,
+                    Item.CodigoMateriaCarrera.Requisito.CodigoMateria,
+                    Item.CodigoMateriaCarrera.Requisito.NombreMateria,
+                    Item.CodigoMateriaCarrera.Corequisito.CodigoMateria,
+                    Item.CodigoMateriaCarrera.Corequisito.NombreMateria,
                     Item.CodigoProfesor.Nombre,
                     Item.CodigoAula.NumeroAula,
                     Item.Grupo,
@@ -241,14 +281,13 @@ namespace Interfaz
                         if (comboTipoPago.SelectedIndex != -1)
                         {
                             matricula = generarEntidad();
-                            if (matricula != null)
+                            if (!matricula.Existe)
                             {
                                 numFactura = logicaM.Insertar(matricula, listaMateriasA); //inserta matricula
                             }
                             else
                             {
-                                numFactura = -1;
-                                //numFactura = logicaM.Modificar(cliente);////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                numFactura = logicaM.Modificar(matricula.NumeroFactura,listaMateriasA);////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             }
 
                             if (numFactura > 0)
@@ -293,6 +332,7 @@ namespace Interfaz
             if (!string.IsNullOrEmpty(txtNumFactura.Text))
             {
                 matricula = matriculaERegistrado;
+                matricula.Existe = true;
             }
             else
             {
@@ -331,6 +371,7 @@ namespace Interfaz
             FrmBuscarMatriculas frmBuscarMatricula = new FrmBuscarMatriculas();
             frmBuscarMatricula.MandarMatricula += new EventHandler(TraerMatricula);
             frmBuscarMatricula.ShowDialog();
+            btnBuscarEstudiante.Enabled = false;
         }
 
         private void CargarMatricula(int numFactura)
@@ -401,16 +442,114 @@ namespace Interfaz
                     Limpiar();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
 
+        private void btnBuscarMateria_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtCarnetEstudiante.Text) && !string.IsNullOrEmpty(txtCedulaEstudiante.Text) &&
+                !string.IsNullOrEmpty(txtNombreEstudiante.Text) && !string.IsNullOrEmpty(txtEmailE.Text) &&
+                !string.IsNullOrEmpty(txtDescuentoE.Text))
+            {
+                FrmBuscarMateriaAbierta FrmBuscarMateriaA = new FrmBuscarMateriaAbierta(int.Parse(txtPeriodo.Text), int.Parse(txtAnio.Text));
+                FrmBuscarMateriaA.MandarMateria += new EventHandler(TraerMateria);
+                FrmBuscarMateriaA.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para buscar una materia debe primero buscar un estudiante", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void btnFacturar_Click(object sender, EventArgs e)
+        {
+            if (txtNumFactura.Text == string.Empty) //significa que se esta creando la factura en ese mismo momento y la quiere cancelar de una vez no quiere guardarla
+            {
+                if ((!string.IsNullOrEmpty(txtCarnetEstudiante.Text) && !string.IsNullOrEmpty(txtCedulaEstudiante.Text) &&
+                !string.IsNullOrEmpty(txtNombreEstudiante.Text) && !string.IsNullOrEmpty(txtEmailE.Text) &&
+                !string.IsNullOrEmpty(txtDescuentoE.Text)))
+                {
+                    if (listaMateriasA.Count > 0)
+                    {
+                        if (comboTipoPago.SelectedIndex != -1)
+                        {
+                            LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
+                            Matricula matricula;
+                            int numFactura = -1;
+                            int resultadoFacturar = -1;
+                            matricula = generarEntidad();
+
+                            numFactura = logicaM.Insertar(matricula, listaMateriasA); //como esta facturando de manera inmediata entonces debe primero crear la matricula para poder facturarla
+                            resultadoFacturar = logicaM.Facturar(numFactura);
+
+                            if (numFactura > 0 && resultadoFacturar > 0)
+                            {
+                                MessageBox.Show(logicaM.Mensaje+" "+" y ha sido facturada con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Limpiar();    //Limpia el form
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se pudo guardar la matricula ni realizar la facturación", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Para facturar debe de escoger un tipo de pago", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Para facturar una matricula debe de escoger al menos una materia", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Para facturar una matricula debe de buscar primero un estudiante", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else //sino significa que se desea facturar una matricula que fue recuperada
+            {
+                if (listaMateriasA.Count > 0)
+                {
+                    if (comboTipoPago.SelectedIndex != -1)
+                    {
+                        LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
+                        Matricula matricula;
+                        int resultadoModificar = -1;
+                        int resultadoFacturar = -1;
+                        matricula = generarEntidad();
+
+                        resultadoModificar = logicaM.Modificar(matricula.NumeroFactura, listaMateriasA); //esta facturando de una matricula recuperada entonces vuelve a cambiar la informacion y psa a facturar
+                        resultadoFacturar = logicaM.Facturar(matricula.NumeroFactura);
+
+                        if (resultadoModificar > 0 && resultadoFacturar > 0)
+                        {
+                            MessageBox.Show("La Matricula ha sido cancelada con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Limpiar();    //Limpia el form
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo realizar la cancelación de la matrícula", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Para facturar debe de escoger un tipo de pago", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Para facturar una matricula debe de haber al menos una materia", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
     }//fin del form
 }//fin del namespace

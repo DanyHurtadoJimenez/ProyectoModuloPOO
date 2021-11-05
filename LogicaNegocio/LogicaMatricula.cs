@@ -146,6 +146,40 @@ namespace LogicaNegocio
             return DS;//se devuelve el dataset
         }
 
+
+        public int Modificar(int numFactura,List<MateriasAbiertas> materiasA)
+        {
+            int resultado = 0;
+            ADMatricula accesoDatosMTR = new ADMatricula(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMTR.ModificarMaterias(numFactura, materiasA);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            _mensaje = accesoDatosMTR.Mensaje;
+            return resultado;
+        }
+
+        public int Facturar(int numFactura)
+        {
+            int resultado = 0;
+            ADMatricula accesoDatosMRT = new ADMatricula(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMRT.FacturarMatricula(numFactura);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return resultado;
+        }
+
+
         #endregion
 
 

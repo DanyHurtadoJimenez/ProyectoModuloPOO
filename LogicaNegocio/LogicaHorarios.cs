@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using AccesoDatos;
+using Entidades;
 
 namespace LogicaNegocio
 {
@@ -60,6 +61,23 @@ namespace LogicaNegocio
             }
 
             return DS;//se devuelve el dataset
+        }
+
+
+        public int verificarChoqueMateria(DataSet datos, string carnetEstudiante)
+        {
+            int resultado = 0;
+            ADHorarios accesoDatosH = new ADHorarios(_cadenaConexion);//se instancia el acceso a los datos
+            try
+            {
+                resultado = accesoDatosH.verificarChoquesMaterias(datos, carnetEstudiante);
+            }
+            catch (Exception)
+            {
+                throw; 
+            }
+            _mensaje = accesoDatosH.Mensaje;
+            return resultado;
         }
 
         #endregion

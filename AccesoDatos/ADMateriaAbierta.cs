@@ -313,6 +313,45 @@ namespace AccesoDatos
         }
 
 
+        public int verificarChoquesMaterias(string carnetEstudiante, string codRequisito)
+        { //insertar el profesor mediante un stored Procedure en la tabla de materias Abiertas
+            int resultado = -1;
+
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = "SP_VERIFICARREQUISITO"; //nombre del procedimiento almacenado
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Connection = conexion;
+
+            //parametros de entrada para el SP
+            comando.Parameters.AddWithValue("@codRequisito", codRequisito);
+            comando.Parameters.AddWithValue("@carnetEstudiante", carnetEstudiante);
+
+            //parametro de salida del SP
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+            comando.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
+
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
+                resultado = Convert.ToInt32(comando.Parameters["@resultado"].Value); //obtengo la variable de retorno
+                //se va a leer el parametro de salida del SP
+                _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+
+        }
+
+
 
         #endregion
 

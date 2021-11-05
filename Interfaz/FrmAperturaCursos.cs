@@ -320,7 +320,7 @@ namespace Interfaz
 
                             if (idMateriaAbierta > 0 )
                             {
-                                //llamarMetodoLimpiar
+                                Limpiar();
                                 MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
@@ -383,11 +383,29 @@ namespace Interfaz
 
                 throw;
             }
-
-
-
         }
 
+
+        private void Limpiar() {
+            txtCodigoMateria.Text = string.Empty;
+            txtCreditos.Text = string.Empty;
+            txtNombreCarrera.Text = string.Empty;
+            txtNombreMateria.Text = string.Empty;
+            txtGrupo.Text = string.Empty;
+            nudCupo.Value = 0;
+            txtCosto.Text = string.Empty;
+            comboAnio.SelectedIndex = -1;
+            comboDiasSemana.SelectedIndex = -1;
+            listaHorarios.Clear();
+            dtgvMostrarHorario.Columns.Clear();
+            txtCodigaAula.Text = string.Empty;
+            txtTipoAula.Text = string.Empty;
+            txtNumAula.Text = string.Empty;
+            txtCapacidad.Text = string.Empty;
+            txtCodProfe.Text = string.Empty;
+            txtNombreProfe.Text = string.Empty;
+            
+        }
         private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))

@@ -73,7 +73,7 @@ namespace LogicaNegocio
             }
             catch (Exception)
             {
-                throw;
+                throw; 
             }
             _mensaje = accesoDatosMA.Mensaje;
             return codMateriaA;
@@ -126,6 +126,23 @@ namespace LogicaNegocio
 
             return materiaAbierta;
         }
+
+        public int verificarChoquesMaterias(string carnetEstudiante,string codRequisito)
+        {
+            int resultado = 0;
+            ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMA.verificarChoquesMaterias(carnetEstudiante, codRequisito);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            _mensaje = accesoDatosMA.Mensaje;
+            return resultado;
+        }
+
 
 
         #endregion
