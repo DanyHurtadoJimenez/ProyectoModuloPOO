@@ -105,11 +105,14 @@ C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPO
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmBuscarEstudiante.resources
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmBuscarMateria.resources
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmBuscarMateriaAbierta.resources
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmBuscarMatriculas.resources
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmBuscarProfesor.resources
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmDespliegueCostos.resources
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmEscogerAula.resources
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmMatricular.resources
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmMenu.resources
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmMostrarHorarios.resources
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.Properties.Resources.resources
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.csproj.GenerateResource.cache
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.GeneratedMSBuildEditorConfig.editorconfig
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.AssemblyInfoInputs.cache
@@ -119,6 +122,3 @@ C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPO
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.dll
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.pdb
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.genruntimeconfig.cache
-C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmMostrarHorarios.resources
-C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.FrmBuscarMatriculas.resources
-C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Interfaz\obj\Debug\netcoreapp3.1\Interfaz.Properties.Resources.resources

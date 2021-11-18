@@ -1,0 +1,54 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#encabezado {
+    background-color: #1F3C88;
+    padding: 20px;
+}
+
+    #encabezado h1 {
+        color: #F6F5F5;
+    }
+
+
+#form1 {
+    background-color: #F6F5F5;
+}
+
+#navegacion {
+    background-color: #EE6F57;
+    color: black;
+}
+
+#piePagina {
+    background-color: #070D59;
+    padding: 4%;
+}
+
+#contenedorPiePagina p {
+    color: white;
+    margin-right: 10px;
+    font-size: medium;
+}
+
+.container {
+    padding: 20px;
+}
+
+.imagen {
+    width: 55%;
+}
+
+.row {
+    align-items: center;
+}
+
+#info {
+    padding: 25px;
+}
+
+a {
+    text-decoration: none;
+}

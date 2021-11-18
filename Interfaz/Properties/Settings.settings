@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ConnectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Data Source=DESKTOP-C6EJFMT\SQLEXPRESS;Initial Catalog=MATRICULA2021_DEPRUEBA;Integrated Security=True</Value>
+      <Value Profile="(Default)">Data Source=DESKTOP-C6EJFMT\SQLEXPRESS;Initial Catalog=MATRICULA2021_DANYHURTADO;Integrated Security=True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

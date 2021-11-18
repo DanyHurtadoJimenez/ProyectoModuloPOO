@@ -9,10 +9,9 @@ namespace Entidades
 
         #region Atributos
 
-            private int anio;
-            private int periodo;
-            private int montoMatricula;
-            private int disponibilidad;
+        private int anio;
+        private int periodo;
+        private int valorMatricula;
 
         #endregion
 
@@ -22,8 +21,7 @@ namespace Entidades
         {
             anio = 0;
             periodo = 0;
-            montoMatricula = 0;
-            disponibilidad = 0;
+            valorMatricula = 0;
         }
 
 
@@ -33,8 +31,7 @@ namespace Entidades
 
         public int Anio { get => anio; set => anio = value; }
         public int Periodo { get => periodo; set => periodo = value; }
-        public int MontoMatricula { get => montoMatricula; set => montoMatricula = value; }
-        public int Disponibilidad { get => disponibilidad; set => disponibilidad = value; }
+        public int ValorMatricula { get => valorMatricula; set => valorMatricula = value; }
 
         #endregion
 

@@ -182,7 +182,7 @@ namespace Interfaz
             valoresR =  logicaValores.RecuperarPeriodoAnio();
             txtPeriodo.Text = valoresR.Periodo.ToString();
             txtAnio.Text = valoresR.Anio.ToString();
-            lblMontoMatricula.Text = valoresR.MontoMatricula.ToString();
+            lblMontoMatricula.Text = valoresR.ValorMatricula.ToString();
         }
 
         public DataSet GenerarDataSet(List<MateriasAbiertas> materiasAbiertas) //genera un dataset con el horario que se le manda

@@ -30,7 +30,6 @@ namespace Interfaz
             
             try
             {
-                int numeroGrupo = traerMateriaCarrera.generarGrupo(codMateriaCarrera); //se genera el numero del grupo
                 MateriaC = traerMateriaCarrera.ObtenerMateriaCarrera(codMateriaCarrera);
                 if (MateriaC != null)
                 {
@@ -40,7 +39,6 @@ namespace Interfaz
                     txtNombreMateria.Text = MateriaC.CodigoMateria.NombreMateria;
                     txtCreditos.Text = MateriaC.CodigoMateria.CreditosMateria.ToString();
                     txtNombreCarrera.Text = MateriaC.CodigoCarreras.NombreCarrera;
-                    txtGrupo.Text = numeroGrupo.ToString();
                     //clienteRegistrado = MateriaC; //se setea el cliente registrado para poder darle la opcion al usuario de modificar la informacion del cliente
                 }
                 else
@@ -61,24 +59,18 @@ namespace Interfaz
             MateriasAbiertas materiaA;
             MateriasAbiertas materiaAbierta = new MateriasAbiertas();
             materiaAbierta.CodigoMateriaCarrera = new MateriasCarreras();
-            materiaAbierta.CodigoProfesor = new Profesores();
-            materiaAbierta.CodigoAula = new Aulas();
 
             if (!string.IsNullOrEmpty(txtCodigoMateria.Text))
             {
                 
                 materiaA = new MateriasAbiertas();
                 materiaA.CodigoMateriaCarrera = new MateriasCarreras();
-                materiaA.CodigoProfesor = new Profesores();
-                materiaA.CodigoAula = new Aulas();
                 materiaA = materiaAbierta;
             }
             else
             {
                 materiaA = new MateriasAbiertas();
                 materiaA.CodigoMateriaCarrera = new MateriasCarreras();
-                materiaA.CodigoProfesor = new Profesores();
-                materiaA.CodigoAula = new Aulas();
             }
 
             materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = idMateriaCarrera;
@@ -320,7 +312,6 @@ namespace Interfaz
 
                             if (idMateriaAbierta > 0 )
                             {
-                                Limpiar();
                                 MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
@@ -356,6 +347,7 @@ namespace Interfaz
                                         MessageBox.Show(logicaMA.Mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                 }
+                                Limpiar();
                             }
                             else
                             {
@@ -416,6 +408,26 @@ namespace Interfaz
             else
             {
                 errorProvider1.SetError(txtCosto, string.Empty);
+            }
+        }
+
+        private void comboAnio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (txtCodigoMateria.Text != string.Empty && nudPeriodo.Value > 0)
+            {
+                LogicaMateriaCarrera traerMateriaCarrera = new LogicaMateriaCarrera(Configuracion.getConnectionString);
+                int numeroGrupo = traerMateriaCarrera.generarGrupo(idMateriaCarrera, Convert.ToInt32(comboAnio.SelectedItem), Convert.ToInt32(nudPeriodo.Value)); //se genera el numero del grupo
+                txtGrupo.Text = numeroGrupo.ToString();
+            }
+        }
+
+        private void nudPeriodo_ValueChanged(object sender, EventArgs e)
+        {
+            if (txtCodigoMateria.Text != string.Empty && comboAnio.SelectedIndex != -1)
+            {
+                LogicaMateriaCarrera traerMateriaCarrera = new LogicaMateriaCarrera(Configuracion.getConnectionString);
+                int numeroGrupo = traerMateriaCarrera.generarGrupo(idMateriaCarrera, Convert.ToInt32(comboAnio.SelectedItem), Convert.ToInt32(nudPeriodo.Value)); //se genera el numero del grupo
+                txtGrupo.Text = numeroGrupo.ToString();
             }
         }
     }

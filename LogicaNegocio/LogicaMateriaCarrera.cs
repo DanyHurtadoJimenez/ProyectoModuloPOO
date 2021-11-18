@@ -2,6 +2,7 @@
 using System.Data;
 using AccesoDatos;
 using Entidades;
+using LogicaNegocio;
 
 namespace LogicaNegocio
 {
@@ -77,13 +78,14 @@ namespace LogicaNegocio
             return materiaC;
         }
 
-        public int generarGrupo(int codMateriaCarrera)
+        public int generarGrupo(int codMateriaCarrera, int anio, int periodo)
         {
+
             int numeroGrupo;
             ADMateriaCarrera accesoMC = new ADMateriaCarrera(_cadenaConexion);
             try
             {
-                numeroGrupo = accesoMC.generarGrupo(codMateriaCarrera);
+                numeroGrupo = accesoMC.generarGrupo(codMateriaCarrera, anio, periodo);
             }
             catch (Exception)
             {

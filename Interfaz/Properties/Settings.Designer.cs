@@ -25,8 +25,8 @@ namespace Interfaz.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-C6EJFMT\\SQLEXPRESS;Initial Catalog=MATRICULA2021_DEPRUEBA;Int" +
-            "egrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-C6EJFMT\\SQLEXPRESS;Initial Catalog=MATRICULA2021_DANYHURTADO;" +
+            "Integrated Security=True")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

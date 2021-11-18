@@ -1,0 +1,30 @@
+﻿body {
+   background-color: #F6F5F5;
+}
+
+
+.textBox {
+    border-radius: 6px;
+    border: rgba(114, 114, 114, 0.541) 1.5px solid;
+}
+
+.container {
+    border-radius: 6px;
+    border: rgba(114, 114, 114, 0.541) 1.5px solid;
+    margin-bottom:45px;
+    
+}
+
+@media only screen and (max-width:600px) {
+
+    .contenedores {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .container {
+        margin-left:5px;
+        margin-right:5px;
+    }
+
+} 

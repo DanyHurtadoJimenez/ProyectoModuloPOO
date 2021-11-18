@@ -50,7 +50,7 @@ namespace LogicaNegocio
             ADValoresReferencia accesoDatosVR = new ADValoresReferencia(_cadenaConexion);
             try
             {
-                valoresRef = accesoDatosVR.RecuperarPeriodoAnio();
+                valoresRef = accesoDatosVR.RecuperarValoresReferencia();
             }
             catch (Exception)
             {

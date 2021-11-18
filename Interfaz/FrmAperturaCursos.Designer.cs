@@ -557,6 +557,7 @@ namespace Interfaz
             this.comboAnio.Name = "comboAnio";
             this.comboAnio.Size = new System.Drawing.Size(100, 23);
             this.comboAnio.TabIndex = 16;
+            this.comboAnio.SelectedIndexChanged += new System.EventHandler(this.comboAnio_SelectedIndexChanged);
             // 
             // txtGrupo
             // 
@@ -602,6 +603,7 @@ namespace Interfaz
             0,
             0,
             0});
+            this.nudPeriodo.ValueChanged += new System.EventHandler(this.nudPeriodo_ValueChanged);
             // 
             // label13
             // 

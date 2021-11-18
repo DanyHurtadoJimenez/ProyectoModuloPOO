@@ -124,7 +124,7 @@ namespace AccesoDatos
 
         }
 
-        public int generarGrupo(int codMateriaCarrera)
+        public int generarGrupo(int codMateriaCarrera, int anio, int periodo)
         {
             int numGrupo;
             
@@ -136,6 +136,8 @@ namespace AccesoDatos
             comando.Connection = conexion;
             //parametro de entrada para el SP
             comando.Parameters.AddWithValue("@codMateriaCarrera",codMateriaCarrera);
+            comando.Parameters.AddWithValue("@anio", anio);
+            comando.Parameters.AddWithValue("@periodo", periodo);
 
             //parametro de salida del SP
             comando.Parameters.Add("@msj", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado

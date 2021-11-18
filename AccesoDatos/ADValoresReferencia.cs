@@ -33,15 +33,19 @@ namespace AccesoDatos
 
         #region  Metodos
 
-        public ValoresReferencia RecuperarPeriodoAnio() 
-        {  
+        public ValoresReferencia RecuperarValoresReferencia() //devuelve el periodo del valor de referencia
+        {
 
             ValoresReferencia valoresReferencia = new ValoresReferencia();
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
             SqlDataReader dataReader;//el data reader no tiene constructor para llenarlo es mediante un execute
 
-            string sentencia = "select anio,periodo,montoMatricula,disponibilidad from TBL_ValoresReferencia where disponibilidad = 1";
+            string sentencia = "select valor from TBL_ValoresReferencia where dato = 'periodo'";
+
+            string sentencia2 = "select valor from TBL_ValoresReferencia where dato = 'anio'";
+
+            string sentencia3 = "select valor from TBL_ValoresReferencia where dato = 'valorMatricula'";
 
             comando.Connection = conexion;
             comando.CommandText = sentencia;
@@ -49,16 +53,14 @@ namespace AccesoDatos
             try
             {
                 conexion.Open();
-                dataReader = comando.ExecuteReader();
+                dataReader = comando.ExecuteReader();//ejecuta la primera sentencia
 
                 if (dataReader.HasRows)
                 {
-                    dataReader.Read();//lee fila por fila del data reader
-                    valoresReferencia.Anio = dataReader.GetInt32(0); //esta columna es de tipo integer y esta en la posicion 0
-                    valoresReferencia.Periodo = dataReader.GetInt32(1);
-                    valoresReferencia.MontoMatricula = dataReader.GetInt32(2);
-
+                    dataReader.Read();
+                    valoresReferencia.Periodo = dataReader.GetInt32(0); 
                 }
+
                 conexion.Close();
 
             }
@@ -66,7 +68,50 @@ namespace AccesoDatos
             {
                 throw;
             }
-            return valoresReferencia;
+
+            comando.CommandText = sentencia2;
+
+            try
+            {
+                conexion.Open();
+                dataReader = comando.ExecuteReader(); //ejecuta la segunda sentencia
+
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    valoresReferencia.Anio = dataReader.GetInt32(0);
+                }
+
+                conexion.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            comando.CommandText = sentencia3;
+
+            try
+            {
+                conexion.Open();
+                dataReader = comando.ExecuteReader(); //ejecuta la Tercera sentencia
+
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    valoresReferencia.ValorMatricula = dataReader.GetInt32(0);
+                }
+
+                conexion.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return valoresReferencia; //devuelve el objeto lleno
         }
 
         #endregion
