@@ -11,7 +11,8 @@ namespace Interfaz
         //recupera la variable connectionString
         public static string getConnectionString
         {
-            get {
+            get
+            {
                 return Properties.Settings.Default.ConnectionString;
             }
         }

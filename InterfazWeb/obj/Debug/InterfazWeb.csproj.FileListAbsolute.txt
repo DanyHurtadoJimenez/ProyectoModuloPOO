@@ -50,8 +50,17 @@ C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPO
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\roslyn\vbc.rsp
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\roslyn\VBCSCompiler.exe
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\roslyn\VBCSCompiler.exe.config
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\Entidades.dll
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\LogicaNegocio.dll
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\System.Data.SqlClient.dll
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\AccesoDatos.dll
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\Entidades.pdb
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\LogicaNegocio.pdb
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\System.Data.SqlClient.xml
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\bin\AccesoDatos.pdb
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\obj\Debug\InterfazWeb.csproj.AssemblyReference.cache
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\obj\Debug\InterfazWeb.csproj.CoreCompileInputs.cache
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\obj\Debug\InterfazWeb.csproj.CopyComplete
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\InterfazWeb\obj\Debug\InterfazWeb.dll
