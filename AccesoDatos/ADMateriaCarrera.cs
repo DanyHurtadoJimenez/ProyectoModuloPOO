@@ -124,43 +124,6 @@ namespace AccesoDatos
 
         }
 
-        public int generarGrupo(int codMateriaCarrera, int anio, int periodo)
-        {
-            int numGrupo;
-            
-            SqlConnection conexion = new SqlConnection(_cadenaConexion);
-            SqlCommand comando = new SqlCommand();
-
-            comando.CommandText = "SP_ASIGNAR_GRUPO"; //nombre del procedimiento almacenado
-            comando.CommandType = CommandType.StoredProcedure;//se especifica que tipo de comando es, en este caso es un procedimiento almacenado
-            comando.Connection = conexion;
-            //parametro de entrada para el SP
-            comando.Parameters.AddWithValue("@codMateriaCarrera",codMateriaCarrera);
-            comando.Parameters.AddWithValue("@anio", anio);
-            comando.Parameters.AddWithValue("@periodo", periodo);
-
-            //parametro de salida del SP
-            comando.Parameters.Add("@msj", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
-            comando.Parameters.Add("@numGrupo", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
-
-            try
-            {
-                conexion.Open();
-                comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
-                numGrupo = Convert.ToInt32(comando.Parameters["@numGrupo"].Value); //obtengo la variable de retorno
-                //se va a leer el parametro de salida del SP
-                _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
-                conexion.Close();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            return numGrupo;
-
-        }
 
         #endregion
 

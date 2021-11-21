@@ -24,6 +24,15 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
+        /// Control rfvCodigoMateria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCodigoMateria;
+
+        /// <summary>
         /// Control txtCodigoMateria.
         /// </summary>
         /// <remarks>
@@ -87,6 +96,24 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.TextBox txtNombreCarrera;
 
         /// <summary>
+        /// Control btnBuscarMateria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscarMateria;
+
+        /// <summary>
+        /// Control btnModificarMateria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificarMateria;
+
+        /// <summary>
         /// Control Label5.
         /// </summary>
         /// <remarks>
@@ -94,6 +121,15 @@ namespace InterfazWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label5;
+
+        /// <summary>
+        /// Control rfvGrupo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvGrupo;
 
         /// <summary>
         /// Control txtGrupo.
@@ -114,6 +150,15 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
+        /// Control rfvCupo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCupo;
+
+        /// <summary>
         /// Control nudCupo.
         /// </summary>
         /// <remarks>
@@ -130,6 +175,15 @@ namespace InterfazWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label7;
+
+        /// <summary>
+        /// Control rfvCosto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCosto;
 
         /// <summary>
         /// Control txtCosto.
@@ -150,6 +204,15 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label8;
 
         /// <summary>
+        /// Control rfvPeriodo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPeriodo;
+
+        /// <summary>
         /// Control nudPeriodo.
         /// </summary>
         /// <remarks>
@@ -168,6 +231,15 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label9;
 
         /// <summary>
+        /// Control rfvAnio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAnio;
+
+        /// <summary>
         /// Control DropDownAnios.
         /// </summary>
         /// <remarks>
@@ -177,6 +249,15 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.DropDownList DropDownAnios;
 
         /// <summary>
+        /// Control btnCrearGrupo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCrearGrupo;
+
+        /// <summary>
         /// Control Label10.
         /// </summary>
         /// <remarks>
@@ -184,6 +265,15 @@ namespace InterfazWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label10;
+
+        /// <summary>
+        /// Control rfvDias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDias;
 
         /// <summary>
         /// Control DropDownListDias.
@@ -204,6 +294,15 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label11;
 
         /// <summary>
+        /// Control rfvHoraInicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHoraInicio;
+
+        /// <summary>
         /// Control txtHoraInicio.
         /// </summary>
         /// <remarks>
@@ -222,6 +321,15 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label12;
 
         /// <summary>
+        /// Control rfvHoraFin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHoraFin;
+
+        /// <summary>
         /// Control txtHoraFin.
         /// </summary>
         /// <remarks>
@@ -229,6 +337,24 @@ namespace InterfazWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtHoraFin;
+
+        /// <summary>
+        /// Control btnAniadirHorario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAniadirHorario;
+
+        /// <summary>
+        /// Control ValidationSummary1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
 
         /// <summary>
         /// Control GrdVerHorarios.
@@ -247,41 +373,5 @@ namespace InterfazWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSiguiente;
-
-        /// <summary>
-        /// Control txtnombreMateriaCarrera.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtnombreMateriaCarrera;
-
-        /// <summary>
-        /// Control btnBuscar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBuscar;
-
-        /// <summary>
-        /// Control GrdListaMaterias.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GrdListaMaterias;
-
-        /// <summary>
-        /// Control lnkSeleccionar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkSeleccionar;
     }
 }

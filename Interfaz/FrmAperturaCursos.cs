@@ -413,22 +413,22 @@ namespace Interfaz
 
         private void comboAnio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (txtCodigoMateria.Text != string.Empty && nudPeriodo.Value > 0)
-            {
-                LogicaMateriaCarrera traerMateriaCarrera = new LogicaMateriaCarrera(Configuracion.getConnectionString);
-                int numeroGrupo = traerMateriaCarrera.generarGrupo(idMateriaCarrera, Convert.ToInt32(comboAnio.SelectedItem), Convert.ToInt32(nudPeriodo.Value)); //se genera el numero del grupo
-                txtGrupo.Text = numeroGrupo.ToString();
-            }
+            //if (txtCodigoMateria.Text != string.Empty && nudPeriodo.Value > 0)
+            //{
+            //    LogicaMateriaCarrera traerMateriaCarrera = new LogicaMateriaCarrera(Configuracion.getConnectionString);
+            //    int numeroGrupo = traerMateriaCarrera.generarGrupo(idMateriaCarrera, Convert.ToInt32(comboAnio.SelectedItem), Convert.ToInt32(nudPeriodo.Value)); //se genera el numero del grupo
+            //    txtGrupo.Text = numeroGrupo.ToString();
+            //}
         }
 
         private void nudPeriodo_ValueChanged(object sender, EventArgs e)
         {
-            if (txtCodigoMateria.Text != string.Empty && comboAnio.SelectedIndex != -1)
-            {
-                LogicaMateriaCarrera traerMateriaCarrera = new LogicaMateriaCarrera(Configuracion.getConnectionString);
-                int numeroGrupo = traerMateriaCarrera.generarGrupo(idMateriaCarrera, Convert.ToInt32(comboAnio.SelectedItem), Convert.ToInt32(nudPeriodo.Value)); //se genera el numero del grupo
-                txtGrupo.Text = numeroGrupo.ToString();
-            }
+            //if (txtCodigoMateria.Text != string.Empty && comboAnio.SelectedIndex != -1)
+            //{
+            //    LogicaMateriaCarrera traerMateriaCarrera = new LogicaMateriaCarrera(Configuracion.getConnectionString);
+            //    int numeroGrupo = traerMateriaCarrera.generarGrupo(idMateriaCarrera, Convert.ToInt32(comboAnio.SelectedItem), Convert.ToInt32(nudPeriodo.Value)); //se genera el numero del grupo
+            //    txtGrupo.Text = numeroGrupo.ToString();
+            //}
         }
     }
 }

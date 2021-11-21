@@ -78,24 +78,7 @@ namespace LogicaNegocio
             return materiaC;
         }
 
-        public int generarGrupo(int codMateriaCarrera, int anio, int periodo)
-        {
-
-            int numeroGrupo;
-            ADMateriaCarrera accesoMC = new ADMateriaCarrera(_cadenaConexion);
-            try
-            {
-                numeroGrupo = accesoMC.generarGrupo(codMateriaCarrera, anio, periodo);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            _mensaje = accesoMC.Mensaje;
-            return numeroGrupo;
-        }
-
+       
         #endregion
 
     }

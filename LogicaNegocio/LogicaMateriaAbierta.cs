@@ -63,13 +63,13 @@ namespace LogicaNegocio
             return DS;//se devuelve el dataset
         }
 
-        public int InsertarMateriaAbierta(MateriasAbiertas materiaA,List<Horarios> horario)
+        public int InsertarMateriaAbierta(MateriasAbiertas materiaAbierta, Horarios horario)
         {
             int codMateriaA = 0;
             ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
             try
             {
-                codMateriaA = accesoDatosMA.InsertarMateriaAConSP(materiaA,horario);
+                codMateriaA = accesoDatosMA.InsertarMateriaAConSP(materiaAbierta, horario);
             }
             catch (Exception)
             {
@@ -144,6 +144,23 @@ namespace LogicaNegocio
         }
 
 
+        public int generarGrupo(int codMateriaCarrera, int anio, int periodo)
+        {
+
+            int numeroGrupo;
+            ADMateriaAbierta accesoMa = new ADMateriaAbierta(_cadenaConexion);
+            try
+            {
+                numeroGrupo = accesoMa.generarGrupo(codMateriaCarrera, anio, periodo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            _mensaje = accesoMa.Mensaje;
+            return numeroGrupo;
+        }
 
         #endregion
 

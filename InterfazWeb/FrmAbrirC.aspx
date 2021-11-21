@@ -3,8 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/estilosAbrirC.css" rel="stylesheet" />
 
-    <script src="JQuery/jQuery.js"></script>
-    <script src="js/funciones.js"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -29,19 +27,29 @@
         <label for="basic-url" class="form-label">Escoja la materia</label>
 
         <div class="input-group mb-4 justify-content-between flex-nowrap align-items-center contenedores ">
-            <asp:Label ID="Label1" CssClass="me-3 ms-2" runat="server" Text="Código Materia"></asp:Label>
-            <asp:TextBox CssClass="textBox" ID="txtCodigoMateria" runat="server" ReadOnly="True" Width="114px"></asp:TextBox>
+            <asp:Label ID="Label1" CssClass="me-3 ms-2" runat="server" Text="Código Materia">
+                <asp:RequiredFieldValidator ID="rfvCodigoMateria" runat="server"
+                    ErrorMessage="Debe de BUSCAR UNA MATERIA para poder abrirla"
+                    Text="*"
+                    ControlToValidate="txtCodigoMateria"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
 
-            <asp:Label ID="Label2" CssClass="me-3 ms-2" runat="server" Text="Nombre Materia"></asp:Label>
-            <asp:TextBox CssClass="textBox" ID="txtNombreMateria" runat="server" ReadOnly="True" Width="151px"></asp:TextBox>
+            <asp:TextBox CssClass="textBox" ID="txtCodigoMateria" runat="server" ReadOnly="True" Width="72px"></asp:TextBox>
+
+            <asp:Label ID="Label2" CssClass="me-3 ms-2" runat="server" Text="Nombre Materia">
+            </asp:Label>
+            <asp:TextBox CssClass="textBox" ID="txtNombreMateria" runat="server" ReadOnly="True" Width="245px"></asp:TextBox>
 
             <asp:Label ID="Label3" CssClass="me-3 ms-2" runat="server" Text="Créditos Materia"></asp:Label>
             <asp:TextBox CssClass="textBox" ID="txtCreditos" runat="server" ReadOnly="True" Width="32px"></asp:TextBox>
 
             <asp:Label ID="Label4" CssClass="me-3 ms-2" runat="server" Text="Nombre Carrera"></asp:Label>
-            <asp:TextBox CssClass="textBox" ID="txtNombreCarrera" runat="server" ReadOnly="True" Width="119px"></asp:TextBox>
-
-            <input id="btnBuscarMateria" class="btn btn-outline-secondary ms-3" type="button" value="Buscar Materia" data-bs-toggle="modal" data-bs-target="#materiaModal" />
+            <asp:TextBox CssClass="textBox" ID="txtNombreCarrera" runat="server" ReadOnly="True" Width="404px"></asp:TextBox>
+            <asp:Button ID="btnBuscarMateria" CssClass="btn btn-outline-secondary ms-3" runat="server" Text="Buscar Materia" OnClick="btnBuscarMateria_Click" />
+            <asp:Button ID="btnModificarMateria" CssClass="btn btn-outline-info ms-3" runat="server" Text="Modificar un curso" />
         </div>
 
         <hr />
@@ -49,20 +57,62 @@
         <label for="basic-url" class="form-label">Escoja los periodos y demas información importante</label>
 
         <div class="input-group mb-4 justify-content-between flex-nowrap align-items-center contenedores ">
-            <asp:Label ID="Label5" CssClass="me-3 ms-2" runat="server" Text="Grupo"></asp:Label>
+            <asp:Label ID="Label5" CssClass="me-3 ms-2" runat="server" Text="Grupo">
+                <asp:RequiredFieldValidator ID="rfvGrupo" runat="server"
+                    ErrorMessage="Debe de GENERAR UN GRUPO para abrir el curso"
+                    Text="*"
+                    ControlToValidate="txtGrupo"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
             <asp:TextBox CssClass="textBox" ID="txtGrupo" runat="server" ReadOnly="True" Width="151px" MaxLength="2" TextMode="Number"></asp:TextBox>
 
-            <asp:Label ID="Label6" CssClass="me-3 ms-2" runat="server" Text="Cupo"></asp:Label>
+            <asp:Label ID="Label6" CssClass="me-3 ms-2" runat="server" Text="Cupo">
+                <asp:RequiredFieldValidator ID="rfvCupo" runat="server"
+                    ErrorMessage="Debe definir un CUPO para el curso"
+                    Text="*"
+                    ControlToValidate="nudCupo"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
             <asp:TextBox CssClass="textBox" ID="nudCupo" TextMode="Number" runat="server" min="0" max="20" step="1" Width="174px"></asp:TextBox>
 
-            <asp:Label ID="Label7" CssClass="me-3 ms-2" runat="server" Text="Costo"></asp:Label>
+            <asp:Label ID="Label7" CssClass="me-3 ms-2" runat="server" Text="Costo">
+                <asp:RequiredFieldValidator ID="rfvCosto" runat="server"
+                    ErrorMessage="Debe definir un COSTO para el curso"
+                    Text="*"
+                    ControlToValidate="txtCosto"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
             <asp:TextBox CssClass="textBox" ID="txtCosto" runat="server" Width="137px" TextMode="Number"></asp:TextBox>
 
-            <asp:Label ID="Label8" CssClass="me-3 ms-2" runat="server" Text="Periodo"></asp:Label>
+            <asp:Label ID="Label8" CssClass="me-3 ms-2" runat="server" Text="Periodo">
+                <asp:RequiredFieldValidator ID="rfvPeriodo" runat="server"
+                    ErrorMessage="Debe definir un PERIODO para el curso"
+                    Text="*"
+                    ControlToValidate="nudPeriodo"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
             <asp:TextBox CssClass="textBox" ID="nudPeriodo" TextMode="Number" runat="server" min="1" max="3" step="1"></asp:TextBox>
 
-            <asp:Label ID="Label9" CssClass="me-3 ms-2" runat="server" Text="Año"></asp:Label>
+            <asp:Label ID="Label9" CssClass="me-3 ms-2" runat="server" Text="Año">
+                <asp:RequiredFieldValidator ID="rfvAnio" runat="server"
+                    ErrorMessage="Debe definir EL AÑO para el curso"
+                    Text="*"
+                    ControlToValidate="DropDownAnios"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
             <asp:DropDownList ID="DropDownAnios" runat="server"></asp:DropDownList>
+
+            <asp:Button ID="btnCrearGrupo" CssClass="btn btn-outline-secondary ms-2" runat="server" Text="Crear Numero Grupo" OnClick="btnCrearGrupo_Click" />
 
         </div>
 
@@ -71,7 +121,15 @@
         <label for="basic-url" class="form-label">Escoja los horarios (Debe escoger al menos 1)</label>
 
         <div class="input-group mb-3 justify-content-between flex-nowrap align-items-center contenedores ">
-            <asp:Label ID="Label10" CssClass="me-3 ms-2" runat="server" Text="Día"></asp:Label>
+            <asp:Label ID="Label10" CssClass="me-3 ms-2" runat="server" Text="Día">
+                <asp:RequiredFieldValidator ID="rfvDias" runat="server"
+                    ErrorMessage="Debe definir un DIA para el horario"
+                    Text="*"
+                    ControlToValidate="DropDownListDias"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
             <asp:DropDownList ID="DropDownListDias" runat="server">
                 <asp:ListItem>L</asp:ListItem>
                 <asp:ListItem>K</asp:ListItem>
@@ -81,11 +139,30 @@
                 <asp:ListItem>S</asp:ListItem>
             </asp:DropDownList>
 
-            <asp:Label ID="Label11" CssClass="me-3 ms-2" runat="server" Text="Hora Inicio"></asp:Label>
+            <asp:Label ID="Label11" CssClass="me-3 ms-2" runat="server" Text="Hora Inicio">
+                <asp:RequiredFieldValidator ID="rfvHoraInicio" runat="server"
+                    ErrorMessage="Debe definir una HORA DE INICIO para el horario"
+                    Text="*"
+                    ControlToValidate="txtHoraInicio"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
             <asp:TextBox CssClass="textBox" ID="txtHoraInicio" TextMode="Time" runat="server"></asp:TextBox>
 
-            <asp:Label ID="Label12" CssClass="me-3 ms-2" runat="server" Text="Hora Fin"></asp:Label>
+            <asp:Label ID="Label12" CssClass="me-3 ms-2" runat="server" Text="Hora Fin">
+                <asp:RequiredFieldValidator ID="rfvHoraFin" runat="server"
+                    ErrorMessage="Debe definir una HORA DE FIN para el horario"
+                    Text="*"
+                    ControlToValidate="txtHoraFin"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
             <asp:TextBox CssClass="textBox" ID="txtHoraFin" TextMode="Time" runat="server"></asp:TextBox>
+
+            <asp:Button ID="btnAniadirHorario" CssClass="btn btn-outline-secondary ms-2" runat="server" Text="Asignar Horario" ValidationGroup="1" OnClick="btnAniadirHorario_Click" />
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" class="mt-3" Font-Italic="True" ForeColor="#CC0000" ValidationGroup="1" />
 
         </div>
 
@@ -126,72 +203,6 @@
 
     </div>
 
-    <%--Modal Buscar Materia--%>
-    <div class="modal fade" id="materiaModal" tabindex="-1" aria-labelledby="MateriaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="MateriaModalLabel">Buscar Materia</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row ">
-                        <div class="col">
 
-                            <div class="row mt-3">
-                                <div class="col-auto">
-
-                                </div>
-                                <div class="col-auto">
-                                    <asp:TextBox ID="txtnombreMateriaCarrera" runat="server" class="form-control"></asp:TextBox>
-                                </div>
-                                <div class="col-auto">
-                                    <asp:Button ID="btnBuscar" runat="server" class="btn btn-primary" Text="Buscar"/>
-                                </div>
-                            </div>
-                            <br />
-
-                            <br />
-                            <asp:GridView ID="GrdListaMaterias" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" EmptyDataText="No existen registros" ForeColor="#333333" GridLines="None" Width="100%" PagerSettings-PageButtonCount="4" OnPageIndexChanging="GrdListaMaterias_PageIndexChanging">
-                                <AlternatingRowStyle BackColor="White" />
-                                <Columns>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="lnkSeleccionar" runat="server" CommandArgument='<%# Eval("CodMateriaCarrera").ToString()%>' CommandName="Seleccionar" ToolTip="Seleccionar" OnCommand="lnkSeleccionar_Command">
-                                                Seleccionar
-                                            </asp:LinkButton>
-
-                                        </ItemTemplate
-                                    </asp:TemplateField>
-
-                                    <asp:BoundField DataField="CodigoMateria" HeaderText="Código Materia"/>
-                                    <asp:BoundField DataField="NombreMateria" HeaderText="Nombre Materia" />
-                                    <asp:BoundField DataField="CreditosMateria" HeaderText="Creditos" />
-                                    <asp:BoundField DataField="NombreCarrera" HeaderText="Carrera" />
-                                </Columns>
-                                <EditRowStyle BackColor="#2461BF" />
-                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-
-                                <PagerSettings PageButtonCount="4"></PagerSettings>
-
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" />
-                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
-                            </asp:GridView>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </asp:Content>

@@ -73,6 +73,7 @@
     <Content Include="CSS\estiloMasterPage.css" />
     <Content Include="CSS\estilosAbrirC.css" />
     <Content Include="FrmAbrirC.aspx" />
+    <Content Include="FrmBuscarMateria.aspx" />
     <Content Include="FrmInicio.aspx" />
     <Content Include="JQuery\jQuery.js" />
     <Content Include="js\funciones.js" />
@@ -86,18 +87,28 @@
     <Compile Include="Configuracion.cs" />
     <Compile Include="FrmAbrirC.aspx.cs">
       <DependentUpon>FrmAbrirC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FrmAbrirC.aspx.designer.cs">
       <DependentUpon>FrmAbrirC.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FrmBuscarMateria.aspx.cs">
+      <DependentUpon>FrmBuscarMateria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmBuscarMateria.aspx.designer.cs">
+      <DependentUpon>FrmBuscarMateria.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FrmInicio.aspx.cs">
       <DependentUpon>FrmInicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FrmInicio.aspx.designer.cs">
       <DependentUpon>FrmInicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Plantilla.Master.cs">
       <DependentUpon>Plantilla.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Plantilla.Master.designer.cs">
       <DependentUpon>Plantilla.Master</DependentUpon>

@@ -11,6 +11,7 @@ namespace Entidades
         private string dia;
         private DateTime horaInicio; //////////////////////////////
         private DateTime horaFin; ///////////////////////////////////
+        private bool existe;
         #endregion
 
         #region Constructores
@@ -20,6 +21,7 @@ namespace Entidades
             dia = diaH;
             horaInicio = horaInicioH;
             horaFin = horaFinH;
+            existe = true;
         }
 
         public Horarios()
@@ -28,6 +30,7 @@ namespace Entidades
             dia = string.Empty;
             horaInicio = DateTime.Today;
             horaFin = DateTime.Today;
+            existe = false;
         }
         #endregion
 
@@ -36,6 +39,7 @@ namespace Entidades
         public string Dia { get => dia; set => dia = value; }
         public DateTime HoraInicio { get => horaInicio; set => horaInicio = value; }
         public DateTime HoraFin { get => horaFin; set => horaFin = value; }
+        public bool Existe { get => existe; set => existe = value; }
         #endregion
 
         #region Metodos

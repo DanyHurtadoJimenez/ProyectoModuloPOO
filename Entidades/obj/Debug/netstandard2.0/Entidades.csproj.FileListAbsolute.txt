@@ -20,10 +20,10 @@ D:\proyecto\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\obj\Debug\netstand
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\bin\Debug\netstandard2.0\Entidades.deps.json
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\bin\Debug\netstandard2.0\Entidades.dll
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\bin\Debug\netstandard2.0\Entidades.pdb
-C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\obj\Debug\netstandard2.0\Entidades.csproj.AssemblyReference.cache
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\obj\Debug\netstandard2.0\Entidades.GeneratedMSBuildEditorConfig.editorconfig
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\obj\Debug\netstandard2.0\Entidades.AssemblyInfoInputs.cache
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\obj\Debug\netstandard2.0\Entidades.AssemblyInfo.cs
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\obj\Debug\netstandard2.0\Entidades.csproj.CoreCompileInputs.cache
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\obj\Debug\netstandard2.0\Entidades.dll
 C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\obj\Debug\netstandard2.0\Entidades.pdb
+C:\TareasC#\ProyectoPOOFinal\PROYECTOPOOACTUALIZADOO\ProyectoPOOFinal\ProyectoPOODanyHurtado\Entidades\obj\Debug\netstandard2.0\Entidades.csproj.AssemblyReference.cache
