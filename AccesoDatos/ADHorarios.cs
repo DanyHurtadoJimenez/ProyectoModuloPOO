@@ -34,7 +34,7 @@ namespace AccesoDatos
         #region Metodos
 
         public DataSet Listar(int codMateriaAbierta) //lista horarios seleccionados
-        {  //devuelve un dataset de Aulas para mostrarlo en un datagridView
+        {  //devuelve un dataset de horarios para mostrarlo en un datagridView
 
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);

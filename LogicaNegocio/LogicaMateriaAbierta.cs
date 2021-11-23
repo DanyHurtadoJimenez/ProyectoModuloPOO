@@ -52,7 +52,7 @@ namespace LogicaNegocio
 
             try
             {
-                DS = accesoDatosMA.ListarMateriasAbiertas(condicion,periodo, anio);
+                DS = accesoDatosMA.ListarMateriasAbiertas(condicion, periodo, anio);
 
             }
             catch (Exception)
@@ -63,29 +63,62 @@ namespace LogicaNegocio
             return DS;//se devuelve el dataset
         }
 
-        public int InsertarMateriaAbierta(MateriasAbiertas materiaAbierta, Horarios horario)
+        public int InsertarMateriaAbierta(MateriasAbiertas materiaAbierta, Horarios horario, int codMateriaAB)
         {
             int codMateriaA = 0;
             ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
             try
             {
-                codMateriaA = accesoDatosMA.InsertarMateriaAConSP(materiaAbierta, horario);
+                if (horario.HoraInicio >= DateTime.Parse("07:00") && horario.HoraInicio <= DateTime.Parse("20:00"))
+                {
+                    if (horario.HoraFin >= DateTime.Parse("08:00") && horario.HoraFin <= DateTime.Parse("22:00"))
+                    {
+                        if (horario.HoraInicio != horario.HoraFin)
+                        {
+                            if (horario.HoraFin > horario.HoraInicio)
+                            {
+                                codMateriaA = accesoDatosMA.InsertarMateriaAConSP(materiaAbierta, horario, codMateriaAB);
+                                _mensaje = accesoDatosMA.Mensaje;
+                            }
+                            else
+                            {
+                                _mensaje = "ERROR, la hora no es válida, la hora final debe ser mayor que la hora de inicio";
+                            }
+
+                        }
+                        else
+                        {
+                            _mensaje = "ERROR, la hora de inicio y la hora de fin no pueden ser iguales";
+                        }
+                    }
+                    else
+                    {
+                        _mensaje = "ERROR, la hora de fin va desde las 08:00 hasta las 22:00";
+                    }
+                }
+                else
+                {
+                    _mensaje = "ERROR, la hora de inicio va desde las 07:00 hasta las 20:00";
+                }
+
             }
             catch (Exception)
             {
-                throw; 
+                throw;
             }
-            _mensaje = accesoDatosMA.Mensaje;
+
             return codMateriaA;
         }
 
-        public int AsignarProfesor(int codProfesor,int idMateriaA)
+        
+
+        public int AsignarProfesor(int codProfesor, int idMateriaA)
         {
             int resultado = 0;
             ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
             try
             {
-                resultado = accesoDatosMA.InsertarProfesor(codProfesor,idMateriaA);
+                resultado = accesoDatosMA.InsertarProfesor(codProfesor, idMateriaA);
             }
             catch (Exception)
             {
@@ -127,7 +160,7 @@ namespace LogicaNegocio
             return materiaAbierta;
         }
 
-        public int verificarChoquesMaterias(string carnetEstudiante,string codRequisito)
+        public int verificarChoquesMaterias(string carnetEstudiante, string codRequisito)
         {
             int resultado = 0;
             ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);

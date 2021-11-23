@@ -49,15 +49,9 @@ namespace AccesoDatos
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlDataAdapter adapter;
-            string sentencia = string.Format("SELECT CodMateriaAbierta,M.CodigoMateria,M.NombreMateria,MC.Requisito," +
-                                             "(SELECT NombreMateria FROM TBL_Materias WHERE CodigoMateria = MC.Requisito) AS 'nombreRequisito'" +
-                                             ",MC.corequisito,(SELECT NombreMateria FROM TBL_Materias WHERE CodigoMateria = MC.corequisito) AS 'nombreCoRequisito'," +
-                                             "concat(NombreProfesor, ' ', Apellido1Profesor, ' ', Apellido2Profesor) as 'nombreProfesor'," +
-                                             "A.NumeroAula,Grupo,Cupo,Costo FROM TBL_MateriasAbiertas MA left join TBL_MateriasCarreras MC on " +
-                                             " MA.CodMateriaCarrera = MC.CodMateriaCarrera  left join TBL_Materias M on " +
-                                             " M.CodigoMateria = MC.CodigoMateria  left join TBL_Profesores P on " +
-                                             " P.CodigoProfesor = MA.CodigoProfesor  left join TBL_Aulas A on " +
-                                             " A.CodigoAula = MA.CodigoAula where Periodo = {0} and Anio = {1}", periodo, anio);
+            string sentencia = string.Format("SELECT CodMateriaAbierta, CodigoMateria, NombreMateria, NombreProfesor, "+
+                                             "NumeroAula, Grupo, Cupo, Costo, Periodo,Anio FROM CONSULTA_MATERIAS_ABIERTAS "+
+                                             " where Periodo = {0} and Anio = {1}", periodo, anio);
 
             if (!string.IsNullOrEmpty(condicion))
             { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia
@@ -127,11 +121,9 @@ namespace AccesoDatos
         //}
 
 
-        public int InsertarMateriaAConSP(MateriasAbiertas materiaAbierta, Horarios horario)
+        public int InsertarMateriaAConSP(MateriasAbiertas materiaAbierta, Horarios horario, int codMateriaA)
         {
             int resultado = -1;
-            //DataTable dtaHorarios = convertirArregloAdatatable(horarios);//los horarios se convierten en un datatable para enviarlo como parametro al procedimiento del SQL
-            //dtaHorarios.TableName = "dbo.HorarioType";
 
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
@@ -140,6 +132,7 @@ namespace AccesoDatos
             comando.CommandType = CommandType.StoredProcedure;//se especifica que tipo de comando es, en este caso es un procedimiento almacenado
             comando.Connection = conexion;
             //parametro de entrada para el SP
+            comando.Parameters.AddWithValue("@codMateriaAbierta", codMateriaA);
             comando.Parameters.AddWithValue("@codMateriaCarrera", materiaAbierta.CodigoMateriaCarrera.CodigoMateriaCarrera);
             comando.Parameters.AddWithValue("@grupo", Convert.ToByte(materiaAbierta.Grupo));
             comando.Parameters.AddWithValue("@cupo", Convert.ToByte(materiaAbierta.Cupo));
@@ -149,11 +142,7 @@ namespace AccesoDatos
             comando.Parameters.AddWithValue("@dia", horario.Dia);
             comando.Parameters.AddWithValue("@horaInicio", horario.HoraInicio);
             comando.Parameters.AddWithValue("@horaFin", horario.HoraFin);
-            //SqlParameter dataTable = new SqlParameter();
-            //dataTable.SqlDbType = SqlDbType.Structured;
-            //dataTable.TypeName = "dbo.HorarioType";
-            //dataTable.Value = dtaHorarios;
-            //comando.Parameters.AddWithValue("@Horario", dataTable.Value);
+
 
             //parametro de salida del SP
             comando.Parameters.Add("@msj", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
@@ -289,16 +278,14 @@ namespace AccesoDatos
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
             SqlDataReader dataReader;//el data reader no tiene constructor para llenarlo es mediante un execute
-            string sentencia = string.Format("select CodMateriaAbierta,MC.CodMateriaCarrera,MC.CodigoMateria,M.NombreMateria,MC.requisito," +
-                                             "(SELECT NombreMateria FROM TBL_Materias WHERE CodigoMateria = MC.Requisito) AS 'nombreRequisito'," +
-                                             "MC.corequisito,(SELECT NombreMateria FROM TBL_Materias WHERE CodigoMateria = MC.corequisito) AS 'nombreCoRequisito'," +
-                                             "P.CodigoProfesor,concat(P.NombreProfesor, ' ', P.Apellido1Profesor, ' ', P.Apellido2Profesor) as 'NombreProfesor'," +
-                                             "A.CodigoAula,A.NumeroAula,Grupo,Cupo,Costo,Periodo,Anio from TBL_MateriasAbiertas MA left join TBL_MateriasCarreras MC on " +
-                                             " MA.CodMateriaCarrera = MC.CodMateriaCarrera left join TBL_Materias M on M.CodigoMateria = MC.CodigoMateria left join " +
-                                             " TBL_Profesores P on P.CodigoProfesor = MA.CodigoProfesor left join TBL_Aulas A on A.CodigoAula = MA.CodigoAula where CodMateriaAbierta = {0}", codMateriaAbierta);
+            string sentencia = string.Format("SELECT CodMateriaAbierta,CodMateriaCarrera,CodigoMateria,NombreMateria,Requisito,"+
+                                             "nombreRequisito,corequisito,nombreCoRequisito,CodigoProfesor,NombreProfesor,CodigoAula,"+
+                                             "NumeroAula,Grupo,Cupo,Costo,Periodo,Anio,NombreCarrera,CreditosMateria FROM OBTENER_MATERIA_ABIERTA " +
+                                             " where CodMateriaAbierta = {0}", codMateriaAbierta);
             comando.Connection = conexion;
             comando.CommandText = sentencia;
             materiaA.CodigoMateriaCarrera = new MateriasCarreras();
+            materiaA.CodigoMateriaCarrera.CodigoCarreras = new Carreras();
             materiaA.CodigoMateriaCarrera.CodigoMateria = new Materias();
             materiaA.CodigoMateriaCarrera.Requisito = new Materias();
             materiaA.CodigoMateriaCarrera.Corequisito = new Materias();
@@ -354,6 +341,8 @@ namespace AccesoDatos
                     materiaA.Costo = dataReader.GetDecimal(14);
                     materiaA.Periodo = dataReader.GetByte(15);
                     materiaA.Anio = dataReader.GetInt16(16);
+                    materiaA.CodigoMateriaCarrera.CodigoCarreras.NombreCarrera = dataReader.GetString(17);
+                    materiaA.CodigoMateriaCarrera.CodigoMateria.CreditosMateria = dataReader.GetByte(18);
                 }
                 conexion.Close();
 

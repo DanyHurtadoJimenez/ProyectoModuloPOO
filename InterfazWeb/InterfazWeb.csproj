@@ -74,6 +74,7 @@
     <Content Include="CSS\estilosAbrirC.css" />
     <Content Include="FrmAbrirC.aspx" />
     <Content Include="FrmBuscarMateria.aspx" />
+    <Content Include="FrmBuscarMateriaAbierta.aspx" />
     <Content Include="FrmInicio.aspx" />
     <Content Include="JQuery\jQuery.js" />
     <Content Include="js\funciones.js" />
@@ -98,6 +99,13 @@
     </Compile>
     <Compile Include="FrmBuscarMateria.aspx.designer.cs">
       <DependentUpon>FrmBuscarMateria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBuscarMateriaAbierta.aspx.cs">
+      <DependentUpon>FrmBuscarMateriaAbierta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmBuscarMateriaAbierta.aspx.designer.cs">
+      <DependentUpon>FrmBuscarMateriaAbierta.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmInicio.aspx.cs">
       <DependentUpon>FrmInicio.aspx</DependentUpon>

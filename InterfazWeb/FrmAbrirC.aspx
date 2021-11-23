@@ -12,7 +12,7 @@
     <% if (Session["_mensaje"] != null)// if metido en medio del codigo html
         {%>
 
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
         <%= Session["_mensaje"]%>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -49,7 +49,7 @@
             <asp:Label ID="Label4" CssClass="me-3 ms-2" runat="server" Text="Nombre Carrera"></asp:Label>
             <asp:TextBox CssClass="textBox" ID="txtNombreCarrera" runat="server" ReadOnly="True" Width="404px"></asp:TextBox>
             <asp:Button ID="btnBuscarMateria" CssClass="btn btn-outline-secondary ms-3" runat="server" Text="Buscar Materia" OnClick="btnBuscarMateria_Click" />
-            <asp:Button ID="btnModificarMateria" CssClass="btn btn-outline-info ms-3" runat="server" Text="Modificar un curso" />
+            <asp:Button ID="btnModificarMateria" CssClass="btn btn-outline-info ms-3" runat="server" Text="Modificar un curso" OnClick="btnModificarMateria_Click" />
         </div>
 
         <hr />
@@ -166,36 +166,29 @@
 
         </div>
 
-        <div class="input-group mb-3 justify-content-between">
-            <asp:GridView ID="GrdVerHorarios" AllowPaging="True" runat="server" AutoGenerateColumns="False" CellPadding="4" EmptyDataText="No se registran horarios escogidos." GridLines="None" Width="100%" ForeColor="#333333" PageSize="5">
-                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                <Columns>
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:LinkButton ID="lnkModificar" runat="server">Modificar</asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:LinkButton ID="lnkEliminar" runat="server">Eliminar</asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField HeaderText="Dia" />
-                    <asp:BoundField HeaderText="Hora Inicio" />
-                    <asp:BoundField HeaderText="Hora Fin" />
-                </Columns>
-                <EditRowStyle BackColor="#999999" />
-                <FooterStyle BackColor="#070D59" ForeColor="White" Font-Bold="True" />
-                <HeaderStyle BackColor="#EE6F57" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#070D59" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-            </asp:GridView>
-        </div>
+        <asp:GridView ID="GrdVerHorarios" CssClass="mt-3" AllowPaging="True" runat="server" AutoGenerateColumns="False" CellPadding="5" EmptyDataText="No se registran horarios escogidos." GridLines="None" Width="100%" ForeColor="#333333" PageSize="5">
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+            <Columns>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lnkEliminar" runat="server">Eliminar</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField HeaderText="Dia" DataField="dia" />
+                <asp:BoundField HeaderText="Hora Inicio" DataField="HoraInicio" />
+                <asp:BoundField HeaderText="Hora Fin" DataField="HoraFin" />
+            </Columns>
+            <EditRowStyle BackColor="#999999" />
+            <FooterStyle BackColor="#070D59" ForeColor="White" Font-Bold="True" />
+            <HeaderStyle BackColor="#EE6F57" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#070D59" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+        </asp:GridView>
 
         <div class="input-group mb-5 justify-content-center">
             <asp:Button ID="btnSiguiente" CssClass="btn btn-primary btn-lg" runat="server" Text="Siguiente" />

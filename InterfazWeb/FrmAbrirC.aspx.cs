@@ -17,8 +17,7 @@ namespace InterfazWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // MateriasAbiertas materiaAbierta;
-            // LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+
             try
             {
                 if (!IsPostBack)
@@ -37,19 +36,23 @@ namespace InterfazWeb
                         txtCreditos.Text = materiaCarrera.CodigoMateria.CreditosMateria.ToString();
                         txtNombreCarrera.Text = materiaCarrera.CodigoCarreras.NombreCarrera;
                     }
-                    //if (Session["_CodMateriaAbierta"] != null)
-                    //{
-                    //    materiaAbierta = logicaMA.ObtenerMateriaAbierta(Convert.ToInt32(Session["CodMateriaAbierta"]));
-                    //    txtCodigoMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateriaCarrera.ToString();
-                    //    txtNombreMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.NombreMateria.ToString();
-                    //    txtCreditos.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.CreditosMateria.ToString();
-                    //    txtNombreCarrera.Text = materiaAbierta.CodigoMateriaCarrera.CodigoCarreras.CodigoCarrera.ToString();
-                    //    txtGrupo.Text = materiaAbierta.Grupo.ToString();
-                    //    nudCupo.Text = materiaAbierta.Cupo.ToString();
-                    //    txtCosto.Text = materiaAbierta.Costo.ToString();
-                    //    DropDownAnios.SelectedValue = materiaAbierta.Anio.ToString();
-
-                    //}
+                    else if (Session["_CodMateriaAbierta"] != null)
+                    {
+                        MateriasAbiertas materiaAbierta;
+                        LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+                        materiaAbierta = logicaMA.ObtenerMateriaAbierta(Convert.ToInt32(Session["_CodMateriaAbierta"]));
+                        txtCodigoMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.CodigoMateria;
+                        txtNombreMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.NombreMateria;
+                        txtCreditos.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.CreditosMateria.ToString();
+                        txtNombreCarrera.Text = materiaAbierta.CodigoMateriaCarrera.CodigoCarreras.NombreCarrera;
+                        txtGrupo.Text = materiaAbierta.Grupo.ToString();
+                        nudCupo.Text = materiaAbierta.Cupo.ToString();
+                        txtCosto.Text = Convert.ToInt32(materiaAbierta.Costo).ToString();
+                        nudPeriodo.Text = materiaAbierta.Periodo.ToString();
+                        DropDownAnios.SelectedValue = Convert.ToInt32(materiaAbierta.Anio).ToString();
+                        CargarDataSet(materiaAbierta.CodigoMateriaAbierta); //carga los horarios que la materia tenga 
+                        btnCrearGrupo.Enabled = false;
+                    }
                 }
             }
             catch (Exception)
@@ -120,10 +123,11 @@ namespace InterfazWeb
             else
             {
                 materiaA.CodigoMateriaAbierta = -1;
+                materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = int.Parse(Session["_CodMateriaCarrera"].ToString());
                 materiaA.Existe = false;
             }
 
-            materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = int.Parse(Session["_CodMateriaCarrera"].ToString());
+            
             materiaA.Grupo = Convert.ToInt32(txtGrupo.Text);
             materiaA.Cupo = Convert.ToInt32(nudCupo.Text);
             materiaA.Costo = Convert.ToDecimal(txtCosto.Text);
@@ -149,7 +153,28 @@ namespace InterfazWeb
 
         }
 
+        private void CargarDataSet(int codMateriaAbierta) //carga los horarios en el datagrid
+        { //carga el datagridview con el dataset
+            LogicaHorarios logicaH = new LogicaHorarios(Configuracion.getConnectionString);
+            DataSet DSMateriaCarrera;
 
+            try
+            {
+                DSMateriaCarrera = logicaH.ListarHorarios(codMateriaAbierta);
+
+                if (DSMateriaCarrera != null) //si tiene algo el data set entonces carguelo en el datagridview
+                {
+                    GrdVerHorarios.DataSource = DSMateriaCarrera;
+                    GrdVerHorarios.DataMember = DSMateriaCarrera.Tables[0].TableName;//en la tabla con nombre Clientes del dataset
+                    GrdVerHorarios.DataBind();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
 
         protected void btnAniadirHorario_Click(object sender, EventArgs e) //cuando se le da a agregar horario se esta abriendo una materia abierta con su respectivo horario, si ya esta existe entonces lo que se realiza es aniadir un horario a la materia sin crearla
         {
@@ -158,7 +183,7 @@ namespace InterfazWeb
                 !string.IsNullOrEmpty(txtNombreCarrera.Text) && !string.IsNullOrEmpty(txtGrupo.Text) && !string.IsNullOrEmpty(nudCupo.Text) &&
                 !string.IsNullOrEmpty(txtCosto.Text) && !string.IsNullOrEmpty(nudPeriodo.Text) && DropDownAnios.SelectedIndex != -1 &&
                 DropDownListDias.SelectedIndex != -1 && !string.IsNullOrEmpty(txtHoraInicio.Text) && !string.IsNullOrEmpty(txtHoraFin.Text))
-            {                                           //aqui estamos creando la materia con el horario hay que verificar primero si esa materia ya existe, si ya existe debe tener un horario por lo que los siguientes horarios que se agregen deben de ser solamente insertados en las tablas de horarios
+            {
                 LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
                 MateriasAbiertas materiaA;
                 Horarios horario;
@@ -167,25 +192,30 @@ namespace InterfazWeb
                 try
                 {
                     materiaA = GenerarEntidadMA();
-                    if (materiaA.Existe)
-                    {
-                        resultado = -1;//aqui se debe de modificar la materia aun se debe de hacer esto *****************************************************************************************************************
+                    if (materiaA.Existe) 
+                    {  //modificar materia abierta
+                        horario = GenerarEntidadH(materiaA.CodigoMateriaAbierta);
+                        resultado = logicaMA.InsertarMateriaAbierta(materiaA, horario, Convert.ToInt16(Session["_CodMateriaAbierta"])); //si ya existe la materia entonces solo hay que agregarle el horario y modificarla 
+                        CargarDataSet(resultado); //carga el datagrid con los horarios de esa materia abierta
                     }
                     else
-                    {
+                    { //crear materia abierta
                         horario = GenerarEntidadH(materiaA.CodigoMateriaAbierta);
-                        resultado = logicaMA.InsertarMateriaAbierta(materiaA,horario);
+                        resultado = logicaMA.InsertarMateriaAbierta(materiaA, horario, Convert.ToInt16(Session["_CodMateriaAbierta"]));
 
-                        if (resultado > 0)
+                        if (resultado > 0)//si el resultado es mayor que 0 la materia abierta si existe y se guarda en el session
                         {
-                            Session["_mensaje"] = $"Operación realizada satisfactoriamente {logicaMA.Mensaje}";
+                            Session["_CodMateriaAbierta"] = resultado;
+                            CargarDataSet(resultado); //carga el datagrid con los horarios de esa materia abierta
                         }
                         else
                         {
-                            Session["_mensaje"] = $"Hubo un error al insertar la materia y el horario {logicaMA.Mensaje}";
+                            Session["_CodMateriaAbierta"] = null; //si aun no se ha creado la materia abierta no debe existir la variable en el session
                         }
                     }
-                    
+
+                    Session["_mensaje"] = $"{logicaMA.Mensaje}";
+
 
                 }
                 catch (Exception ex)
@@ -196,6 +226,11 @@ namespace InterfazWeb
 
             }
 
+        }
+
+        protected void btnModificarMateria_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("FrmBuscarMateriaAbierta.aspx");
         }
     }
 }
