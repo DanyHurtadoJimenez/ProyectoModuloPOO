@@ -45,14 +45,14 @@ namespace LogicaNegocio
 
         #region Metodos
 
-        public DataSet ListarMateriasAbiertas(string condicion, int periodo, int anio)
+        public DataSet ListarMateriasAbiertas(string condicion)
         {
             DataSet DS;
             ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);//se instancia el acceso a los datos
 
             try
             {
-                DS = accesoDatosMA.ListarMateriasAbiertas(condicion, periodo, anio);
+                DS = accesoDatosMA.ListarMateriasAbiertas(condicion);
 
             }
             catch (Exception)
@@ -193,6 +193,22 @@ namespace LogicaNegocio
             }
             _mensaje = accesoMa.Mensaje;
             return numeroGrupo;
+        }
+
+        public int modificarMateriaAbierta(MateriasAbiertas materiaA)
+        {
+            int resultado = 0;
+            ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMA.modificarMateriaAbierta(materiaA);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            _mensaje = accesoDatosMA.Mensaje;
+            return resultado;
         }
 
         #endregion

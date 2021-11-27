@@ -24,6 +24,8 @@ namespace InterfazWeb
                 {
                     DropDownAnios.Items.Add(DateTime.Today.Year.ToString());
                     DropDownAnios.Items.Add(DateTime.Today.AddYears(1).Year.ToString());
+                    txtHoraInicio.Text = "07:00";
+                    txtHoraFin.Text = "08:00";
 
                     Session["_mensaje"] = null;
                     if (Session["_CodMateriaCarrera"] != null)
@@ -31,6 +33,7 @@ namespace InterfazWeb
                         MateriasCarreras materiaCarrera;
                         LogicaMateriaCarrera logicaMAC = new LogicaMateriaCarrera(Configuracion.getConnectionString);
                         materiaCarrera = logicaMAC.ObtenerMateriaCarrera(Convert.ToInt32(Session["_CodMateriaCarrera"]));
+                        txtCodMateriaCarrera.Text = Session["_CodMateriaCarrera"].ToString();
                         txtCodigoMateria.Text = materiaCarrera.CodigoMateria.CodigoMateria.ToString();
                         txtNombreMateria.Text = materiaCarrera.CodigoMateria.NombreMateria;
                         txtCreditos.Text = materiaCarrera.CodigoMateria.CreditosMateria.ToString();
@@ -40,7 +43,8 @@ namespace InterfazWeb
                     {
                         MateriasAbiertas materiaAbierta;
                         LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
-                        materiaAbierta = logicaMA.ObtenerMateriaAbierta(Convert.ToInt32(Session["_CodMateriaAbierta"]));
+                        materiaAbierta = logicaMA.ObtenerMateriaAbierta(Convert.ToInt32(Session["_CodMateriaAbierta"])); 
+                        txtCodMateriaCarrera.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateriaCarrera.ToString();
                         txtCodigoMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.CodigoMateria;
                         txtNombreMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.NombreMateria;
                         txtCreditos.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.CreditosMateria.ToString();
@@ -51,7 +55,6 @@ namespace InterfazWeb
                         nudPeriodo.Text = materiaAbierta.Periodo.ToString();
                         DropDownAnios.SelectedValue = Convert.ToInt32(materiaAbierta.Anio).ToString();
                         CargarDataSet(materiaAbierta.CodigoMateriaAbierta); //carga los horarios que la materia tenga 
-                        btnCrearGrupo.Enabled = false;
                     }
                 }
             }
@@ -61,30 +64,10 @@ namespace InterfazWeb
             }
         }
 
-
-        //        int id = int.Parse(e.CommandArgument.ToString());
-        //        MateriasCarreras materiaCarr;
-        //        LogicaMateriaCarrera logicaMAC = new LogicaMateriaCarrera(Configuracion.getConnectionString);
-        //            try
-        //            {
-        //                materiaCarr = logicaMAC.ObtenerMateriaCarrera(id);
-        //                if (materiaCarr != null)
-        //                {
-        //                    txtCodigoMateria.Text = materiaCarr.CodigoMateria.CodigoMateria.ToString();
-        //                    txtNombreMateria.Text = materiaCarr.CodigoMateria.NombreMateria;
-        //                    txtCreditos.Text = materiaCarr.CodigoMateria.CreditosMateria.ToString();
-        //                    txtNombreCarrera.Text = materiaCarr.CodigoCarreras.NombreCarrera;
-        //                }
-        //}
-        //            catch (Exception)
-        //{
-
-        //    Session["_mensaje"] = "Error al Seleccionar la materia";
-        //}
-
-
         protected void btnBuscarMateria_Click(object sender, EventArgs e)
         {
+            btnCrearGrupo.Enabled = true;
+            Session["_CodMateriaAbierta"] = null;
             Response.Redirect("FrmBuscarMateria.aspx");
         }
 
@@ -95,7 +78,7 @@ namespace InterfazWeb
                 try
                 {
                     LogicaMateriaAbierta crearGrupo = new LogicaMateriaAbierta(Configuracion.getConnectionString);
-                    int numeroGrupo = crearGrupo.generarGrupo(Convert.ToInt32(Session["_CodMateriaCarrera"]), Convert.ToInt32(DropDownAnios.SelectedItem.ToString()), Convert.ToInt32(nudPeriodo.Text)); //se genera el numero del grupo
+                    int numeroGrupo = crearGrupo.generarGrupo(Convert.ToInt32(txtCodMateriaCarrera.Text), Convert.ToInt32(DropDownAnios.SelectedItem.ToString()), Convert.ToInt32(nudPeriodo.Text)); //se genera el numero del grupo
                     txtGrupo.Text = numeroGrupo.ToString();
                 }
                 catch (Exception ex)
@@ -118,6 +101,7 @@ namespace InterfazWeb
             if (Session["_CodMateriaAbierta"] != null)
             {
                 materiaA.CodigoMateriaAbierta = int.Parse(Session["_CodMateriaAbierta"].ToString());
+                materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = Convert.ToInt32(txtCodMateriaCarrera.Text);
                 materiaA.Existe = true;
             }
             else
@@ -127,7 +111,7 @@ namespace InterfazWeb
                 materiaA.Existe = false;
             }
 
-            
+
             materiaA.Grupo = Convert.ToInt32(txtGrupo.Text);
             materiaA.Cupo = Convert.ToInt32(nudCupo.Text);
             materiaA.Costo = Convert.ToDecimal(txtCosto.Text);
@@ -192,7 +176,7 @@ namespace InterfazWeb
                 try
                 {
                     materiaA = GenerarEntidadMA();
-                    if (materiaA.Existe) 
+                    if (materiaA.Existe)
                     {  //modificar materia abierta
                         horario = GenerarEntidadH(materiaA.CodigoMateriaAbierta);
                         resultado = logicaMA.InsertarMateriaAbierta(materiaA, horario, Convert.ToInt16(Session["_CodMateriaAbierta"])); //si ya existe la materia entonces solo hay que agregarle el horario y modificarla 
@@ -230,7 +214,38 @@ namespace InterfazWeb
 
         protected void btnModificarMateria_Click(object sender, EventArgs e)
         {
+            Session["_CodMateriaCarrera"] = null;
+            //btnCrearGrupo.Enabled = false;
             Response.Redirect("FrmBuscarMateriaAbierta.aspx");
+        }
+
+        protected void lnkEliminar_Command(object sender, CommandEventArgs e)
+        {
+            int cantidadHorarios;
+            LogicaHorarios logicaH = new LogicaHorarios(Configuracion.getConnectionString);
+            cantidadHorarios = logicaH.contarHorarios(int.Parse(Session["_CodMateriaAbierta"].ToString())); //se fija primero cuantos horarios posee esa materia, si ya solo tiene uno no le permite borrarlo
+            if (cantidadHorarios > 1)
+            {
+                int id = int.Parse(e.CommandArgument.ToString()); //obtiene el codigo del horario para eliminarlo
+                logicaH.eliminarHorario(id);
+                Session["_mensaje"] = $"{logicaH.Mensaje}";
+                CargarDataSet(int.Parse(Session["_CodMateriaAbierta"].ToString()));
+            }
+            else
+            {
+                Session["_mensaje"] = "No puede eliminar este horario, porque la materia no puede estar registrada sin horarios.";
+            }
+
+        }
+
+        protected void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+            MateriasAbiertas materiaA;
+            materiaA = GenerarEntidadMA(); //OBTIENE LOS DATOS QUE ESTAN EN EL FORMULARIO PARA MODIFICAR LA MATERIA ABIERTA
+            logicaMA.modificarMateriaAbierta(materiaA);
+            Session["_mensaje"] = null;
+            Response.Redirect("frmAgregarProfe.aspx");
         }
     }
 }

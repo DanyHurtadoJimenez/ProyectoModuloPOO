@@ -39,7 +39,7 @@ namespace AccesoDatos
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlDataAdapter adapter;
-            string sentencia = string.Format("select dia,HoraInicio,HoraFin from TBL_Horarios where CodMateriaAbierta = {0}", codMateriaAbierta);
+            string sentencia = string.Format("select CodHorario, dia,HoraInicio,HoraFin from TBL_Horarios where CodMateriaAbierta = {0}", codMateriaAbierta);
 
             try
             {
@@ -130,7 +130,66 @@ namespace AccesoDatos
             return dtHorarios;
         }
 
+        public void eliminarHorario(int codHorario)
+        {
 
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = "SP_EliminarHorarios"; //nombre del procedimiento almacenado
+            comando.CommandType = CommandType.StoredProcedure;//se especifica que tipo de comando es, en este caso es un procedimiento almacenado
+            comando.Connection = conexion;
+            //parametro de entrada para el SP
+            comando.Parameters.AddWithValue("@CodHorario", codHorario);
+
+            //parametro de salida del SP
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+
+
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery(); //ejecuta el SP 
+                //se va a leer el parametro de salida del SP
+                _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public int contarHorarios(int codMateriaAbierta) //cuenta cuantos horarios posee una materia abierta
+        {
+            int cantidadHorarios;
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = string.Format("select count(*) from TBL_Horarios where CodMateriaAbierta = {0}",codMateriaAbierta); //nombre del procedimiento almacenado
+            comando.Connection = conexion;
+
+            //parametro de salida del SP
+            //comando.Parameters.Add("@msj", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+
+            try
+            {
+                conexion.Open();
+                cantidadHorarios = Convert.ToInt32(comando.ExecuteScalar()); //ejecuta el SP 
+                //se va a leer el parametro de salida del SP
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return cantidadHorarios;
+
+        }
 
 
         #endregion

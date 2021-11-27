@@ -73,11 +73,11 @@
     <Content Include="CSS\estiloMasterPage.css" />
     <Content Include="CSS\estilosAbrirC.css" />
     <Content Include="FrmAbrirC.aspx" />
+    <Content Include="frmAgregarProfe.aspx" />
     <Content Include="FrmBuscarMateria.aspx" />
     <Content Include="FrmBuscarMateriaAbierta.aspx" />
     <Content Include="FrmInicio.aspx" />
     <Content Include="JQuery\jQuery.js" />
-    <Content Include="js\funciones.js" />
     <Content Include="Multimedia\11_Success-1.jpg" />
     <Content Include="Multimedia\portrait-of-group-of-students-celebrating-their-graduation.jpg" />
     <Content Include="Multimedia\university-students-discussing-project-together.jpg" />
@@ -92,6 +92,13 @@
     </Compile>
     <Compile Include="FrmAbrirC.aspx.designer.cs">
       <DependentUpon>FrmAbrirC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmAgregarProfe.aspx.cs">
+      <DependentUpon>frmAgregarProfe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmAgregarProfe.aspx.designer.cs">
+      <DependentUpon>frmAgregarProfe.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmBuscarMateria.aspx.cs">
       <DependentUpon>FrmBuscarMateria.aspx</DependentUpon>

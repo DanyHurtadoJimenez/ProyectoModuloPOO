@@ -21,11 +21,11 @@ namespace InterfazWeb
 
             try
             {
-                LogicaValoresReferencia LVR = new LogicaValoresReferencia(Configuracion.getConnectionString);
-                ValoresReferencia valoresR;
-                valoresR = LVR.RecuperarPeriodoAnio();//se obtiene el periodo y el anio actual
+                //LogicaValoresReferencia LVR = new LogicaValoresReferencia(Configuracion.getConnectionString);
+                //ValoresReferencia valoresR;
+                //valoresR = LVR.RecuperarPeriodoAnio();//se obtiene el periodo y el anio actual
 
-                dsMateriasAbiertas = logicaMateriaAbierta.ListarMateriasAbiertas(condicion, valoresR.Periodo, valoresR.Anio);
+                dsMateriasAbiertas = logicaMateriaAbierta.ListarMateriasAbiertas(condicion);
                 if (dsMateriasAbiertas.Tables[0].Rows.Count > 0) //si tiene algo el data set entonces carguelo en el datagridview
                 {
                     GrdListaMaterias.DataSource = dsMateriasAbiertas;
@@ -44,7 +44,11 @@ namespace InterfazWeb
         {
             try
             {
-                CargarDataSet();
+                if (!IsPostBack)
+                {
+                    CargarDataSet();
+                }
+                    
             }
             catch (Exception ex)
             {

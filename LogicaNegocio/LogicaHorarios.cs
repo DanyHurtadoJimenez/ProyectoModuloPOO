@@ -80,8 +80,41 @@ namespace LogicaNegocio
             return resultado;
         }
 
+        public void eliminarHorario(int codHorario)
+        {
+            ADHorarios accesoDatosH = new ADHorarios(_cadenaConexion);//se instancia el acceso a los datos
+            try
+            {
+               accesoDatosH.eliminarHorario(codHorario);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            _mensaje = accesoDatosH.Mensaje;
+        }
+
+
+        public int contarHorarios(int codMateriaAbierta)
+        {
+            int cantidadHorarios;
+            ADHorarios accesoDatosH = new ADHorarios(_cadenaConexion);//se instancia el acceso a los datos
+            try
+            {
+                cantidadHorarios = accesoDatosH.contarHorarios(codMateriaAbierta);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return cantidadHorarios;
+        }
+
         #endregion
 
 
     }
 }
+
+
+

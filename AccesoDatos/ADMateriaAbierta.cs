@@ -43,15 +43,14 @@ namespace AccesoDatos
 
         #region Metodos
 
-        public DataSet ListarMateriasAbiertas(string condicion, int periodo, int anio)
+        public DataSet ListarMateriasAbiertas(string condicion)
         {  //devuelve un dataset de Aulas para mostrarlo en un datagridView
 
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlDataAdapter adapter;
-            string sentencia = string.Format("SELECT CodMateriaAbierta, CodigoMateria, NombreMateria, NombreProfesor, "+
-                                             "NumeroAula, Grupo, Cupo, Costo, Periodo,Anio FROM CONSULTA_MATERIAS_ABIERTAS "+
-                                             " where Periodo = {0} and Anio = {1}", periodo, anio);
+            string sentencia = string.Format("SELECT CodMateriaAbierta, CodigoMateria, NombreMateria, NombreProfesor, " +
+                                             "NumeroAula, Grupo, Cupo, Costo, Periodo,Anio FROM CONSULTA_MATERIAS_ABIERTAS WHERE Disponible = 0 ");
 
             if (!string.IsNullOrEmpty(condicion))
             { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia
@@ -278,8 +277,8 @@ namespace AccesoDatos
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
             SqlDataReader dataReader;//el data reader no tiene constructor para llenarlo es mediante un execute
-            string sentencia = string.Format("SELECT CodMateriaAbierta,CodMateriaCarrera,CodigoMateria,NombreMateria,Requisito,"+
-                                             "nombreRequisito,corequisito,nombreCoRequisito,CodigoProfesor,NombreProfesor,CodigoAula,"+
+            string sentencia = string.Format("SELECT CodMateriaAbierta,CodMateriaCarrera,CodigoMateria,NombreMateria,Requisito," +
+                                             "nombreRequisito,corequisito,nombreCoRequisito,CodigoProfesor,NombreProfesor,CodigoAula," +
                                              "NumeroAula,Grupo,Cupo,Costo,Periodo,Anio,NombreCarrera,CreditosMateria FROM OBTENER_MATERIA_ABIERTA " +
                                              " where CodMateriaAbierta = {0}", codMateriaAbierta);
             comando.Connection = conexion;
@@ -428,6 +427,47 @@ namespace AccesoDatos
             }
 
             return numGrupo;
+
+        }
+
+
+        public int modificarMateriaAbierta(MateriasAbiertas materiaA)
+        {
+            int resultado;
+
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = "SP_Modificar_Materia_Abierta"; //nombre del procedimiento almacenado
+            comando.CommandType = CommandType.StoredProcedure;//se especifica que tipo de comando es, en este caso es un procedimiento almacenado
+            comando.Connection = conexion;
+            //parametro de entrada para el SP
+            comando.Parameters.AddWithValue("@codMateriaAbierta", materiaA.CodigoMateriaAbierta);
+            comando.Parameters.AddWithValue("@codMateriaCarrera", materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera);
+            comando.Parameters.AddWithValue("@grupo", Convert.ToByte(materiaA.Grupo));
+            comando.Parameters.AddWithValue("@cupo", Convert.ToByte(materiaA.Cupo));
+            comando.Parameters.AddWithValue("@costo", materiaA.Costo);
+            comando.Parameters.AddWithValue("@periodo", Convert.ToByte(materiaA.Periodo));
+            comando.Parameters.AddWithValue("@anio", (Int16)materiaA.Anio);
+
+            //parametro de salida del SP
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+
+            try
+            {
+                conexion.Open();
+                resultado = comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
+                //se va a leer el parametro de salida del SP
+                _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
 
         }
 

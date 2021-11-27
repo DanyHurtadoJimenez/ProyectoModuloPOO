@@ -2,7 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/estilosAbrirC.css" rel="stylesheet" />
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -29,7 +28,7 @@
         <div class="input-group mb-4 justify-content-between flex-nowrap align-items-center contenedores ">
             <asp:Label ID="Label1" CssClass="me-3 ms-2" runat="server" Text="Código Materia">
                 <asp:RequiredFieldValidator ID="rfvCodigoMateria" runat="server"
-                    ErrorMessage="Debe de BUSCAR UNA MATERIA para poder abrirla"
+                    ErrorMessage="Debe de BUSCAR UNA MATERIA"
                     Text="*"
                     ControlToValidate="txtCodigoMateria"
                     ValidationGroup="1"
@@ -48,6 +47,7 @@
 
             <asp:Label ID="Label4" CssClass="me-3 ms-2" runat="server" Text="Nombre Carrera"></asp:Label>
             <asp:TextBox CssClass="textBox" ID="txtNombreCarrera" runat="server" ReadOnly="True" Width="404px"></asp:TextBox>
+            <asp:TextBox ID="txtCodMateriaCarrera" runat="server" Visible="False"></asp:TextBox>
             <asp:Button ID="btnBuscarMateria" CssClass="btn btn-outline-secondary ms-3" runat="server" Text="Buscar Materia" OnClick="btnBuscarMateria_Click" />
             <asp:Button ID="btnModificarMateria" CssClass="btn btn-outline-info ms-3" runat="server" Text="Modificar un curso" OnClick="btnModificarMateria_Click" />
         </div>
@@ -57,16 +57,6 @@
         <label for="basic-url" class="form-label">Escoja los periodos y demas información importante</label>
 
         <div class="input-group mb-4 justify-content-between flex-nowrap align-items-center contenedores ">
-            <asp:Label ID="Label5" CssClass="me-3 ms-2" runat="server" Text="Grupo">
-                <asp:RequiredFieldValidator ID="rfvGrupo" runat="server"
-                    ErrorMessage="Debe de GENERAR UN GRUPO para abrir el curso"
-                    Text="*"
-                    ControlToValidate="txtGrupo"
-                    ValidationGroup="1"
-                    ForeColor="#FF3300">
-                </asp:RequiredFieldValidator>
-            </asp:Label>
-            <asp:TextBox CssClass="textBox" ID="txtGrupo" runat="server" ReadOnly="True" Width="151px" MaxLength="2" TextMode="Number"></asp:TextBox>
 
             <asp:Label ID="Label6" CssClass="me-3 ms-2" runat="server" Text="Cupo">
                 <asp:RequiredFieldValidator ID="rfvCupo" runat="server"
@@ -111,6 +101,17 @@
                 </asp:RequiredFieldValidator>
             </asp:Label>
             <asp:DropDownList ID="DropDownAnios" runat="server"></asp:DropDownList>
+
+            <asp:Label ID="Label5" CssClass="me-3 ms-2" runat="server" Text="Grupo">
+                <asp:RequiredFieldValidator ID="rfvGrupo" runat="server"
+                    ErrorMessage="Debe de GENERAR UN GRUPO para abrir el curso"
+                    Text="*"
+                    ControlToValidate="txtGrupo"
+                    ValidationGroup="1"
+                    ForeColor="#FF3300">
+                </asp:RequiredFieldValidator>
+            </asp:Label>
+            <asp:TextBox CssClass="textBox" ID="txtGrupo" runat="server" ReadOnly="True" Width="151px" MaxLength="2" TextMode="Number"></asp:TextBox>
 
             <asp:Button ID="btnCrearGrupo" CssClass="btn btn-outline-secondary ms-2" runat="server" Text="Crear Numero Grupo" OnClick="btnCrearGrupo_Click" />
 
@@ -171,9 +172,10 @@
             <Columns>
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:LinkButton ID="lnkEliminar" runat="server">Eliminar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkEliminar" runat="server" CommandArgument='<%# Eval("CodHorario").ToString() %>' OnCommand="lnkEliminar_Command">Eliminar</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:BoundField DataField="CodHorario" HeaderText="Cod Horario" Visible="False" />
                 <asp:BoundField HeaderText="Dia" DataField="dia" />
                 <asp:BoundField HeaderText="Hora Inicio" DataField="HoraInicio" />
                 <asp:BoundField HeaderText="Hora Fin" DataField="HoraFin" />
@@ -190,12 +192,17 @@
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
 
+
         <div class="input-group mb-5 justify-content-center">
-            <asp:Button ID="btnSiguiente" CssClass="btn btn-primary btn-lg" runat="server" Text="Siguiente" />
+            <asp:Button ID="Button1" CssClass="btn btn-danger mt-5 ms-5 " runat="server" Text="Eliminar Curso" />
+            <asp:Button ID="btnSiguiente" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" ValidationGroup="1" Text="Siguiente" OnClick="btnSiguiente_Click" />
         </div>
+
+
+
 
     </div>
 
-
-
 </asp:Content>
+
+
