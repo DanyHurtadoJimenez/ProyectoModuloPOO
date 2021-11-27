@@ -43,7 +43,7 @@ namespace InterfazWeb
                     {
                         MateriasAbiertas materiaAbierta;
                         LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
-                        materiaAbierta = logicaMA.ObtenerMateriaAbierta(Convert.ToInt32(Session["_CodMateriaAbierta"])); 
+                        materiaAbierta = logicaMA.ObtenerMateriaAbierta(Convert.ToInt32(Session["_CodMateriaAbierta"]));
                         txtCodMateriaCarrera.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateriaCarrera.ToString();
                         txtCodigoMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.CodigoMateria;
                         txtNombreMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.NombreMateria;
@@ -180,7 +180,7 @@ namespace InterfazWeb
                     {  //modificar materia abierta
                         horario = GenerarEntidadH(materiaA.CodigoMateriaAbierta);
                         resultado = logicaMA.InsertarMateriaAbierta(materiaA, horario, Convert.ToInt16(Session["_CodMateriaAbierta"])); //si ya existe la materia entonces solo hay que agregarle el horario y modificarla 
-                        CargarDataSet(resultado); //carga el datagrid con los horarios de esa materia abierta
+                        CargarDataSet(materiaA.CodigoMateriaAbierta); //carga el datagrid con los horarios de esa materia abierta
                     }
                     else
                     { //crear materia abierta
@@ -246,6 +246,21 @@ namespace InterfazWeb
             logicaMA.modificarMateriaAbierta(materiaA);
             Session["_mensaje"] = null;
             Response.Redirect("frmAgregarProfe.aspx");
+        }
+
+        protected void GrdVerHorarios_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GrdVerHorarios.PageIndex = e.NewPageIndex;
+                CargarDataSet(Convert.ToInt32(Session["_CodMateriaAbierta"]));
+
+            }
+            catch (Exception ex)
+            {
+
+                Session["_mensaje"] = $"Error al cargar las Materias {ex.Message}";
+            }
         }
     }
 }

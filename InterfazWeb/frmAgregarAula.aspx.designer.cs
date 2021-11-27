@@ -11,7 +11,7 @@ namespace InterfazWeb
 {
 
 
-    public partial class frmAgregarProfe
+    public partial class frmAgregarAula
     {
 
         /// <summary>
@@ -105,6 +105,24 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.TextBox txtGrupo;
 
         /// <summary>
+        /// Control Label11.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label11;
+
+        /// <summary>
+        /// Control txtCupo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCupo;
+
+        /// <summary>
         /// Control Label6.
         /// </summary>
         /// <remarks>
@@ -159,13 +177,13 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control txtNombreProfe.
+        /// Control txtNumAula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreProfe;
+        protected global::System.Web.UI.WebControls.TextBox txtNumAula;
 
         /// <summary>
         /// Control Label3.
@@ -177,13 +195,13 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// Control txtApellido1P.
+        /// Control txtTipoAula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtApellido1P;
+        protected global::System.Web.UI.WebControls.TextBox txtTipoAula;
 
         /// <summary>
         /// Control Label2.
@@ -195,40 +213,40 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Control txtApellido2P.
+        /// Control txtCapacidadAula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtApellido2P;
+        protected global::System.Web.UI.WebControls.TextBox txtCapacidadAula;
 
         /// <summary>
-        /// Control txtCodigoProfe.
+        /// Control txtCodigoAula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoProfe;
+        protected global::System.Web.UI.WebControls.TextBox txtCodigoAula;
 
         /// <summary>
-        /// Control btnEliminarProfe.
+        /// Control btnEliminarAula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminarProfe;
+        protected global::System.Web.UI.WebControls.Button btnEliminarAula;
 
         /// <summary>
-        /// Control GrdVerProfesores.
+        /// Control GrdVerAulas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GrdVerProfesores;
+        protected global::System.Web.UI.WebControls.GridView GrdVerAulas;
 
         /// <summary>
         /// Control btnAtras.
@@ -240,12 +258,12 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Button btnAtras;
 
         /// <summary>
-        /// Control btnSiguiente.
+        /// Control btnFinalizar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSiguiente;
+        protected global::System.Web.UI.WebControls.Button btnFinalizar;
     }
 }

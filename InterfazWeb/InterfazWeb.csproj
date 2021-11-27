@@ -73,6 +73,7 @@
     <Content Include="CSS\estiloMasterPage.css" />
     <Content Include="CSS\estilosAbrirC.css" />
     <Content Include="FrmAbrirC.aspx" />
+    <Content Include="frmAgregarAula.aspx" />
     <Content Include="frmAgregarProfe.aspx" />
     <Content Include="FrmBuscarMateria.aspx" />
     <Content Include="FrmBuscarMateriaAbierta.aspx" />
@@ -92,6 +93,13 @@
     </Compile>
     <Compile Include="FrmAbrirC.aspx.designer.cs">
       <DependentUpon>FrmAbrirC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmAgregarAula.aspx.cs">
+      <DependentUpon>frmAgregarAula.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmAgregarAula.aspx.designer.cs">
+      <DependentUpon>frmAgregarAula.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmAgregarProfe.aspx.cs">
       <DependentUpon>frmAgregarProfe.aspx</DependentUpon>

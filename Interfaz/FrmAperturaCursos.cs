@@ -286,95 +286,95 @@ namespace Interfaz
 
         private void btnAbrirMateria_Click(object sender, EventArgs e)
         {
-            //LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
-            //MateriasAbiertas materiaAB;
-            //int idMateriaAbierta,ingresoProfesor = -1, ingresoAula = -1;
-            //try
-            //{
-            //    if (!string.IsNullOrEmpty(txtCodigoMateria.Text) && !string.IsNullOrEmpty(txtNombreMateria.Text) &&
-            //        !string.IsNullOrEmpty(txtCreditos.Text) && !string.IsNullOrEmpty(txtNombreCarrera.Text))
-            //    {
-            //        if (!string.IsNullOrEmpty(txtGrupo.Text) && nudCupo.Value != 0 &&
-            //            !string.IsNullOrEmpty(txtCosto.Text) && nudPeriodo.Value != 0 &&
-            //            comboAnio.SelectedIndex != -1)
-            //        {
-            //            if (comboDiasSemana.SelectedIndex != -1 && dtgvMostrarHorario.Rows.Count > 0)
-            //            {
-            //                materiaAB = GenerarEntidad();
-            //                if (materiaAB.Existe)
-            //                {
-            //                    //idMateriaAbierta = logicaMA.InsertarMateriaAbierta(materiaAB, listaHorarios);
-            //                }
-            //                else 
-            //                {
-            //                    idMateriaAbierta = -1;//se llamaria al metodo modificar                            
-            //                }
+            LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+            MateriasAbiertas materiaAB;
+            int idMateriaAbierta, ingresoProfesor = -1, ingresoAula = -1;
+            try
+            {
+                if (!string.IsNullOrEmpty(txtCodigoMateria.Text) && !string.IsNullOrEmpty(txtNombreMateria.Text) &&
+                    !string.IsNullOrEmpty(txtCreditos.Text) && !string.IsNullOrEmpty(txtNombreCarrera.Text))
+                {
+                    if (!string.IsNullOrEmpty(txtGrupo.Text) && nudCupo.Value != 0 &&
+                        !string.IsNullOrEmpty(txtCosto.Text) && nudPeriodo.Value != 0 &&
+                        comboAnio.SelectedIndex != -1)
+                    {
+                        if (comboDiasSemana.SelectedIndex != -1 && dtgvMostrarHorario.Rows.Count > 0)
+                        {
+                            materiaAB = GenerarEntidad();
+                            if (materiaAB.Existe)
+                            {
+                                //idMateriaAbierta = logicaMA.InsertarMateriaAbierta(materiaAB, listaHorarios);
+                            }
+                            else
+                            {
+                                idMateriaAbierta = -1;//se llamaria al metodo modificar                            
+                            }
 
-            //                if (idMateriaAbierta > 0 )
-            //                {
-            //                    MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (idMateriaAbierta > 0)
+                            {
+                                MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-            //                    if (!string.IsNullOrEmpty(txtCodProfe.Text))
-            //                    {
-            //                        int codProfesor = int.Parse(txtCodProfe.Text);
-                                    
-            //                        ingresoProfesor = logicaMA.AsignarProfesor(codProfesor,idMateriaAbierta); //se trata de ingresar al profesor
+                                if (!string.IsNullOrEmpty(txtCodProfe.Text))
+                                {
+                                    int codProfesor = int.Parse(txtCodProfe.Text);
 
-            //                        if (ingresoProfesor == 0)
-            //                        {
-            //                            MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //                        }
-            //                        else
-            //                        {
-            //                            MessageBox.Show(logicaMA.Mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                        }
+                                    ingresoProfesor = logicaMA.AsignarProfesor(codProfesor, idMateriaAbierta); //se trata de ingresar al profesor
 
-            //                    }
+                                    if (ingresoProfesor == 0)
+                                    {
+                                        MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(logicaMA.Mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
 
-            //                    if (!string.IsNullOrEmpty(txtCodigaAula.Text))
-            //                    {
-            //                        int codAula = int.Parse(txtCodigaAula.Text);
+                                }
 
-            //                        ingresoAula = logicaMA.AsignarAula(codAula, idMateriaAbierta);//se trata de ingresar el aula
+                                if (!string.IsNullOrEmpty(txtCodigaAula.Text))
+                                {
+                                    int codAula = int.Parse(txtCodigaAula.Text);
 
-            //                        if (ingresoAula == 0)
-            //                        {
-            //                            MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //                        }
-            //                        else
-            //                        {
-            //                            MessageBox.Show(logicaMA.Mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                        }
-            //                    }
-            //                    Limpiar();
-            //                }
-            //                else
-            //                {
-            //                    MessageBox.Show("No fue posible abrir la materia", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //                }
+                                    ingresoAula = logicaMA.AsignarAula(codAula, idMateriaAbierta);//se trata de ingresar el aula
 
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("Debe introducir un horario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Debe introducir la informacion de los periodos y cupos de la materia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Debe realizar la busqueda de la informacion de la materia primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
-            //catch (Exception)
-            //{
+                                    if (ingresoAula == 0)
+                                    {
+                                        MessageBox.Show(logicaMA.Mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(logicaMA.Mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
+                                Limpiar();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No fue posible abrir la materia", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
 
-            //    throw;
-            //}
+                        }
+                        else
+                        {
+                            MessageBox.Show("Debe introducir un horario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe introducir la informacion de los periodos y cupos de la materia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe realizar la busqueda de la informacion de la materia primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 

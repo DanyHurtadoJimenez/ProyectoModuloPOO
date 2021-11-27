@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.Master" AutoEventWireup="true" CodeBehind="frmAgregarProfe.aspx.cs" Inherits="InterfazWeb.frmAgregarProfe" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.Master" AutoEventWireup="true" CodeBehind="frmAgregarAula.aspx.cs" Inherits="InterfazWeb.frmAgregarAula" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -6,7 +6,7 @@
 
 
     <div class="container">
-        <h1 class="text-center mt-3 mb-5">Asignar Profesor</h1>
+        <h1 class="text-center mt-3 mb-5">Asignar Aula</h1>
 
         <% if (Session["_mensaje"] != null)// if metido en medio del codigo html
             {%>
@@ -46,6 +46,11 @@
             </div>
 
             <div class="col">
+                <asp:Label ID="Label11" runat="server" Text="Cupo:"></asp:Label>
+                <asp:TextBox CssClass="form-control" ID="txtCupo" runat="server" ReadOnly="True"></asp:TextBox>
+            </div>
+
+            <div class="col">
                 <asp:Label ID="Label6" runat="server" Text="Periodo:"></asp:Label>
                 <asp:TextBox CssClass="form-control" ID="txtPeriodo" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
@@ -59,45 +64,44 @@
         </div>
 
         <div class="row mt-5">
-            <h2 class="mt-3 mb-3">Informacion del Profesor:</h2>
+            <h2 class="mt-3 mb-3">Informacion del Aula:</h2>
             <div class="col">
-                <asp:Label ID="Label1" runat="server" Text="Nombre:"></asp:Label>
-                <asp:TextBox CssClass="form-control" ID="txtNombreProfe" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:Label ID="Label1" runat="server" Text="Numero Aula:"></asp:Label>
+                <asp:TextBox CssClass="form-control" ID="txtNumAula" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
             <div class="col">
-                <asp:Label ID="Label3" runat="server" Text="Primer Apellido:"></asp:Label>
-                <asp:TextBox CssClass="form-control" ID="txtApellido1P" runat="server" ReadOnly="True"></asp:TextBox>
-            </div>
-
-            <div class="col">
-                <asp:Label ID="Label2" runat="server" Text="Segundo Apellido:"></asp:Label>
-                <asp:TextBox CssClass="form-control" ID="txtApellido2P" runat="server" ReadOnly="True"></asp:TextBox>
-                <asp:TextBox CssClass="form-control" ID="txtCodigoProfe" runat="server" Visible="False"></asp:TextBox>
+                <asp:Label ID="Label3" runat="server" Text="Tipo Aula:"></asp:Label>
+                <asp:TextBox CssClass="form-control" ID="txtTipoAula" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
 
             <div class="col">
-                <asp:Button CssClass="btn btn-outline-danger" ID="btnEliminarProfe" runat="server" Text="Retirar Profesor" OnClick="btnEliminarProfe_Click" />
+                <asp:Label ID="Label2" runat="server" Text="Capacidad:"></asp:Label>
+                <asp:TextBox CssClass="form-control" ID="txtCapacidadAula" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox CssClass="form-control" ID="txtCodigoAula" runat="server" Visible="False"></asp:TextBox>
+            </div>
+
+            <div class="col">
+                <asp:Button CssClass="btn btn-outline-danger" ID="btnEliminarAula" runat="server" Text="Retirar Aula" />
             </div>
         </div>
 
         <hr class="mt-lg-5 mb-lg-5" />
 
-        <h2 class="mt-3 mb-3">Escoja un Profesor</h2>
+        <h2 class="mt-3 mb-3">Escoja un aula</h2>
 
-        <asp:GridView ID="GrdVerProfesores" CssClass="mt-lg-5 mb-lg-5" AllowPaging="True" runat="server" AutoGenerateColumns="False" CellPadding="5" EmptyDataText="No se registran profesores escogidos." GridLines="None" Width="100%" ForeColor="#333333" PageSize="5" OnPageIndexChanging="GrdVerProfesores_PageIndexChanging">
+
+        <asp:GridView ID="GrdVerAulas" CssClass="mt-lg-5 mb-lg-5" AllowPaging="True" runat="server" AutoGenerateColumns="False" CellPadding="5" EmptyDataText="No se registran aulas." GridLines="None" Width="100%" ForeColor="#333333" PageSize="5" OnPageIndexChanging="GrdVerAulas_PageIndexChanging">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:LinkButton ID="lnkSeleccionar" runat="server" CommandArgument='<%# Eval("CodigoProfesor").ToString() %>' OnCommand="lnkSeleccionar_Command">Seleccionar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkSeleccionar" runat="server" CommandArgument='<%# Eval("CodigoAula").ToString() %>' OnCommand="lnkSeleccionar_Command">Seleccionar</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="CodigoProfesor" HeaderText="Cod Profe" Visible="False" />
-                <asp:BoundField HeaderText="Cédula Profesor" DataField="IdProfesor" />
-                <asp:BoundField HeaderText="Nombre Profesor" DataField="NombreProfesor" />
-                <asp:BoundField HeaderText="Primer Apellido" DataField="Apellido1Profesor" />
-                <asp:BoundField DataField="Apellido2Profesor" HeaderText="Segundo Apellido" />
-                <asp:BoundField DataField="TelefonoProfesor" HeaderText="Teléfono" />
+                <asp:BoundField DataField="CodigoAula" HeaderText="Cod Aula" Visible="False" />
+                <asp:BoundField HeaderText="Número Aula" DataField="NumeroAula" />
+                <asp:BoundField HeaderText="Tipo Aula" DataField="TipoAula" />
+                <asp:BoundField HeaderText="Capacidad" DataField="Capacidad" />
             </Columns>
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#070D59" ForeColor="White" Font-Bold="True" />
@@ -112,12 +116,15 @@
         </asp:GridView>
 
         <div class="input-group mt-lg-5 mb-lg-5 justify-content-center">
-            <asp:Button ID="btnAtras" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" Text="Ir Atrás" OnClick="btnAtras_Click" style="width: 114px; left: 0px; top: 0px" />
-            <asp:Button ID="btnSiguiente" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" Text="Siguiente" OnClick="btnSiguiente_Click" />
+            <asp:Button ID="btnAtras" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" Text="Ir Atrás" Style="width: 114px; left: 0px; top: 0px" />
+            <asp:Button ID="btnFinalizar" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" Text="Finalizar Proceso" />
         </div>
 
     </div>
 
 
 
+
 </asp:Content>
+
+

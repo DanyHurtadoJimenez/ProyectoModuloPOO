@@ -167,7 +167,7 @@
 
         </div>
 
-        <asp:GridView ID="GrdVerHorarios" CssClass="mt-3" AllowPaging="True" runat="server" AutoGenerateColumns="False" CellPadding="5" EmptyDataText="No se registran horarios escogidos." GridLines="None" Width="100%" ForeColor="#333333" PageSize="5">
+        <asp:GridView ID="GrdVerHorarios" CssClass="mt-3" AllowPaging="True" runat="server" AutoGenerateColumns="False" CellPadding="5" EmptyDataText="No se registran horarios escogidos." GridLines="None" Width="100%" ForeColor="#333333" PageSize="5" OnPageIndexChanging="GrdVerHorarios_PageIndexChanging">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:TemplateField>

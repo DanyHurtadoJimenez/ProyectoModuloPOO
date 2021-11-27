@@ -110,7 +110,7 @@ namespace LogicaNegocio
             return codMateriaA;
         }
 
-        
+
 
         public int AsignarProfesor(int codProfesor, int idMateriaA)
         {
@@ -209,6 +209,22 @@ namespace LogicaNegocio
             }
             _mensaje = accesoDatosMA.Mensaje;
             return resultado;
+        }
+
+
+        public int EliminarProfesor(int codMateriaAbierta, int codProfe)
+        {
+            int filasAfectadas = 0;
+            ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
+            try
+            {
+                filasAfectadas = accesoDatosMA.EliminarProfesor(codMateriaAbierta, codProfe);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return filasAfectadas;
         }
 
         #endregion

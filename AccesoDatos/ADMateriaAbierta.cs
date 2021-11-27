@@ -471,6 +471,35 @@ namespace AccesoDatos
 
         }
 
+        public int EliminarProfesor(int codMateriaAbierta, int codProfe) //elimina un profesor de la materia abierta
+        {
+            int filasAfectadas = -1;
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+            string sentencia = "UPDATE TBL_MateriasAbiertas SET CodigoProfesor = Null where CodMateriaAbierta = @CodMateriaAbierta and CodigoProfesor = @CodigoProfesor";
+            comando.CommandText = sentencia;
+            comando.Connection = conexion;
+            comando.Parameters.AddWithValue("@CodMateriaAbierta", codMateriaAbierta);
+            comando.Parameters.AddWithValue("@CodigoProfesor", codProfe);
+
+            try
+            {
+                conexion.Open();
+                filasAfectadas = comando.ExecuteNonQuery();
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.Dispose();
+                comando.Dispose();
+            }
+            return filasAfectadas;
+        }
+
 
         #endregion
 
