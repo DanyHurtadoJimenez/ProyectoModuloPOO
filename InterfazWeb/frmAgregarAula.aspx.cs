@@ -156,5 +156,54 @@ namespace InterfazWeb
 
 
         }
+
+        protected void btnEliminarAula_Click(object sender, EventArgs e)
+        {
+            LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+            int resultado;
+
+            if (!string.IsNullOrEmpty(txtCodigoAula.Text) && !string.IsNullOrEmpty(txtNumAula.Text) &&
+                !string.IsNullOrEmpty(txtTipoAula.Text) && !string.IsNullOrEmpty(txtCapacidadAula.Text) &&
+                !string.IsNullOrEmpty(txtCodMateriaAbierta.Text)) //revisa que ya se haya cargado la informacion con la que se trabajará
+            {
+                try
+                {
+                    resultado = logicaMA.EliminarAula(Convert.ToInt32(txtCodMateriaAbierta.Text), Convert.ToInt32(txtCodigoAula.Text));
+                    if (resultado > 0)
+                    {
+                        Session["_mensaje"] = "Se ha retirado el aula del curso";
+                        txtNumAula.Text = string.Empty;
+                        txtTipoAula.Text = string.Empty;
+                        txtCapacidadAula.Text = string.Empty;
+                    }
+                    else
+                    {
+                        Session["_mensaje"] = "No se pudo retirar el aula del curso";
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    Session["_mensaje"] = $"{ex.Message}";
+                }
+
+            }
+            else
+            {
+                Session["_mensaje"] = null;
+            }
+        }
+
+        protected void btnAtras_Click(object sender, EventArgs e)
+        {
+            Session["_CodMateriaAbierta"] = txtCodMateriaAbierta.Text;//se mantiene el codigo de la materia abierta para que no se pierdan los datos
+            Response.Redirect("frmAgregarProfe.aspx");
+        }
+
+        protected void btnFinalizar_Click(object sender, EventArgs e)
+        {
+            Session["_CodMateriaAbierta"] = null;//ya no se mantendra la variable en el session para evitar que cuando vuelva a entrar cargue informacion no necesaria para el usuario
+            Response.Redirect("FrmInicio.aspx");
+        }
     }
 }

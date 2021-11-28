@@ -81,7 +81,7 @@
             </div>
 
             <div class="col">
-                <asp:Button CssClass="btn btn-outline-danger" ID="btnEliminarAula" runat="server" Text="Retirar Aula" />
+                <asp:Button CssClass="btn btn-outline-danger" ID="btnEliminarAula" runat="server" Text="Retirar Aula" OnClick="btnEliminarAula_Click" />
             </div>
         </div>
 
@@ -116,8 +116,8 @@
         </asp:GridView>
 
         <div class="input-group mt-lg-5 mb-lg-5 justify-content-center">
-            <asp:Button ID="btnAtras" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" Text="Ir Atrás" Style="width: 114px; left: 0px; top: 0px" />
-            <asp:Button ID="btnFinalizar" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" Text="Finalizar Proceso" />
+            <asp:Button ID="btnAtras" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" Text="Ir Atrás" Style="width: 114px; left: 0px; top: 0px" OnClick="btnAtras_Click" />
+            <asp:Button ID="btnFinalizar" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" Text="Finalizar Proceso" OnClick="btnFinalizar_Click" />
         </div>
 
     </div>

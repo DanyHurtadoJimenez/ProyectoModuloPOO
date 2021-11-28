@@ -227,6 +227,22 @@ namespace LogicaNegocio
             return filasAfectadas;
         }
 
+        public int EliminarAula(int codMateriaAbierta, int codAula)
+        {
+            int filasAfectadas = 0;
+            ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
+            try
+            {
+                filasAfectadas = accesoDatosMA.EliminarAula(codMateriaAbierta, codAula);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return filasAfectadas;
+        }
+
+
         #endregion
 
 

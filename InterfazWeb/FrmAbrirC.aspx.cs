@@ -168,44 +168,66 @@ namespace InterfazWeb
                 !string.IsNullOrEmpty(txtCosto.Text) && !string.IsNullOrEmpty(nudPeriodo.Text) && DropDownAnios.SelectedIndex != -1 &&
                 DropDownListDias.SelectedIndex != -1 && !string.IsNullOrEmpty(txtHoraInicio.Text) && !string.IsNullOrEmpty(txtHoraFin.Text))
             {
-                LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
-                MateriasAbiertas materiaA;
-                Horarios horario;
-                int resultado;
 
-                try
+                if (Convert.ToInt32(nudCupo.Text) > 1 && Convert.ToInt32(nudCupo.Text) < 40)
                 {
-                    materiaA = GenerarEntidadMA();
-                    if (materiaA.Existe)
-                    {  //modificar materia abierta
-                        horario = GenerarEntidadH(materiaA.CodigoMateriaAbierta);
-                        resultado = logicaMA.InsertarMateriaAbierta(materiaA, horario, Convert.ToInt16(Session["_CodMateriaAbierta"])); //si ya existe la materia entonces solo hay que agregarle el horario y modificarla 
-                        CargarDataSet(materiaA.CodigoMateriaAbierta); //carga el datagrid con los horarios de esa materia abierta
-                    }
-                    else
-                    { //crear materia abierta
-                        horario = GenerarEntidadH(materiaA.CodigoMateriaAbierta);
-                        resultado = logicaMA.InsertarMateriaAbierta(materiaA, horario, Convert.ToInt16(Session["_CodMateriaAbierta"]));
-
-                        if (resultado > 0)//si el resultado es mayor que 0 la materia abierta si existe y se guarda en el session
+                    if (Convert.ToInt32(txtCosto.Text) > 0)
+                    {
+                        if (Convert.ToInt32(nudPeriodo.Text) >= 1 && Convert.ToInt32(nudPeriodo.Text) <= 3)
                         {
-                            Session["_CodMateriaAbierta"] = resultado;
-                            CargarDataSet(resultado); //carga el datagrid con los horarios de esa materia abierta
+                            LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+                            MateriasAbiertas materiaA;
+                            Horarios horario;
+                            int resultado;
+
+                            try
+                            {
+                                materiaA = GenerarEntidadMA();
+                                if (materiaA.Existe)
+                                {  //modificar materia abierta
+                                    horario = GenerarEntidadH(materiaA.CodigoMateriaAbierta);
+                                    resultado = logicaMA.InsertarMateriaAbierta(materiaA, horario, Convert.ToInt16(Session["_CodMateriaAbierta"])); //si ya existe la materia entonces solo hay que agregarle el horario y modificarla 
+                                    CargarDataSet(materiaA.CodigoMateriaAbierta); //carga el datagrid con los horarios de esa materia abierta
+                                }
+                                else
+                                { //crear materia abierta
+                                    horario = GenerarEntidadH(materiaA.CodigoMateriaAbierta);
+                                    resultado = logicaMA.InsertarMateriaAbierta(materiaA, horario, Convert.ToInt16(Session["_CodMateriaAbierta"]));
+
+                                    if (resultado > 0)//si el resultado es mayor que 0 la materia abierta si existe y se guarda en el session
+                                    {
+                                        Session["_CodMateriaAbierta"] = resultado;
+                                        CargarDataSet(resultado); //carga el datagrid con los horarios de esa materia abierta
+                                    }
+                                    else
+                                    {
+                                        Session["_CodMateriaAbierta"] = null; //si aun no se ha creado la materia abierta no debe existir la variable en el session
+                                    }
+                                }
+
+                                Session["_mensaje"] = $"{logicaMA.Mensaje}";
+
+
+                            }
+                            catch (Exception ex)
+                            {
+
+                                Session["_mensaje"] = $"Error al insertar la materia con el horario {ex.Message}";
+                            }
                         }
                         else
                         {
-                            Session["_CodMateriaAbierta"] = null; //si aun no se ha creado la materia abierta no debe existir la variable en el session
+                            Session["_mensaje"] = "Solo existen 3 periodos, escoja uno de ellos";
                         }
                     }
-
-                    Session["_mensaje"] = $"{logicaMA.Mensaje}";
-
-
+                    else
+                    {
+                        Session["_mensaje"] = "El costo solo admite números positivos";
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-
-                    Session["_mensaje"] = $"Error al insertar la materia con el horario {ex.Message}";
+                    Session["_mensaje"] = "El cupo debe ser un numero entre 1 y 40";
                 }
 
             }

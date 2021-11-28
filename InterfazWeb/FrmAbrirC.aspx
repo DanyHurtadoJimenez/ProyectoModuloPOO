@@ -67,7 +67,7 @@
                     ForeColor="#FF3300">
                 </asp:RequiredFieldValidator>
             </asp:Label>
-            <asp:TextBox CssClass="textBox" ID="nudCupo" TextMode="Number" runat="server" min="0" max="20" step="1" Width="174px"></asp:TextBox>
+            <asp:TextBox CssClass="textBox" ID="nudCupo" TextMode="Number" runat="server" min="1" max="40" step="1" Width="174px"></asp:TextBox>
 
             <asp:Label ID="Label7" CssClass="me-3 ms-2" runat="server" Text="Costo">
                 <asp:RequiredFieldValidator ID="rfvCosto" runat="server"
@@ -78,7 +78,7 @@
                     ForeColor="#FF3300">
                 </asp:RequiredFieldValidator>
             </asp:Label>
-            <asp:TextBox CssClass="textBox" ID="txtCosto" runat="server" Width="137px" TextMode="Number"></asp:TextBox>
+            <asp:TextBox CssClass="textBox" ID="txtCosto" runat="server" Width="137px" min="1" TextMode="Number"></asp:TextBox>
 
             <asp:Label ID="Label8" CssClass="me-3 ms-2" runat="server" Text="Periodo">
                 <asp:RequiredFieldValidator ID="rfvPeriodo" runat="server"
