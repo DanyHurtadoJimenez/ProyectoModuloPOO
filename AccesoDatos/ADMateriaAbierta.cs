@@ -43,19 +43,30 @@ namespace AccesoDatos
 
         #region Metodos
 
-        public DataSet ListarMateriasAbiertas(string condicion)
-        {  //devuelve un dataset de Aulas para mostrarlo en un datagridView
+        public DataSet ListarMateriasAbiertas(string condicion, int proceso)
+        {  //devuelve un dataset de las materias abiertas para mostrarlo en un datagridView
 
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlDataAdapter adapter;
-            string sentencia = string.Format("SELECT CodMateriaAbierta, CodigoMateria, NombreMateria, NombreProfesor, " +
-                                             "NumeroAula, Grupo, Cupo, Costo, Periodo,Anio FROM CONSULTA_MATERIAS_ABIERTAS WHERE Disponible = 0 ");
+            string sentencia;
+
+            if (proceso == 1) //dependiendo de quien este llamando este metodo, realice la operacion con diferentes sentencias, puede ser llamada por abrir cursos o para matricular
+            {
+                sentencia = string.Format("SELECT CodMateriaAbierta, CodigoMateria,NombreMateria,Requisito,nombreRequisito,NombreProfesor,NumeroAula," + //este fue llamado para matricular
+                                                  "Grupo,cupo,costo FROM CONSULTA_CURSOS_ABIERTOS where Disponible = 0");
+            }
+            else
+            {
+                sentencia = string.Format("SELECT CodMateriaAbierta, CodigoMateria, NombreMateria, NombreProfesor, " +
+                                  "NumeroAula, Grupo, Cupo, Costo, Periodo,Anio FROM CONSULTA_MATERIAS_ABIERTAS WHERE Disponible = 0 ");//este es llamado para abrir cursos
+            }
 
             if (!string.IsNullOrEmpty(condicion))
             { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia
                 sentencia = string.Format("{0} and {1}", sentencia, condicion);
             }
+
 
             try
             {
@@ -278,7 +289,7 @@ namespace AccesoDatos
             SqlCommand comando = new SqlCommand();
             SqlDataReader dataReader;//el data reader no tiene constructor para llenarlo es mediante un execute
             string sentencia = string.Format("SELECT CodMateriaAbierta,CodMateriaCarrera,CodigoMateria,NombreMateria,Requisito," +
-                                             "nombreRequisito,corequisito,nombreCoRequisito,CodigoProfesor,NombreProfesor,CodigoAula," +
+                                             "nombreRequisito,CodigoProfesor,NombreProfesor,CodigoAula," +
                                              "NumeroAula,Grupo,Cupo,Costo,Periodo,Anio,NombreCarrera,CreditosMateria FROM OBTENER_MATERIA_ABIERTA " +
                                              " where CodMateriaAbierta = {0}", codMateriaAbierta);
             comando.Connection = conexion;
@@ -313,35 +324,27 @@ namespace AccesoDatos
                     }
                     if (!dataReader.IsDBNull(6))
                     {
-                        materiaA.CodigoMateriaCarrera.Corequisito.CodigoMateria = dataReader.GetString(6);
+                        materiaA.CodigoProfesor.CodigoProfesor = dataReader.GetInt32(6);
                     }
                     if (!dataReader.IsDBNull(7))
                     {
-                        materiaA.CodigoMateriaCarrera.Corequisito.NombreMateria = dataReader.GetString(7);
+                        materiaA.CodigoProfesor.Nombre = dataReader.GetString(7);
                     }
                     if (!dataReader.IsDBNull(8))
                     {
-                        materiaA.CodigoProfesor.CodigoProfesor = dataReader.GetInt32(8);
+                        materiaA.CodigoAula.CodigoAula = dataReader.GetInt32(8);
                     }
                     if (!dataReader.IsDBNull(9))
                     {
-                        materiaA.CodigoProfesor.Nombre = dataReader.GetString(9);
+                        materiaA.CodigoAula.NumeroAula = dataReader.GetInt32(9);
                     }
-                    if (!dataReader.IsDBNull(10))
-                    {
-                        materiaA.CodigoAula.CodigoAula = dataReader.GetInt32(10);
-                    }
-                    if (!dataReader.IsDBNull(11))
-                    {
-                        materiaA.CodigoAula.NumeroAula = dataReader.GetInt32(11);
-                    }
-                    materiaA.Grupo = dataReader.GetByte(12);
-                    materiaA.Cupo = dataReader.GetByte(13);
-                    materiaA.Costo = dataReader.GetDecimal(14);
-                    materiaA.Periodo = dataReader.GetByte(15);
-                    materiaA.Anio = dataReader.GetInt16(16);
-                    materiaA.CodigoMateriaCarrera.CodigoCarreras.NombreCarrera = dataReader.GetString(17);
-                    materiaA.CodigoMateriaCarrera.CodigoMateria.CreditosMateria = dataReader.GetByte(18);
+                    materiaA.Grupo = dataReader.GetByte(10);
+                    materiaA.Cupo = dataReader.GetByte(11);
+                    materiaA.Costo = dataReader.GetDecimal(12);
+                    materiaA.Periodo = dataReader.GetByte(13);
+                    materiaA.Anio = dataReader.GetInt16(14);
+                    materiaA.CodigoMateriaCarrera.CodigoCarreras.NombreCarrera = dataReader.GetString(15);
+                    materiaA.CodigoMateriaCarrera.CodigoMateria.CreditosMateria = dataReader.GetByte(16);
                 }
                 conexion.Close();
 

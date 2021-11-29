@@ -75,9 +75,12 @@
     <Content Include="FrmAbrirC.aspx" />
     <Content Include="frmAgregarAula.aspx" />
     <Content Include="frmAgregarProfe.aspx" />
-    <Content Include="FrmBuscarMateria.aspx" />
-    <Content Include="FrmBuscarMateriaAbierta.aspx" />
+    <Content Include="frmBuscarAlumnos.aspx" />
+    <Content Include="frmBuscarCursosAbiertos.aspx" />
+    <Content Include="frmBuscarMateriaAbier.aspx" />
+    <Content Include="frmBuscarMaterias.aspx" />
     <Content Include="FrmInicio.aspx" />
+    <Content Include="FrmMatricular.aspx" />
     <Content Include="JQuery\jQuery.js" />
     <Content Include="Multimedia\11_Success-1.jpg" />
     <Content Include="Multimedia\portrait-of-group-of-students-celebrating-their-graduation.jpg" />
@@ -108,19 +111,33 @@
     <Compile Include="frmAgregarProfe.aspx.designer.cs">
       <DependentUpon>frmAgregarProfe.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FrmBuscarMateria.aspx.cs">
-      <DependentUpon>FrmBuscarMateria.aspx</DependentUpon>
+    <Compile Include="frmBuscarAlumnos.aspx.cs">
+      <DependentUpon>frmBuscarAlumnos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FrmBuscarMateria.aspx.designer.cs">
-      <DependentUpon>FrmBuscarMateria.aspx</DependentUpon>
+    <Compile Include="frmBuscarAlumnos.aspx.designer.cs">
+      <DependentUpon>frmBuscarAlumnos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FrmBuscarMateriaAbierta.aspx.cs">
-      <DependentUpon>FrmBuscarMateriaAbierta.aspx</DependentUpon>
+    <Compile Include="frmBuscarCursosAbiertos.aspx.cs">
+      <DependentUpon>frmBuscarCursosAbiertos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FrmBuscarMateriaAbierta.aspx.designer.cs">
-      <DependentUpon>FrmBuscarMateriaAbierta.aspx</DependentUpon>
+    <Compile Include="frmBuscarCursosAbiertos.aspx.designer.cs">
+      <DependentUpon>frmBuscarCursosAbiertos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscarMateriaAbier.aspx.cs">
+      <DependentUpon>frmBuscarMateriaAbier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmBuscarMateriaAbier.aspx.designer.cs">
+      <DependentUpon>frmBuscarMateriaAbier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscarMaterias.aspx.cs">
+      <DependentUpon>frmBuscarMaterias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmBuscarMaterias.aspx.designer.cs">
+      <DependentUpon>frmBuscarMaterias.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmInicio.aspx.cs">
       <DependentUpon>FrmInicio.aspx</DependentUpon>
@@ -129,6 +146,13 @@
     <Compile Include="FrmInicio.aspx.designer.cs">
       <DependentUpon>FrmInicio.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FrmMatricular.aspx.cs">
+      <DependentUpon>FrmMatricular.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmMatricular.aspx.designer.cs">
+      <DependentUpon>FrmMatricular.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Plantilla.Master.cs">
       <DependentUpon>Plantilla.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -136,11 +160,19 @@
     <Compile Include="Plantilla.Master.designer.cs">
       <DependentUpon>Plantilla.Master</DependentUpon>
     </Compile>
+    <Compile Include="PlantillaBusquedas.Master.cs">
+      <DependentUpon>PlantillaBusquedas.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PlantillaBusquedas.Master.designer.cs">
+      <DependentUpon>PlantillaBusquedas.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Plantilla.Master" />
+    <Content Include="PlantillaBusquedas.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

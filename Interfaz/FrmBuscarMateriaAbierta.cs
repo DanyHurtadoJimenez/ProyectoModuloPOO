@@ -32,26 +32,26 @@ namespace Interfaz
 
 
 
-        private void CargarDataSet(string condicion = "")
-        { //carga el datagridview con el dataset
-            LogicaMateriaAbierta logicaMateriaAbierta = new LogicaMateriaAbierta(Configuracion.getConnectionString);
-            DataSet dsMateriasAbiertas;
+        //private void CargarDataSet(string condicion = "")
+        //{ //carga el datagridview con el dataset
+        //    LogicaMateriaAbierta logicaMateriaAbierta = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+        //    DataSet dsMateriasAbiertas;
 
-            try
-            {
-                dsMateriasAbiertas = logicaMateriaAbierta.ListarMateriasAbiertas(condicion,periodo,anio);
-                if (dsMateriasAbiertas.Tables[0].Rows.Count > 0) //si tiene algo el data set entonces carguelo en el datagridview
-                {
-                    dgvBuscarMateriaA.DataSource = dsMateriasAbiertas;
-                    dgvBuscarMateriaA.DataMember = dsMateriasAbiertas.Tables[0].TableName;//en la tabla con nombre Clientes del dataset
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+        //    try
+        //    {
+        //       // dsMateriasAbiertas = logicaMateriaAbierta.ListarMateriasAbiertas(condicion,periodo,anio);
+        //        if (dsMateriasAbiertas.Tables[0].Rows.Count > 0) //si tiene algo el data set entonces carguelo en el datagridview
+        //        {
+        //            dgvBuscarMateriaA.DataSource = dsMateriasAbiertas;
+        //            dgvBuscarMateriaA.DataMember = dsMateriasAbiertas.Tables[0].TableName;//en la tabla con nombre Clientes del dataset
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
 
-        }
+        //}
 
         private void SeleccionarMateriaAbierta()
         {  //metodo que permite seleccionar el id de la fila del datagridview que se escoja

@@ -185,14 +185,8 @@ namespace AccesoDatos
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlDataAdapter adapter;
-            string sentencia = string.Format("SELECT MA.CodMateriaAbierta,M.CodigoMateria,M.NombreMateria,MC.Requisito," +
-                               "(SELECT NombreMateria FROM TBL_Materias WHERE CodigoMateria = MC.Requisito) AS 'nombreRequisito'," +
-                               "MC.corequisito,(SELECT NombreMateria FROM TBL_Materias WHERE CodigoMateria = MC.corequisito) AS 'nombreCoRequisito'," +
-                               "concat(NombreProfesor, ' ', Apellido1Profesor, ' ', Apellido2Profesor) as 'nombreProfesor',A.NumeroAula,Grupo,Costo " +
-                               " FROM TBL_MateriasAbiertas MA left join TBL_MateriasCarreras MC on MA.CodMateriaCarrera = MC.CodMateriaCarrera " +
-                               " left join TBL_Materias M on M.CodigoMateria = MC.CodigoMateria  left join TBL_Profesores P on P.CodigoProfesor = MA.CodigoProfesor " +
-                               " left join TBL_Aulas A on A.CodigoAula = MA.CodigoAula left join  TBL_DetallesMatriculas DM on " +
-                               " DM.CodMateriaAbierta = MA.CodMateriaAbierta left join TBL_Matriculas MT on MT.NumFactura = DM.NumFactura WHERE MT.NumFactura = {0}", numFactura);
+            string sentencia = string.Format("SELECT CodMateriaAbierta,CodigoMateria,NombreMateria,Requisito,nombreRequisito,nombreProfesor,NumeroAula,Grupo,Costo "+
+                                             " FROM CONSULTA_MATERIAS_MATRICULADAS WHERE NumFactura = {0}", numFactura);
             try
             {
                 adapter = new SqlDataAdapter(sentencia, conexion);//se realiza la conexion y se prepara el adaptador para ejecutar la sentencia
@@ -295,6 +289,61 @@ namespace AccesoDatos
             }
             return filasAfectadas;
         }
+
+
+        public int VerificarMatriculaEstudiante(string carnetEstudiante) //verifica si el estudiante posee una matricula activa para ver si puede volver a matricular o no
+        {
+            int resultado = 0;
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = string.Format("select 1 from TBL_Matriculas M inner join TBL_Estudiantes E on M.CarnetEstudiante = E.CarnetEstudiante where EstadoMatricula = 'ACT' and e.CarnetEstudiante = '{0}'", carnetEstudiante); 
+            comando.Connection = conexion;
+
+            try
+            {
+                conexion.Open();
+                resultado = Convert.ToInt32(comando.ExecuteScalar()); 
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+
+        }
+
+
+        public int VMatriculaPendiente(string carnetEstudiante) //verifica si el estudiante posee una matricula activa y pendiente, eso con el fin de poder cargarla en la pantalla devuelve el numde factura
+        {
+            int resultado = 0;
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = string.Format("select NumFactura from TBL_Matriculas M inner join "+
+                                                " TBL_Estudiantes E on M.CarnetEstudiante = E.CarnetEstudiante "+
+                                                " where EstadoFactura = 'PEN' and EstadoMatricula = 'ACT' and e.CarnetEstudiante = '{0}'", carnetEstudiante);
+            comando.Connection = conexion;
+
+            try
+            {
+                conexion.Open();
+                resultado = Convert.ToInt32(comando.ExecuteScalar()); 
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+
+        }
+
 
         #endregion
 

@@ -4,15 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
 using LogicaNegocio;
+using Entidades;
 using System.Data;
 
 namespace InterfazWeb
 {
-    public partial class FrmBuscarMateriaAbierta : System.Web.UI.Page
+    public partial class frmBuscarCursosAbiertos : System.Web.UI.Page
     {
-
 
         private void CargarDataSet(string condicion = "")
         { //carga el datagridview con el dataset
@@ -21,11 +20,7 @@ namespace InterfazWeb
 
             try
             {
-                //LogicaValoresReferencia LVR = new LogicaValoresReferencia(Configuracion.getConnectionString);
-                //ValoresReferencia valoresR;
-                //valoresR = LVR.RecuperarPeriodoAnio();//se obtiene el periodo y el anio actual
-
-                dsMateriasAbiertas = logicaMateriaAbierta.ListarMateriasAbiertas(condicion);
+                dsMateriasAbiertas = logicaMateriaAbierta.ListarMateriasAbiertas(condicion, 1); //se le manda la condicion si hay y que tipo de proceso lo solicita en este caso para usarse en el modulo de matricular cursos
                 if (dsMateriasAbiertas.Tables[0].Rows.Count > 0) //si tiene algo el data set entonces carguelo en el datagridview
                 {
                     GrdListaMaterias.DataSource = dsMateriasAbiertas;
@@ -46,9 +41,13 @@ namespace InterfazWeb
             {
                 if (!IsPostBack)
                 {
-                    CargarDataSet();
+                    ValoresReferencia valoresR;
+                    valoresR = ObtenerAnioPeriodo();//se obtiene el periodo y el anio en la que se esta realizando la matricula
+                    string condicion = string.Format("Periodo = {0} and anio = {1}", valoresR.Periodo, valoresR.Anio); //se construye la condicion para recuperar solo las materias abiertas del periodo de la matricula
+
+                    CargarDataSet(condicion);
                 }
-                    
+
             }
             catch (Exception ex)
             {
@@ -61,8 +60,13 @@ namespace InterfazWeb
         {
             try
             {
+                ValoresReferencia valoresR;
+                valoresR = ObtenerAnioPeriodo();//se obtiene el periodo y el anio en la que se esta realizando la matricula
+
+                string condicion = string.Format("Periodo = {0} and anio = {1}", valoresR.Periodo, valoresR.Anio); //se construye la condicion para recuperar solo las materias abiertas del periodo de la matricula
+
                 GrdListaMaterias.PageIndex = e.NewPageIndex;
-                CargarDataSet();
+                CargarDataSet(condicion);
 
             }
             catch (Exception ex)
@@ -72,11 +76,15 @@ namespace InterfazWeb
             }
         }
 
-        protected void lnkSeleccionar_Command(object sender, CommandEventArgs e)
+        private ValoresReferencia ObtenerAnioPeriodo() //obtiene el periodo y el anio en el cual se esta cursando actualmente
         {
-            int id = int.Parse(e.CommandArgument.ToString());
-            Session["_CodMateriaAbierta"] = id; //obtiene el id y lo manda al formulario de abrir cursos en este caso para poder realizar una modificacion a la materia abierta
-            Response.Redirect("FrmAbrirC.aspx");
+
+            LogicaValoresReferencia logicaValores = new LogicaValoresReferencia(Configuracion.getConnectionString); //se obtiene el periodo y el anio correspondiente
+            ValoresReferencia valoresR = new ValoresReferencia();
+            valoresR = logicaValores.RecuperarPeriodoAnio();
+
+            return valoresR;
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)

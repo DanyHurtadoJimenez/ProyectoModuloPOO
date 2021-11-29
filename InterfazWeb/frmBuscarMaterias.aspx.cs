@@ -1,18 +1,17 @@
-﻿using Entidades;
-using LogicaNegocio;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using LogicaNegocio;
+using Entidades;
+using System.Data;
 
 namespace InterfazWeb
 {
-    public partial class FrmBuscarMateria : System.Web.UI.Page
+    public partial class frmBuscarMaterias : System.Web.UI.Page
     {
-
         private void CargarDataSet(string condicion = "") //carga las materias carreras en el modal
         { //carga el datagridview con el dataset
             LogicaMateriaCarrera logicaMC = new LogicaMateriaCarrera(Configuracion.getConnectionString);

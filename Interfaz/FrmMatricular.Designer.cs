@@ -156,6 +156,7 @@ namespace Interfaz
             this.txtNombreEstudiante.ReadOnly = true;
             this.txtNombreEstudiante.Size = new System.Drawing.Size(195, 23);
             this.txtNombreEstudiante.TabIndex = 7;
+            this.txtNombreEstudiante.Text = "0";
             // 
             // label3
             // 

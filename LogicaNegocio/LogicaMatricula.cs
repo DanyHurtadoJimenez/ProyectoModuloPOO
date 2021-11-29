@@ -31,8 +31,8 @@ namespace LogicaNegocio
             set => _cadenaConexion = value;
         }
 
-        public double Subtotal { get => subtotal;}
-        public double MontoDescuento { get => montoDescuento;}
+        public double Subtotal { get => subtotal; }
+        public double MontoDescuento { get => montoDescuento; }
         public double MontoIVA { get => montoIVA; }
 
         #endregion
@@ -59,14 +59,14 @@ namespace LogicaNegocio
 
         #region Metodos
         // Convert.ToDecimal(txtDescuentoE.Text), ref subtotal, ref montoDescuento,ref montoIVA, ref totalPagar, ref listaMateriasA
-        public double calcularCostos(decimal descuentoEstudiante,List<MateriasAbiertas> materias, double montoMatricula)
+        public double calcularCostos(decimal descuentoEstudiante, List<MateriasAbiertas> materias, double montoMatricula)
         {
             double costos;
             ADMatricula accesoDatos = new ADMatricula(_cadenaConexion);//se instancia el acceso a los datos
 
             try
             {
-                costos = accesoDatos.calcularCostos(descuentoEstudiante, materias, ref subtotal,ref montoDescuento, ref montoIVA, montoMatricula);
+                costos = accesoDatos.calcularCostos(descuentoEstudiante, materias, ref subtotal, ref montoDescuento, ref montoIVA, montoMatricula);
 
             }
             catch (Exception)
@@ -147,7 +147,7 @@ namespace LogicaNegocio
         }
 
 
-        public int Modificar(int numFactura,List<MateriasAbiertas> materiasA)
+        public int Modificar(int numFactura, List<MateriasAbiertas> materiasA)
         {
             int resultado = 0;
             ADMatricula accesoDatosMTR = new ADMatricula(_cadenaConexion);
@@ -170,6 +170,38 @@ namespace LogicaNegocio
             try
             {
                 resultado = accesoDatosMRT.FacturarMatricula(numFactura);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return resultado;
+        }
+
+        public int VerificarMatriculaEstudiante(string idEstudiante)  //permite verificar si el estudiante posee ya una matricula activa en caso de que tenga no puede volver a matricular
+        {
+            int resultado;
+            ADMatricula accesoDatosMRT = new ADMatricula(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMRT.VerificarMatriculaEstudiante(idEstudiante);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return resultado;
+        }
+
+        public int VerificarMatriculaPendiente(string idEstudiante)  //permite verificar si el estudiante posee una matricula pendiente de pago, esto para poder cargarla en la pantalla y ya sea facturarla o modificarla, obtiene el numero de factura
+        {
+            int resultado;
+            ADMatricula accesoDatosMRT = new ADMatricula(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMRT.VMatriculaPendiente(idEstudiante);
             }
             catch (Exception)
             {

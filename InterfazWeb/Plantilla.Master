@@ -21,7 +21,7 @@
                     <a class="nav-link" href="FrmAbrirC.aspx">Abrir Cursos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Matricular Estudiantes</a>
+                    <a class="nav-link" href="FrmMatricular.aspx">Matricular Estudiantes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Opción 3</a>

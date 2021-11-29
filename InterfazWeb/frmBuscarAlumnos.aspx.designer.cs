@@ -11,17 +11,8 @@ namespace InterfazWeb
 {
 
 
-    public partial class FrmBuscarMateriaAbierta
+    public partial class frmBuscarAlumnos
     {
-
-        /// <summary>
-        /// Control form1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
         /// Control Label1.
@@ -33,13 +24,13 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control txtNombreMateria.
+        /// Control txtNombreEstudiante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreMateria;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreEstudiante;
 
         /// <summary>
         /// Control Label2.
@@ -51,30 +42,30 @@ namespace InterfazWeb
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Control txtCodigoMateria.
+        /// Control txtCarnetEstudiante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoMateria;
+        protected global::System.Web.UI.WebControls.TextBox txtCarnetEstudiante;
 
         /// <summary>
-        /// Control Button1.
+        /// Control btnBuscarEstudiante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnBuscarEstudiante;
 
         /// <summary>
-        /// Control GrdListaMaterias.
+        /// Control GrdEstudiantes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GrdListaMaterias;
+        protected global::System.Web.UI.WebControls.GridView GrdEstudiantes;
     }
 }

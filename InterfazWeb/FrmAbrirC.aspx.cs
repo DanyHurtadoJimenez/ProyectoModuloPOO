@@ -68,7 +68,7 @@ namespace InterfazWeb
         {
             btnCrearGrupo.Enabled = true;
             Session["_CodMateriaAbierta"] = null;
-            Response.Redirect("FrmBuscarMateria.aspx");
+            Response.Redirect("frmBuscarMaterias.aspx");
         }
 
         protected void btnCrearGrupo_Click(object sender, EventArgs e)
@@ -238,7 +238,7 @@ namespace InterfazWeb
         {
             Session["_CodMateriaCarrera"] = null;
             //btnCrearGrupo.Enabled = false;
-            Response.Redirect("FrmBuscarMateriaAbierta.aspx");
+            Response.Redirect("FrmBuscarMateriaAbier.aspx");
         }
 
         protected void lnkEliminar_Command(object sender, CommandEventArgs e)
