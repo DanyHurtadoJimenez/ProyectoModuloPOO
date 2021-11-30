@@ -160,13 +160,13 @@ namespace LogicaNegocio
             return materiaAbierta;
         }
 
-        public int verificarChoquesMaterias(string carnetEstudiante, string codRequisito)
+        public int verificarRequisitos(string carnetEstudiante, string codRequisito)
         {
             int resultado = 0;
             ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
             try
             {
-                resultado = accesoDatosMA.verificarChoquesMaterias(carnetEstudiante, codRequisito);
+                resultado = accesoDatosMA.verificarRequisitos(carnetEstudiante, codRequisito);
             }
             catch (Exception)
             {

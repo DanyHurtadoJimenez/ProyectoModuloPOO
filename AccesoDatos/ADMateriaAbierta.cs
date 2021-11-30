@@ -357,8 +357,8 @@ namespace AccesoDatos
         }
 
 
-        public int verificarChoquesMaterias(string carnetEstudiante, string codRequisito)
-        { //insertar el profesor mediante un stored Procedure en la tabla de materias Abiertas
+        public int verificarRequisitos(string carnetEstudiante, string codRequisito)
+        { 
             int resultado = -1;
 
             SqlConnection conexion = new SqlConnection(_cadenaConexion);

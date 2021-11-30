@@ -54,11 +54,9 @@ namespace AccesoDatos
 
         }
 
-        public int Insertar(Matricula matriculaE, List<MateriasAbiertas> materiasA)
+        public int Insertar(Matricula matriculaE, int codMateriaA, int numeroFactura) //funciona tanto para matricular como para modificar la matricula
         {
             int resultado = -1;
-            DataTable dtaMateriasA = convertirArregloAdatatable(materiasA);//los horarios se convierten en un datatable para enviarlo como parametro al procedimiento del SQL
-            dtaMateriasA.TableName = "dbo.MateriasEscogidasType";
 
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
@@ -71,14 +69,11 @@ namespace AccesoDatos
             comando.Parameters.AddWithValue("@fechaMatricula", Convert.ToDateTime(matriculaE.FechaMatricula));
             comando.Parameters.AddWithValue("@montoMatricula", Convert.ToDecimal(matriculaE.MontoMatricula));
             comando.Parameters.AddWithValue("@tipoPago", matriculaE.TipoPago);
-            SqlParameter dataTable = new SqlParameter();
-            dataTable.SqlDbType = SqlDbType.Structured;
-            dataTable.TypeName = "dbo.MateriasEscogidasType";
-            dataTable.Value = dtaMateriasA;
-            comando.Parameters.AddWithValue("@Materias", dataTable.Value);
+            comando.Parameters.AddWithValue("@codMateriaA", codMateriaA);
+            comando.Parameters.AddWithValue("@numeroFactura", numeroFactura);
 
             //parametro de salida del SP
-            comando.Parameters.Add("@msj", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
             comando.Parameters.Add("@numFactura", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
 
             try
@@ -185,7 +180,7 @@ namespace AccesoDatos
             DataSet datos = new DataSet(); //lugar donde se va a guardar la tabla que vendra de la consulta del sql
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlDataAdapter adapter;
-            string sentencia = string.Format("SELECT CodMateriaAbierta,CodigoMateria,NombreMateria,Requisito,nombreRequisito,nombreProfesor,NumeroAula,Grupo,Costo "+
+            string sentencia = string.Format("SELECT CodMateriaAbierta,CodigoMateria,NombreMateria,Requisito,nombreRequisito,nombreProfesor,NumeroAula,Grupo,Costo " +
                                              " FROM CONSULTA_MATERIAS_MATRICULADAS WHERE NumFactura = {0}", numFactura);
             try
             {
@@ -240,7 +235,7 @@ namespace AccesoDatos
                 throw;
             }
 
-            return resultado; 
+            return resultado;
 
         }
 
@@ -297,13 +292,13 @@ namespace AccesoDatos
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
 
-            comando.CommandText = string.Format("select 1 from TBL_Matriculas M inner join TBL_Estudiantes E on M.CarnetEstudiante = E.CarnetEstudiante where EstadoMatricula = 'ACT' and e.CarnetEstudiante = '{0}'", carnetEstudiante); 
+            comando.CommandText = string.Format("select 1 from TBL_Matriculas M inner join TBL_Estudiantes E on M.CarnetEstudiante = E.CarnetEstudiante where EstadoMatricula = 'ACT' and e.CarnetEstudiante = '{0}'", carnetEstudiante);
             comando.Connection = conexion;
 
             try
             {
                 conexion.Open();
-                resultado = Convert.ToInt32(comando.ExecuteScalar()); 
+                resultado = Convert.ToInt32(comando.ExecuteScalar());
                 conexion.Close();
             }
             catch (Exception)
@@ -323,15 +318,15 @@ namespace AccesoDatos
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
 
-            comando.CommandText = string.Format("select NumFactura from TBL_Matriculas M inner join "+
-                                                " TBL_Estudiantes E on M.CarnetEstudiante = E.CarnetEstudiante "+
+            comando.CommandText = string.Format("select NumFactura from TBL_Matriculas M inner join " +
+                                                " TBL_Estudiantes E on M.CarnetEstudiante = E.CarnetEstudiante " +
                                                 " where EstadoFactura = 'PEN' and EstadoMatricula = 'ACT' and e.CarnetEstudiante = '{0}'", carnetEstudiante);
             comando.Connection = conexion;
 
             try
             {
                 conexion.Open();
-                resultado = Convert.ToInt32(comando.ExecuteScalar()); 
+                resultado = Convert.ToInt32(comando.ExecuteScalar());
                 conexion.Close();
             }
             catch (Exception)
@@ -344,6 +339,43 @@ namespace AccesoDatos
 
         }
 
+        public int verificarMateriasRepetidas(int codigoMateriaAbierta, int numFactura)
+        {
+            int resultado = -1;
+
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = "SP_VERIFICAR_MATERIAS_REPETIDAS"; //nombre del procedimiento almacenado
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Connection = conexion;
+
+            //parametros de entrada para el SP
+            comando.Parameters.AddWithValue("@codMateriaAbierta", codigoMateriaAbierta);
+            comando.Parameters.AddWithValue("@numFactura", numFactura);
+
+            //parametro de salida del SP
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+            comando.Parameters.Add("@materiaRepetida", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
+
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
+                resultado = Convert.ToInt32(comando.Parameters["@materiaRepetida"].Value); //obtengo la variable de retorno
+                //se va a leer el parametro de salida del SP
+                _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+
+        }
 
         #endregion
 

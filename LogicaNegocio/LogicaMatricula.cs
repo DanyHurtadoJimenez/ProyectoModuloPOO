@@ -77,13 +77,13 @@ namespace LogicaNegocio
             return costos;
         }
 
-        public int Insertar(Matricula matriculas, List<MateriasAbiertas> materiasA)
+        public int Insertar(Matricula matriculas, int codMateriaA, int numFactura)
         {
-            int numFactura = 0;
+            int resultado;
             ADMatricula accesoDatosMRT = new ADMatricula(_cadenaConexion);
             try
             {
-                numFactura = accesoDatosMRT.Insertar(matriculas, materiasA);
+                resultado = accesoDatosMRT.Insertar(matriculas, codMateriaA, numFactura);
             }
             catch (Exception)
             {
@@ -208,6 +208,22 @@ namespace LogicaNegocio
                 throw;
             }
 
+            return resultado;
+        }
+
+        public int verificarMateriasRepetidas(int codMateriaAbierta, int numFactura)
+        {
+            int resultado = 0;
+            ADMatricula accesoDatosMatricula = new ADMatricula(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMatricula.verificarMateriasRepetidas(codMateriaAbierta, numFactura);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            _mensaje = accesoDatosMatricula.Mensaje;
             return resultado;
         }
 

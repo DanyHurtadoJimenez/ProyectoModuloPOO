@@ -90,7 +90,7 @@ namespace Interfaz
                     if (materiaAbierta != null)
                     {
 
-                        if (logicaMA.verificarChoquesMaterias(txtCarnetEstudiante.Text,materiaAbierta.CodigoMateriaCarrera.Requisito.CodigoMateria) ==1 )
+                        if (logicaMA.verificarChoquesMaterias(txtCarnetEstudiante.Text,materiaAbierta.CodigoMateriaCarrera.Requisito.CodigoMateria) == 1 )
                         {
                             if (listaMateriasA.Count > 0)
                             {

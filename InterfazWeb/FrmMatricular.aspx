@@ -121,6 +121,45 @@
 
         <hr class="mb-2 mt-2" />
 
+
+        <div class="row mb-2">
+
+            <div class="col">
+                <asp:Label ID="Label10" runat="server" Text="Monto de la matrícula:"></asp:Label>
+                <asp:Label ID="lblMontoMatricula" runat="server" Text=""></asp:Label>
+            </div>
+
+            <div class="col">
+                <asp:Label ID="Label11" runat="server" Text="Subtotal:"></asp:Label>
+                <asp:Label ID="lblSubtotal" runat="server" Text=""></asp:Label>
+            </div>
+
+            <div class="col">
+                <asp:Label ID="Label13" runat="server" Text="Descuento Estudiante:"></asp:Label>
+                <asp:Label ID="lblDescuentoEstudiante" runat="server" Text=""></asp:Label>
+            </div>
+
+        </div>
+        <hr />
+        <div class="row mb-2">
+            <div class="col">
+                <asp:Label ID="Label12" runat="server" Text="Monto Descuento:"></asp:Label>
+                <asp:Label ID="lblMontoDescuento" runat="server" Text=""></asp:Label>
+            </div>
+
+            <div class="col">
+                <asp:Label ID="Label14" runat="server" Text="Monto IVA 2%:"></asp:Label>
+                <asp:Label ID="lblMontoIva" runat="server" Text=""></asp:Label>
+            </div>
+
+            <div class="col">
+                <strong><asp:Label ID="Label15" runat="server" Text="Total a Pagar:"></asp:Label></strong>
+                <asp:Label ID="lblTotalPagar" runat="server" Text=""></asp:Label>
+            </div>
+        </div>
+
+        <asp:Button ID="btnFacturar" CssClass="btn btn-outline-primary mt-3" runat="server" Text="Pagar Matrícula"/>
+
     </div>
 
 </asp:Content>

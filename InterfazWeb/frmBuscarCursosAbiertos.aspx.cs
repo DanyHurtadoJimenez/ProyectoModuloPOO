@@ -100,5 +100,13 @@ namespace InterfazWeb
                 Session["_mensaje"] = "Error al buscar la materia";
             }
         }
+
+        protected void lnkSeleccionar_Command(object sender, CommandEventArgs e)
+        {
+
+            int idMateriaAbierta = Convert.ToInt32(e.CommandArgument.ToString());
+            Session["_codCurso"] = idMateriaAbierta; //obtiene el id y lo manda al formulario de matricular
+            Response.Redirect("FrmMatricular.aspx");
+        }
     }
 }

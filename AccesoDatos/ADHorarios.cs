@@ -55,11 +55,11 @@ namespace AccesoDatos
         }
 
 
-        public int verificarChoquesMaterias(DataSet datos, string carnetEstudiante)
+        public int verificarChoquesMaterias(string carnetEstudiante, int codMateriaAbierta)
         {
             int resultado = -1;
-            DataTable dtaHorarios = convertirADataTable(datos);//los horarios se convierten en un datatable para enviarlo como parametro al procedimiento del SQL
-            dtaHorarios.TableName = "dbo.HorarioType";
+            //DataTable dtaHorarios = convertirADataTable(datos);//los horarios se convierten en un datatable para enviarlo como parametro al procedimiento del SQL
+            //dtaHorarios.TableName = "dbo.HorarioType";
 
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
@@ -69,14 +69,15 @@ namespace AccesoDatos
             comando.Connection = conexion;
             //parametro de entrada para el SP
             comando.Parameters.AddWithValue("@carnetEstudiante", carnetEstudiante);
-            SqlParameter dataTable = new SqlParameter();
-            dataTable.SqlDbType = SqlDbType.Structured;
-            dataTable.TypeName = "dbo.HorarioType";
-            dataTable.Value = dtaHorarios;
-            comando.Parameters.AddWithValue("@Horario", dataTable.Value);
+            comando.Parameters.AddWithValue("@codMateriaAbierta", codMateriaAbierta);
+            //SqlParameter dataTable = new SqlParameter();
+            //dataTable.SqlDbType = SqlDbType.Structured;
+            //dataTable.TypeName = "dbo.HorarioType";
+            //dataTable.Value = dtaHorarios;
+            //comando.Parameters.AddWithValue("@Horario", dataTable.Value);
 
             //parametro de salida del SP
-            comando.Parameters.Add("@msj", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 300).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
             comando.Parameters.Add("@existeChoque", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
 
             try

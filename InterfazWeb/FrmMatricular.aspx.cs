@@ -25,9 +25,13 @@ namespace InterfazWeb
                     valoresR = logicaValores.RecuperarPeriodoAnio();
                     txtPeriodo.Text = valoresR.Periodo.ToString();
                     txtAnio.Text = valoresR.Anio.ToString();
-                    //lblMontoMatricula.Text = valoresR.ValorMatricula.ToString();
+                    lblMontoMatricula.Text = valoresR.ValorMatricula.ToString();
 
-                    if (Session["_CarnetEstudiante"] != null)
+                    if (Session["_codCurso"] != null) // se fija si existe un codigo de curso en la session el cual proviene de haber escogido cursos, si es asi entonces llame al metodo de matricular, para matricular ese curso escogido
+                    {
+                        matricular();
+                    }
+                    else if (Session["_CarnetEstudiante"] != null)
                     {
                         LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
                         int numFactura = logicaM.VerificarMatriculaPendiente(Session["_CarnetEstudiante"].ToString());
@@ -41,48 +45,12 @@ namespace InterfazWeb
                             cargarEstudiante(Session["_CarnetEstudiante"].ToString());
                         }
                     }
-                }
-                //if (!IsPostBack)
-                //{
-                //    DropDownAnios.Items.Add(DateTime.Today.Year.ToString());
-                //    DropDownAnios.Items.Add(DateTime.Today.AddYears(1).Year.ToString());
-                //    txtHoraInicio.Text = "07:00";
-                //    txtHoraFin.Text = "08:00";
 
-                //    Session["_mensaje"] = null;
-                //    if (Session["_CodMateriaCarrera"] != null)
-                //    {
-                //        MateriasCarreras materiaCarrera;
-                //        LogicaMateriaCarrera logicaMAC = new LogicaMateriaCarrera(Configuracion.getConnectionString);
-                //        materiaCarrera = logicaMAC.ObtenerMateriaCarrera(Convert.ToInt32(Session["_CodMateriaCarrera"]));
-                //        txtCodMateriaCarrera.Text = Session["_CodMateriaCarrera"].ToString();
-                //        txtCodigoMateria.Text = materiaCarrera.CodigoMateria.CodigoMateria.ToString();
-                //        txtNombreMateria.Text = materiaCarrera.CodigoMateria.NombreMateria;
-                //        txtCreditos.Text = materiaCarrera.CodigoMateria.CreditosMateria.ToString();
-                //        txtNombreCarrera.Text = materiaCarrera.CodigoCarreras.NombreCarrera;
-                //    }
-                //    else if (Session["_CodMateriaAbierta"] != null)
-                //    {
-                //        MateriasAbiertas materiaAbierta;
-                //        LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
-                //        materiaAbierta = logicaMA.ObtenerMateriaAbierta(Convert.ToInt32(Session["_CodMateriaAbierta"]));
-                //        txtCodMateriaCarrera.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateriaCarrera.ToString();
-                //        txtCodigoMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.CodigoMateria;
-                //        txtNombreMateria.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.NombreMateria;
-                //        txtCreditos.Text = materiaAbierta.CodigoMateriaCarrera.CodigoMateria.CreditosMateria.ToString();
-                //        txtNombreCarrera.Text = materiaAbierta.CodigoMateriaCarrera.CodigoCarreras.NombreCarrera;
-                //        txtGrupo.Text = materiaAbierta.Grupo.ToString();
-                //        nudCupo.Text = materiaAbierta.Cupo.ToString();
-                //        txtCosto.Text = Convert.ToInt32(materiaAbierta.Costo).ToString();
-                //        nudPeriodo.Text = materiaAbierta.Periodo.ToString();
-                //        DropDownAnios.SelectedValue = Convert.ToInt32(materiaAbierta.Anio).ToString();
-                //        CargarDataSet(materiaAbierta.CodigoMateriaAbierta); //carga los horarios que la materia tenga 
-                //    }
-                //}
+                }
             }
             catch (Exception ex)
             {
-                Session["_mensaje"] = $"Error al generar el numero de grupo {ex.Message}";
+                Session["_mensaje"] = $"{ex.Message}";
             }
         }
 
@@ -130,21 +98,9 @@ namespace InterfazWeb
 
                     if (materias.Tables[0].Rows.Count > 0) //si tiene algo el data set entonces carguelo en el datagridview
                     {
-                        //MateriasAbiertas materiaAbierta;
-                        //LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
-                        //int codMateriaAbierta = 0;
-
                         GrdVerMaterias.DataSource = materias;
                         GrdVerMaterias.DataMember = materias.Tables[0].TableName; //se carga el dataset
                         GrdVerMaterias.DataBind();
-
-                        //for (int i = 0; i < dtgvVerMateriaAbierta.Rows.Count; i++)
-                        //{
-                        //    codMateriaAbierta = (int)(dtgvVerMateriaAbierta.Rows[i].Cells[0].Value); //tome el primer valor del data grid que son los codigos de materiasAbiertas y busquelos para insertarlos en el arreglo de materias abiertas
-
-                        //    materiaAbierta = logicaMA.ObtenerMateriaAbierta(codMateriaAbierta);
-                        //    listaMateriasA.Add(materiaAbierta);//se ingresa la materia abierta dentro del arreglo
-                        //}
                     }
 
                     //calcularCostos(); // se vuelven a calcular los costos
@@ -160,7 +116,16 @@ namespace InterfazWeb
             }
         }
 
+        private void calcularCostos()
+        { //esta funcion permite calcular los costos de la matricula
 
+            LogicaMatricula costosM = new LogicaMatricula();
+            lblTotalPagar.Text = costosM.calcularCostos(Convert.ToDecimal(txtDescuentoE.Text), listaMateriasA, Convert.ToDouble(lblMontoMatricula.Text)).ToString();///////////////////////////////////////////////////////////////
+            lblSubtotal.Text = costosM.Subtotal.ToString();
+            lblDescuentoEstudiante.Text = txtDescuento.Text;
+            lblMontoDescuento.Text = costosM.MontoDescuento.ToString();
+            lblMontoIva.Text = costosM.MontoIVA.ToString();
+        }
 
         protected void btnBuscarEstudiante_Click(object sender, EventArgs e)
         {
@@ -170,6 +135,127 @@ namespace InterfazWeb
         protected void btnBuscarMateria_Click(object sender, EventArgs e)
         {
             Response.Redirect("FrmBuscarCursosAbiertos.aspx");
+
         }
+
+        private Matricula generarEntidad()
+        {
+            LogicaMatricula traerMatricula = new LogicaMatricula(Configuracion.getConnectionString);
+            Matricula matricula;
+
+            if (!string.IsNullOrEmpty(txtNumFactura.Text))
+            {
+                matricula = traerMatricula.ObtenerMatricula(Convert.ToInt32(txtNumFactura.Text));
+                matricula.Existe = true;
+            }
+            else
+            {
+                matricula = new Matricula();
+                matricula.CarnetEstudiante = new Estudiantes();
+            }
+
+            matricula.CarnetEstudiante.CarnetEstudiante = txtCarnet.Text;
+            matricula.FechaMatricula = Convert.ToDateTime(txtFechaMatricula.Text);
+            //matricula.MontoMatricula = Convert.ToDecimal(lblTotalPagar.Text);
+            //matricula.TipoPago = comboTipoPago.SelectedItem.ToString();
+
+            return matricula;
+        }
+
+
+        private void matricular()
+        {
+            try
+            {
+                MateriasAbiertas materiaAbierta;
+                // DataSet horario;
+                LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+                LogicaMatricula logicaMatricula = new LogicaMatricula(Configuracion.getConnectionString);
+                LogicaHorarios logicaH = new LogicaHorarios(Configuracion.getConnectionString);
+                int estudianteCumple = 1;
+                if (Session["_codCurso"] != null)
+                {
+                    materiaAbierta = logicaMA.ObtenerMateriaAbierta(Convert.ToInt32(Session["_codCurso"]));
+
+                    if (materiaAbierta != null)
+                    {
+                        if (materiaAbierta.CodigoMateriaCarrera.Requisito.CodigoMateria != string.Empty) //verifica si la materia posee requisito, si tiene requisito entonces se debe revisar si el estudiante posee ese requisito
+                        {
+                            estudianteCumple = logicaMA.verificarRequisitos(txtCarnet.Text, materiaAbierta.CodigoMateriaCarrera.Requisito.CodigoMateria);
+                        }
+
+                        if (estudianteCumple == 1) //verifica si el estudiante cuenta con el requisito para matricular la materia escogida
+                        {
+                            if (!string.IsNullOrEmpty(txtNumFactura.Text)) //si no esta vacio quiere decir que se esta modificando una matricula, porque ya se busco anteriormente y se quieren agregar o eliminar materias
+                            {
+                                if (logicaMatricula.verificarMateriasRepetidas(materiaAbierta.CodigoMateriaAbierta, Convert.ToInt32(txtNumFactura.Text)) == 0)//verifica si la materia escogida se repite en las que ya tiene matriculadas
+                                {
+                                    if (logicaH.verificarChoqueMateria(txtCarnet.Text, materiaAbierta.CodigoMateriaAbierta) == 0) //verifica que las materias que escoje el usuario no choquen en sus horarios
+                                    {
+                                        LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
+                                        Matricula matricula;
+                                        int numFactura;
+
+                                        matricula = generarEntidad();
+                                        numFactura = logicaM.Insertar(matricula, Convert.ToInt32(Session["_codCurso"]), Convert.ToInt32(txtNumFactura.Text));
+
+                                        Session["_codCurso"] = null; //borra la variable en session para evitar que vuelva a matricular la misma la proxima vez que cargue el forms
+
+                                    }
+                                    else
+                                    {
+                                        Session["_mensaje"] = $"{logicaH.Mensaje}";
+                                        Session["_codCurso"] = null;
+                                    }
+                                }
+                                else
+                                {
+                                    Session["_mensaje"] = $"{logicaMatricula.Mensaje}";
+                                    Session["_codCurso"] = null;
+                                }
+                            }
+                            else //si esta vacio ese espacio quiere decir que se esta creando una matricula desde 0 entonces no se debe verificar ni choques de horas ni materias repetidas
+                            {
+                                LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
+                                Matricula matricula;
+                                matricula = generarEntidad();
+                                int numFactura;
+                                numFactura = logicaM.Insertar(matricula, Convert.ToInt32(Session["_codCurso"]), Convert.ToInt32(txtNumFactura.Text)); //inserta matricula
+                                txtNumFactura.Text = numFactura.ToString();
+                            }
+                        }
+                        else
+                        {
+                            Session["_mensaje"] = $"{logicaMA.Mensaje}";
+                        }
+
+                        //calcularCostos();
+                    }
+                    else
+                    {
+                        Session["_mensaje"] = "Error La materia no se encuentra en la base de datos";
+                        Session["_codCurso"] = null;
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
     }
+
 }
+
+
+
+
+
+
+
+

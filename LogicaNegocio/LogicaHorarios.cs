@@ -64,13 +64,13 @@ namespace LogicaNegocio
         }
 
 
-        public int verificarChoqueMateria(DataSet datos, string carnetEstudiante)
+        public int verificarChoqueMateria(string carnetEstudiante, int codMateriaAbierta)
         {
             int resultado = 0;
             ADHorarios accesoDatosH = new ADHorarios(_cadenaConexion);//se instancia el acceso a los datos
             try
             {
-                resultado = accesoDatosH.verificarChoquesMaterias(datos, carnetEstudiante);
+                resultado = accesoDatosH.verificarChoquesMaterias(carnetEstudiante,codMateriaAbierta);
             }
             catch (Exception)
             {
