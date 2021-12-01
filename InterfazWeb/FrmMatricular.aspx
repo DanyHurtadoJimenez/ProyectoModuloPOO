@@ -52,27 +52,64 @@
             <h4>Informacion del estudiante:</h4>
 
             <div class="col">
-                <asp:Label ID="Label5" runat="server" Text="Carnet:"></asp:Label>
-                <asp:TextBox CssClass="form-control" ID="txtCarnet" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:Label ID="Label5" runat="server" Text="Carnet:">
+                    <asp:RequiredFieldValidator ID="rfvCarnetEstudiante" runat="server"
+                        ErrorMessage="Debe de BUSCAR UN ESTUDIANTE PARA CARGAR UNA MATRICULA"
+                        Text="*"
+                        ControlToValidate="txtCarnet"
+                        ValidationGroup="1"
+                        ForeColor="#FF3300">
+                    </asp:RequiredFieldValidator>
+                </asp:Label>
+                <asp:TextBox CssClass="form-control" ID="txtCarnet" runat="server" ReadOnly="True">
+                </asp:TextBox>
             </div>
 
             <div class="col">
-                <asp:Label ID="Label6" runat="server" Text="Cédula:"></asp:Label>
+                <asp:Label ID="Label6" runat="server" Text="Cédula:">
+                    <asp:RequiredFieldValidator ID="RfvCedulaEstudiante" runat="server"
+                        Text="*"
+                        ControlToValidate="txtCedula"
+                        ValidationGroup="1"
+                        ForeColor="#FF3300">
+                    </asp:RequiredFieldValidator>
+                </asp:Label>
                 <asp:TextBox CssClass="form-control" ID="txtCedula" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
 
             <div class="col">
-                <asp:Label ID="Label7" runat="server" Text="Nombre Estudiante:"></asp:Label>
+                <asp:Label ID="Label7" runat="server" Text="Nombre Estudiante:">
+                    <asp:RequiredFieldValidator ID="RfvNombreE" runat="server"
+                        Text="*"
+                        ControlToValidate="txtNombre"
+                        ValidationGroup="1"
+                        ForeColor="#FF3300">
+                    </asp:RequiredFieldValidator>
+                </asp:Label>
                 <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
 
             <div class="col">
-                <asp:Label ID="Label8" runat="server" Text="Email:"></asp:Label>
+                <asp:Label ID="Label8" runat="server" Text="Email:">
+                    <asp:RequiredFieldValidator ID="RfvEmail" runat="server"
+                        Text="*"
+                        ControlToValidate="txtEmail"
+                        ValidationGroup="1"
+                        ForeColor="#FF3300">
+                    </asp:RequiredFieldValidator>
+                </asp:Label>
                 <asp:TextBox CssClass="form-control" ID="txtEmail" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
 
             <div class="col">
-                <asp:Label ID="Label9" runat="server" Text="Descuento:"></asp:Label>
+                <asp:Label ID="Label9" runat="server" Text="Descuento:">
+                    <asp:RequiredFieldValidator ID="RfvDescuento" runat="server"
+                        Text="*"
+                        ControlToValidate="txtDescuento"
+                        ValidationGroup="1"
+                        ForeColor="#FF3300">
+                    </asp:RequiredFieldValidator>
+                </asp:Label>
                 <asp:TextBox CssClass="form-control" ID="txtDescuento" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
 
@@ -86,15 +123,15 @@
 
         <div class="mt-1 mb-3" style="display: flex; justify-content: flex-start; align-items: center">
             <h4>Buscar Materia a Matricular</h4>
-            <asp:Button ID="btnBuscarMateria" CssClass="btn btn-outline-primary ms-5" runat="server" Text="Buscar Curso" OnClick="btnBuscarMateria_Click" />
+            <asp:Button ID="btnBuscarMateria" CssClass="btn btn-outline-primary ms-5" runat="server" ValidationGroup="1" Text="Buscar Curso" OnClick="btnBuscarMateria_Click" />
         </div>
-
-        <asp:GridView ID="GrdVerMaterias" CssClass="mt-lg-2 mb-lg-2" AllowPaging="True" runat="server" AutoGenerateColumns="False" CellPadding="5" EmptyDataText="No se registran materias escogidas." GridLines="None" Width="100%" ForeColor="#333333" PageSize="5">
+        <hr class="mb-1 mt-1" />
+        <asp:GridView ID="GrdVerMaterias" CssClass="mt-5 mb-5" AllowPaging="True" runat="server" AutoGenerateColumns="False" CellPadding="5" EmptyDataText="No se registran materias escogidas." GridLines="None" Width="100%" ForeColor="#333333" PageSize="5">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:LinkButton ID="lnkEliminar" CommandArgument='<%# Eval("CodMateriaAbierta").ToString() %>' runat="server">Eliminar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkEliminar" CommandArgument='<%# Eval("CodMateriaAbierta").ToString() %>' runat="server" OnCommand="lnkEliminar_Command">Eliminar</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="CodMateriaAbierta" HeaderText="codMateriaAbierta" Visible="False" />
@@ -153,12 +190,24 @@
             </div>
 
             <div class="col">
-                <strong><asp:Label ID="Label15" runat="server" Text="Total a Pagar:"></asp:Label></strong>
+                <strong>
+                    <asp:Label ID="Label15" runat="server" Text="Total a Pagar:"></asp:Label></strong>
                 <asp:Label ID="lblTotalPagar" runat="server" Text=""></asp:Label>
             </div>
         </div>
 
-        <asp:Button ID="btnFacturar" CssClass="btn btn-outline-primary mt-3" runat="server" Text="Pagar Matrícula"/>
+        <div style="display:flex; justify-content:flex-end; align-items: baseline;">
+            <asp:Label ID="Label16" runat="server" CssClass="me-2" Text="Escoja un tipo de pago:"></asp:Label>
+            <asp:DropDownList CssClass="me-3" ID="dropDownTipoPago" runat="server">
+                <asp:ListItem>Efectivo</asp:ListItem>
+                <asp:ListItem>Tarjeta</asp:ListItem>
+                <asp:ListItem>Transferencia</asp:ListItem>
+                <asp:ListItem>Sinpe</asp:ListItem>
+            </asp:DropDownList>
+            <asp:Button ID="btnFacturar" CssClass="btn btn-outline-primary mt-3" runat="server" ValidationGroup="1" Text="Pagar Matrícula" OnClick="btnFacturar_Click" />
+        </div>
+
+        <asp:ValidationSummary CssClass="mt-2" ID="ValidationSummary1" Font-Italic="True" ForeColor="#CC0000" runat="server" ValidationGroup="1" />
 
     </div>
 

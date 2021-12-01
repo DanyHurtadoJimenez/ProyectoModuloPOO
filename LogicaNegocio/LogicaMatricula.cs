@@ -58,8 +58,8 @@ namespace LogicaNegocio
         #endregion
 
         #region Metodos
-        // Convert.ToDecimal(txtDescuentoE.Text), ref subtotal, ref montoDescuento,ref montoIVA, ref totalPagar, ref listaMateriasA
-        public double calcularCostos(decimal descuentoEstudiante, List<MateriasAbiertas> materias, double montoMatricula)
+        
+        public double calcularCostos(decimal descuentoEstudiante, DataSet materias, double montoMatricula)
         {
             double costos;
             ADMatricula accesoDatos = new ADMatricula(_cadenaConexion);//se instancia el acceso a los datos
@@ -90,7 +90,7 @@ namespace LogicaNegocio
                 throw;
             }
             _mensaje = accesoDatosMRT.Mensaje;
-            return numFactura;
+            return resultado;
         }
 
         public DataSet ListarMatriculas(string condicion)
@@ -147,13 +147,13 @@ namespace LogicaNegocio
         }
 
 
-        public int Modificar(int numFactura, List<MateriasAbiertas> materiasA)
+        public int EliminarMateriasE(int numFactura, int materiaA)
         {
-            int resultado = 0;
+            int resultado;
             ADMatricula accesoDatosMTR = new ADMatricula(_cadenaConexion);
             try
             {
-                resultado = accesoDatosMTR.ModificarMaterias(numFactura, materiasA);
+                resultado = accesoDatosMTR.EliminarMateriasEscogidas(numFactura, materiaA);
             }
             catch (Exception)
             {
@@ -163,13 +163,13 @@ namespace LogicaNegocio
             return resultado;
         }
 
-        public int Facturar(int numFactura)
+        public int Facturar(int numFactura, string tipoPago)
         {
             int resultado = 0;
             ADMatricula accesoDatosMRT = new ADMatricula(_cadenaConexion);
             try
             {
-                resultado = accesoDatosMRT.FacturarMatricula(numFactura);
+                resultado = accesoDatosMRT.FacturarMatricula(numFactura, tipoPago);
             }
             catch (Exception)
             {

@@ -34,14 +34,16 @@ namespace AccesoDatos
 
         #region Metodos
 
-        public double calcularCostos(decimal descuentoEstudiante, List<MateriasAbiertas> materias, ref double subtotal, ref double montoDescuentoE, ref double montoIVA, double montoMatricula)
+        public double calcularCostos(decimal descuentoEstudiante, DataSet materias, ref double subtotal, ref double montoDescuentoE, ref double montoIVA, double montoMatricula)
         {
             double totalPagar = 0;
 
-            for (int i = 0; i < materias.Count; i++)
+
+            for (int i = 0; i < materias.Tables[0].Rows.Count; i++)
             {
-                totalPagar += Convert.ToDouble(materias[i].Costo);
+                totalPagar += Convert.ToDouble(materias.Tables[0].Rows[0]["Costo"]); //sino hagalo con el dataset
             }
+
 
             subtotal = totalPagar + montoMatricula;
 
@@ -56,7 +58,7 @@ namespace AccesoDatos
 
         public int Insertar(Matricula matriculaE, int codMateriaA, int numeroFactura) //funciona tanto para matricular como para modificar la matricula
         {
-            int resultado = -1;
+            int resultado;
 
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
@@ -196,35 +198,32 @@ namespace AccesoDatos
         }
 
 
-        public int ModificarMaterias(int numFactura, List<MateriasAbiertas> materiasA)
+        public int EliminarMateriasEscogidas(int numFactura, int codMateriaAbierta)
         {
-            int resultado = -1;
-            DataTable dtaMateriasA = convertirArregloAdatatable(materiasA);//los horarios se convierten en un datatable para enviarlo como parametro al procedimiento del SQL
-            dtaMateriasA.TableName = "dbo.MateriasEscogidasType";
+            int resultado;
+            //DataTable dtaMateriasA = convertirArregloAdatatable(materiasA);//los horarios se convierten en un datatable para enviarlo como parametro al procedimiento del SQL
+            //dtaMateriasA.TableName = "dbo.MateriasEscogidasType";
 
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
 
-            comando.CommandText = "SP_MODIFICARMATERIASESCOGIDAS"; //nombre del procedimiento almacenado
+            comando.CommandText = "SP_ELIMINAR_MATERIAS_ESCOGIDAS"; //nombre del procedimiento almacenado
             comando.CommandType = CommandType.StoredProcedure;//se especifica que tipo de comando es, en este caso es un procedimiento almacenado
             comando.Connection = conexion;
             //parametro de entrada para el SP
             comando.Parameters.AddWithValue("@numFactura", numFactura);
-            SqlParameter dataTable = new SqlParameter();
-            dataTable.SqlDbType = SqlDbType.Structured;
-            dataTable.TypeName = "dbo.MateriasEscogidasType";
-            dataTable.Value = dtaMateriasA;
-            comando.Parameters.AddWithValue("@Materias", dataTable.Value);
+            comando.Parameters.AddWithValue("@CodMateriaAbierta", codMateriaAbierta); 
+
 
             //parametro de salida del SP
             comando.Parameters.Add("@msj", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
-            comando.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
+            //comando.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
 
             try
             {
                 conexion.Open();
-                comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
-                resultado = Convert.ToInt32(comando.Parameters["@resultado"].Value); //obtengo la variable de retorno
+                resultado = comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
+                //Convert.ToInt32(comando.Parameters["@resultado"].Value); //obtengo la variable de retorno
                 //se va a leer el parametro de salida del SP
                 _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
                 conexion.Close();
@@ -257,15 +256,16 @@ namespace AccesoDatos
 
         }
 
-        public int FacturarMatricula(int numFactura)
+        public int FacturarMatricula(int numFactura, string tipoPago)
         {
             int filasAfectadas = -1;
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
-            string sentencia = "update TBL_Matriculas set EstadoFactura = 'CAN' WHERE NumFactura = @numFactura";
+            string sentencia = "update TBL_Matriculas set EstadoFactura = 'CAN',TipoPago = @tipoPago WHERE NumFactura = @numFactura";
             comando.CommandText = sentencia;
             comando.Connection = conexion;
             comando.Parameters.AddWithValue("@numFactura", numFactura);
+            comando.Parameters.AddWithValue("@tipoPago", tipoPago);
 
             try
             {

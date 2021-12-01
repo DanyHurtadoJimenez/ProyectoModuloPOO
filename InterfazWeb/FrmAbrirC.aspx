@@ -159,6 +159,7 @@
                     ValidationGroup="1"
                     ForeColor="#FF3300">
                 </asp:RequiredFieldValidator>
+
             </asp:Label>
             <asp:TextBox CssClass="textBox" ID="txtHoraFin" TextMode="Time" runat="server"></asp:TextBox>
 

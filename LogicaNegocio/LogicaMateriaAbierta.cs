@@ -77,8 +77,17 @@ namespace LogicaNegocio
                         {
                             if (horario.HoraFin > horario.HoraInicio)
                             {
-                                codMateriaA = accesoDatosMA.InsertarMateriaAConSP(materiaAbierta, horario, codMateriaAB);
-                                _mensaje = accesoDatosMA.Mensaje;
+                                TimeSpan intervaloHoras = horario.HoraFin - horario.HoraInicio;
+                                if (intervaloHoras.Hours >= 1)
+                                {
+                                    codMateriaA = accesoDatosMA.InsertarMateriaAConSP(materiaAbierta, horario, codMateriaAB);
+                                    _mensaje = accesoDatosMA.Mensaje;
+                                }
+                                else
+                                {
+                                    _mensaje = "ERROR, Las horas deben tener al menos una hora de diferencia";
+                                }
+
                             }
                             else
                             {
