@@ -328,13 +328,13 @@ namespace AccesoDatos
         }
 
 
-        public int VerificarMatriculaEstudiante(string carnetEstudiante) //verifica si el estudiante posee una matricula activa para ver si puede volver a matricular o no
+        public int VerificarMatriculaEstudiante(string carnetEstudiante) //verifica si el estudiante posee una matricula activa Y CANCELADA para ver si puede volver a matricular o no
         {
             int resultado = 0;
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
 
-            comando.CommandText = string.Format("select 1 from TBL_Matriculas M inner join TBL_Estudiantes E on M.CarnetEstudiante = E.CarnetEstudiante where EstadoMatricula = 'ACT' and e.CarnetEstudiante = '{0}'", carnetEstudiante);
+            comando.CommandText = string.Format("select 1 from TBL_Matriculas M inner join TBL_Estudiantes E on M.CarnetEstudiante = E.CarnetEstudiante where EstadoMatricula = 'ACT' and EstadoFactura = 'CAN' and e.CarnetEstudiante = '{0}'", carnetEstudiante);
             comando.Connection = conexion;
 
             try

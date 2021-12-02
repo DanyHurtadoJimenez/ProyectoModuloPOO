@@ -32,21 +32,31 @@ namespace InterfazWeb
                         LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
                         int numFactura = logicaM.VerificarMatriculaPendiente(Session["_CarnetEstudiante"].ToString());
 
-                        if (numFactura > 0) //si el estudiante posee una matricula activa y pendiente entonces carguela en la pantalla
+                        if (logicaM.VerificarMatriculaEstudiante(Session["_CarnetEstudiante"].ToString()) == 0)
                         {
-                            CargarMatricula(numFactura); //carga la informacion en la pantalla
+                            if (numFactura > 0) //si el estudiante posee una matricula activa y pendiente entonces carguela en la pantalla
+                            {
+                                CargarMatricula(numFactura); //carga la informacion en la pantalla
 
+                            }
+                            else //sino la tiene entonces debe crearla
+                            {
+                                cargarEstudiante(Session["_CarnetEstudiante"].ToString());
+                            }
                         }
-                        else //sino la tiene entonces debe crearla
+                        else
                         {
-                            cargarEstudiante(Session["_CarnetEstudiante"].ToString());
+                            Session["_mensaje"] = "El estudiante no puede volver a matricular porque tiene una matricula activa la cual se muestra a continuación";
+                            btnBuscarMateria.Enabled = false;
+                            btnFacturar.Enabled = false;
                         }
+
                     }
 
                     if (Session["_codCurso"] != null) // se fija si existe un codigo de curso en la session el cual proviene de haber escogido cursos, si es asi entonces llame al metodo de matricular, para matricular ese curso escogido
                     {
-
                         matricular();
+
                     }
 
                 }
@@ -157,6 +167,8 @@ namespace InterfazWeb
 
         protected void btnBuscarEstudiante_Click(object sender, EventArgs e)
         {
+            btnBuscarMateria.Enabled = true;
+            btnFacturar.Enabled = true;
             Response.Redirect("frmBuscarAlumnos.aspx");
         }
 
@@ -168,24 +180,32 @@ namespace InterfazWeb
 
         private Matricula generarEntidad() //genera una entidad matricula
         {
-            Matricula matricula = new Matricula();
-
-            if (!string.IsNullOrEmpty(txtNumFactura.Text))
+            try
             {
-                matricula.CarnetEstudiante = new Estudiantes();
-                matricula.NumeroFactura = (Convert.ToInt32(txtNumFactura.Text));
-            }
-            else
-            {
-                matricula = new Matricula();
-                matricula.CarnetEstudiante = new Estudiantes();
-                matricula.NumeroFactura = -1;
+                Matricula matricula = new Matricula();
 
+                if (!string.IsNullOrEmpty(txtNumFactura.Text))
+                {
+                    matricula.CarnetEstudiante = new Estudiantes();
+                    matricula.NumeroFactura = (Convert.ToInt32(txtNumFactura.Text));
+                }
+                else
+                {
+                    matricula = new Matricula();
+                    matricula.CarnetEstudiante = new Estudiantes();
+                    matricula.NumeroFactura = -1;
+
+                }
+                matricula.CarnetEstudiante.CarnetEstudiante = txtCarnet.Text;
+                matricula.FechaMatricula = Convert.ToDateTime(txtFechaMatricula.Text);
+                matricula.MontoMatricula = Convert.ToDecimal(lblTotalPagar.Text);
+                return matricula;
             }
-            matricula.CarnetEstudiante.CarnetEstudiante = txtCarnet.Text;
-            matricula.FechaMatricula = Convert.ToDateTime(txtFechaMatricula.Text);
-            matricula.MontoMatricula = Convert.ToDecimal(lblTotalPagar.Text);
-            return matricula;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
@@ -306,22 +326,30 @@ namespace InterfazWeb
 
         protected void lnkEliminar_Command(object sender, CommandEventArgs e)
         {
-            LogicaMatricula matricula = new LogicaMatricula(Configuracion.getConnectionString);
-            Matricula matriculaEstudiante;
-            DataSet materias;
-            //listaMatriculadas.Clear();
-            int id = int.Parse(e.CommandArgument.ToString());//obtiene el id
+            try
+            {
+                LogicaMatricula matricula = new LogicaMatricula(Configuracion.getConnectionString);
+                Matricula matriculaEstudiante;
+                DataSet materias;
+                //listaMatriculadas.Clear();
+                int id = int.Parse(e.CommandArgument.ToString());//obtiene el id
 
-            matricula.EliminarMateriasE(Convert.ToInt32(txtNumFactura.Text), id);//elimina la materia escogida
-            Session["_mensaje"] = $"{matricula.Mensaje}";
-            materias = matricula.ListarMateriasMatriculadas(Convert.ToInt32(txtNumFactura.Text)); //obtiene en un dataset las materias matriculadas pertenecientes al numero de factura respectivo
-            listaMatriculadas = CargarLista(materias);
-            calcularCostos(listaMatriculadas); //se calculan costos
+                matricula.EliminarMateriasE(Convert.ToInt32(txtNumFactura.Text), id);//elimina la materia escogida
+                Session["_mensaje"] = $"{matricula.Mensaje}";
+                materias = matricula.ListarMateriasMatriculadas(Convert.ToInt32(txtNumFactura.Text)); //obtiene en un dataset las materias matriculadas pertenecientes al numero de factura respectivo
+                listaMatriculadas = CargarLista(materias);
+                calcularCostos(listaMatriculadas); //se calculan costos
 
-            matriculaEstudiante = generarEntidad();//obtengo la matricula actual para modificarla
-            matricula.ModificarMatricula(matriculaEstudiante);//se modifica
+                matriculaEstudiante = generarEntidad();//obtengo la matricula actual para modificarla
+                matricula.ModificarMatricula(matriculaEstudiante);//se modifica
 
-            CargarMateriasGridView(materias);//se carga la materia en el datagrid para poder verla
+                CargarMateriasGridView(materias);//se carga la materia en el datagrid para poder verla
+            }
+            catch (Exception ex)
+            {
+
+                Session["_mensaje"] = $"{ex.Message}";
+            }
         }
 
         protected void btnFacturar_Click(object sender, EventArgs e)
@@ -341,7 +369,7 @@ namespace InterfazWeb
                         if (resultado > 0)
                         {
                             Session["_numFactura"] = txtNumFactura.Text;
-                            Response.Redirect("frmDetalleMatriculaFactura.aspx",true);
+                            Response.Redirect("frmDetalleMatriculaFactura.aspx", false);
                         }
                     }
                     else
