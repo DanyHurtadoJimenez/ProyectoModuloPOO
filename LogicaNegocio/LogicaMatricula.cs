@@ -58,7 +58,7 @@ namespace LogicaNegocio
         #endregion
 
         #region Metodos
-        
+
         public double calcularCostos(decimal descuentoEstudiante, List<MateriasAbiertas> materias, double montoMatricula)
         {
             double costos;
@@ -240,6 +240,22 @@ namespace LogicaNegocio
                 throw;
             }
             _mensaje = accesoDatosMatricula.Mensaje;
+            return resultado;
+        }
+
+        public int ObtenerNumeroFactura(string idEstudiante)  //permite verificar si el estudiante posee una matricula pendiente de pago, esto para poder cargarla en la pantalla y ya sea facturarla o modificarla, obtiene el numero de factura
+        {
+            int resultado;
+            ADMatricula accesoDatosMRT = new ADMatricula(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMRT.ObtenerNumeroFactura(idEstudiante);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
             return resultado;
         }
 

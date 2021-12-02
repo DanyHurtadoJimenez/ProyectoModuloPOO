@@ -107,7 +107,7 @@ namespace InterfazWeb
             else
             {
                 materiaA.CodigoMateriaAbierta = -1;
-                materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = int.Parse(Session["_CodMateriaCarrera"].ToString());
+                materiaA.CodigoMateriaCarrera.CodigoMateriaCarrera = Convert.ToInt32(Session["_CodMateriaCarrera"].ToString());
                 materiaA.Existe = false;
             }
 
@@ -283,6 +283,34 @@ namespace InterfazWeb
 
                 Session["_mensaje"] = $"Error al cargar las Materias {ex.Message}";
             }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LogicaMateriaAbierta logicaMA = new LogicaMateriaAbierta(Configuracion.getConnectionString);
+                int resultado;
+                resultado = logicaMA.EliminarMateriaAbierta(int.Parse(Session["_CodMateriaAbierta"].ToString()));
+                Session["_mensaje"] = $"{logicaMA.Mensaje}";
+                if (resultado > 0)
+                {
+                    nudCupo.Text = string.Empty;
+                    txtCosto.Text = string.Empty;
+                    nudPeriodo.Text = string.Empty;
+                    DropDownAnios.SelectedIndex = -1;
+                    txtGrupo.Text = string.Empty;
+                    CargarDataSet(int.Parse(Session["_CodMateriaAbierta"].ToString()));
+                    Session["_CodMateriaAbierta"] = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Session["_mensaje"] = $"{ex.Message}";
+            }
+
         }
     }
 }

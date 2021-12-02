@@ -53,18 +53,22 @@ namespace AccesoDatos
 
             if (proceso == 1) //dependiendo de quien este llamando este metodo, realice la operacion con diferentes sentencias, puede ser llamada por abrir cursos o para matricular
             {
-                sentencia = string.Format("SELECT CodMateriaAbierta, CodigoMateria,NombreMateria,Requisito,nombreRequisito,NombreProfesor,NumeroAula," + //este fue llamado para matricular
+                sentencia = string.Format("SELECT CodMateriaAbierta, CodigoMateria,NombreMateria,Requisito,nombreRequisito,NombreProfesor,NumeroAula," + //este fue llamado para matricular solo muestra disponibles
                                                   "Grupo,cupo,costo FROM CONSULTA_CURSOS_ABIERTOS where Disponible = 0");
             }
             else
             {
                 sentencia = string.Format("SELECT CodMateriaAbierta, CodigoMateria, NombreMateria, NombreProfesor, " +
-                                  "NumeroAula, Grupo, Cupo, Costo, Periodo,Anio FROM CONSULTA_MATERIAS_ABIERTAS WHERE Disponible = 0 ");//este es llamado para abrir cursos
+                                  "NumeroAula, Grupo, Cupo, Costo, Periodo,Anio FROM CONSULTA_MATERIAS_ABIERTAS");//este es llamado para modificar cursos abiertos
             }
 
-            if (!string.IsNullOrEmpty(condicion))
+            if (!string.IsNullOrEmpty(condicion) && proceso == 1)
             { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia
                 sentencia = string.Format("{0} and {1}", sentencia, condicion);
+            }
+            else if (!string.IsNullOrEmpty(condicion))
+            { //si la condicion no esta vacia entonces concatene esa condicion a la sentencia
+                sentencia = string.Format("{0} where {1}", sentencia, condicion);
             }
 
 
@@ -298,7 +302,7 @@ namespace AccesoDatos
             materiaA.CodigoMateriaCarrera.CodigoCarreras = new Carreras();
             materiaA.CodigoMateriaCarrera.CodigoMateria = new Materias();
             materiaA.CodigoMateriaCarrera.Requisito = new Materias();
-           // materiaA.CodigoMateriaCarrera.Corequisito = new Materias();
+            // materiaA.CodigoMateriaCarrera.Corequisito = new Materias();
             materiaA.CodigoProfesor = new Profesores();
             materiaA.CodigoAula = new Aulas();
 
@@ -358,7 +362,7 @@ namespace AccesoDatos
 
 
         public int verificarRequisitos(string carnetEstudiante, string codRequisito)
-        { 
+        {
             int resultado = -1;
 
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
@@ -530,6 +534,43 @@ namespace AccesoDatos
                 comando.Dispose();
             }
             return filasAfectadas;
+        }
+
+
+
+        public int EliminarMateriaAbierta(int codMateriaAbierta)
+        {
+            int resultado;
+
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = "SP_EliminarMateriaAbierta"; //nombre del procedimiento almacenado
+            comando.CommandType = CommandType.StoredProcedure;//se especifica que tipo de comando es, en este caso es un procedimiento almacenado
+            comando.Connection = conexion;
+            //parametro de entrada para el SP
+            comando.Parameters.AddWithValue("@codMateriaAbierta", codMateriaAbierta);
+
+
+            //parametro de salida del SP
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+
+            try
+            {
+                conexion.Open();
+                resultado = comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
+                //se va a leer el parametro de salida del SP
+                _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+
         }
 
 

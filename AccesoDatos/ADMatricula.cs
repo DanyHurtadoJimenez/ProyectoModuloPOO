@@ -419,6 +419,31 @@ namespace AccesoDatos
 
         }
 
+        public int ObtenerNumeroFactura(string carnetEstudiante) //devuelve el numero de factura que tenga un estudiante
+        {
+            int numFactura = 0;
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = string.Format("SELECT NumFactura FROM TBL_Matriculas WHERE CarnetEstudiante = '{0}'", carnetEstudiante);
+            comando.Connection = conexion;
+
+            try
+            {
+                conexion.Open();
+                numFactura = Convert.ToInt32(comando.ExecuteScalar());
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return numFactura;
+
+        }
+
         #endregion
 
     }

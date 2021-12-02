@@ -61,3 +61,15 @@ C:\TareasC#\ProyectoPOOFinal\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.csproj.CopyComplete
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.dll
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.pdb
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\AccesoDatos.deps.json
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\AccesoDatos.dll
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\AccesoDatos.pdb
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\Entidades.dll
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\bin\Debug\netstandard2.0\Entidades.pdb
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.csprojAssemblyReference.cache
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.AssemblyInfoInputs.cache
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.AssemblyInfo.cs
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.csproj.CoreCompileInputs.cache
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.csproj.CopyComplete
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.dll
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\AccesoDatos\obj\Debug\netstandard2.0\AccesoDatos.pdb

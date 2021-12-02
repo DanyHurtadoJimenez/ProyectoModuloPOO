@@ -251,6 +251,22 @@ namespace LogicaNegocio
             return filasAfectadas;
         }
 
+        public int EliminarMateriaAbierta(int codMateriaAbierta)
+        {
+            int resultado;
+            ADMateriaAbierta accesoDatosMA = new ADMateriaAbierta(_cadenaConexion);
+            try
+            {
+                resultado = accesoDatosMA.EliminarMateriaAbierta(codMateriaAbierta);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            _mensaje = accesoDatosMA.Mensaje;
+            return resultado;
+        }
+
 
         #endregion
 

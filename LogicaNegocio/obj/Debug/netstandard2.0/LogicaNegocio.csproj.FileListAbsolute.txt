@@ -71,3 +71,17 @@ C:\TareasC#\ProyectoPOOFinal\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.csproj.CopyComplete
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.dll
 C:\TareasC#\ProyectoPOOFinal\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.pdb
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\LogicaNegocio.deps.json
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\LogicaNegocio.dll
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\LogicaNegocio.pdb
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\AccesoDatos.dll
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\Entidades.dll
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\AccesoDatos.pdb
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\bin\Debug\netstandard2.0\Entidades.pdb
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.csprojAssemblyReference.cache
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.AssemblyInfoInputs.cache
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.AssemblyInfo.cs
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.csproj.CoreCompileInputs.cache
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.csproj.CopyComplete
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.dll
+b:\Users\Progra\Desktop\ProyectoPOOFinalActaulizado\ProyectoPOODanyHurtado\LogicaNegocio\obj\Debug\netstandard2.0\LogicaNegocio.pdb

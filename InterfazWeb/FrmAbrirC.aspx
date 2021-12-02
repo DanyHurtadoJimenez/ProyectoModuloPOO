@@ -16,7 +16,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <%                                                                          //se muestra el mensaje y lo borra
-            Session["_mensaje"] = null; 
+            Session["_mensaje"] = null;
         } %>
 
 
@@ -195,12 +195,9 @@
 
 
         <div class="input-group mb-5 justify-content-center">
-            <asp:Button ID="Button1" CssClass="btn btn-danger mt-5 ms-5 " runat="server" Text="Eliminar Curso" />
+            <asp:Button ID="Button1" CssClass="btn btn-danger mt-5 ms-5 " runat="server" Text="Eliminar Curso" ValidationGroup="1" OnClick="Button1_Click" Style="left: 0px; top: 0px" />
             <asp:Button ID="btnSiguiente" CssClass="btn btn-primary btn-lg mt-5 ms-5" runat="server" ValidationGroup="1" Text="Siguiente" OnClick="btnSiguiente_Click" />
         </div>
-
-
-
 
     </div>
 

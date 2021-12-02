@@ -30,9 +30,9 @@ namespace InterfazWeb
                     if (Session["_CarnetEstudiante"] != null)
                     {
                         LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
-                        int numFactura = logicaM.VerificarMatriculaPendiente(Session["_CarnetEstudiante"].ToString());
+                        int numFactura = logicaM.VerificarMatriculaPendiente(Session["_CarnetEstudiante"].ToString());//verifica si hay matricula pendiente de pago, para poder verla y si se desea modificarla
 
-                        if (logicaM.VerificarMatriculaEstudiante(Session["_CarnetEstudiante"].ToString()) == 0)
+                        if (logicaM.VerificarMatriculaEstudiante(Session["_CarnetEstudiante"].ToString()) == 0) //verifica si el estudiante posee una matricula activa y cancelada
                         {
                             if (numFactura > 0) //si el estudiante posee una matricula activa y pendiente entonces carguela en la pantalla
                             {
@@ -41,14 +41,15 @@ namespace InterfazWeb
                             }
                             else //sino la tiene entonces debe crearla
                             {
-                                cargarEstudiante(Session["_CarnetEstudiante"].ToString());
+                                cargarEstudiante(Session["_CarnetEstudiante"].ToString());//carga la informacion del estudiante
                             }
                         }
                         else
                         {
-                            Session["_mensaje"] = "El estudiante no puede volver a matricular porque tiene una matricula activa la cual se muestra a continuación";
-                            btnBuscarMateria.Enabled = false;
-                            btnFacturar.Enabled = false;
+                            Session["_mensaje"] = "El estudiante no puede volver a matricular, ni tampoco puede modificar la matrícula, porque tiene una matricula cancelada y activa la cual se muestra a continuación";
+                            cargarEstudiante(Session["_CarnetEstudiante"].ToString());
+                            int factura = logicaM.ObtenerNumeroFactura(Session["_CarnetEstudiante"].ToString());//obtiene el numero de factura del estudiante 
+                            CargarMatricula(factura); //carga la informacion en la pantalla
                         }
 
                     }
@@ -167,14 +168,21 @@ namespace InterfazWeb
 
         protected void btnBuscarEstudiante_Click(object sender, EventArgs e)
         {
-            btnBuscarMateria.Enabled = true;
-            btnFacturar.Enabled = true;
+            Session["_CarnetEstudiante"] = null;
             Response.Redirect("frmBuscarAlumnos.aspx");
         }
 
         protected void btnBuscarMateria_Click(object sender, EventArgs e)
         {
-            Response.Redirect("FrmBuscarCursosAbiertos.aspx");
+            LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
+            if (logicaM.VerificarMatriculaEstudiante(Session["_CarnetEstudiante"].ToString()) == 0) //verifica que no sea un estudiante con matricula cancelada y activa
+            {
+                Response.Redirect("FrmBuscarCursosAbiertos.aspx");
+            }
+            else
+            {
+                Session["_mensaje"] = "El estudiante no puede volver a matricular, ni tampoco puede modificar la matrícula, porque tiene una matricula cancelada y activa la cual se muestra a continuación";
+            }
 
         }
 
@@ -328,22 +336,29 @@ namespace InterfazWeb
         {
             try
             {
-                LogicaMatricula matricula = new LogicaMatricula(Configuracion.getConnectionString);
-                Matricula matriculaEstudiante;
-                DataSet materias;
-                //listaMatriculadas.Clear();
-                int id = int.Parse(e.CommandArgument.ToString());//obtiene el id
+                LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
+                if (logicaM.VerificarMatriculaEstudiante(Session["_CarnetEstudiante"].ToString()) == 0) //verifica que no sea un estudiante con matricula cancelada y activa
+                {
+                    Matricula matriculaEstudiante;
+                    DataSet materias;
+                    int id = int.Parse(e.CommandArgument.ToString());//obtiene el id
 
-                matricula.EliminarMateriasE(Convert.ToInt32(txtNumFactura.Text), id);//elimina la materia escogida
-                Session["_mensaje"] = $"{matricula.Mensaje}";
-                materias = matricula.ListarMateriasMatriculadas(Convert.ToInt32(txtNumFactura.Text)); //obtiene en un dataset las materias matriculadas pertenecientes al numero de factura respectivo
-                listaMatriculadas = CargarLista(materias);
-                calcularCostos(listaMatriculadas); //se calculan costos
+                    logicaM.EliminarMateriasE(Convert.ToInt32(txtNumFactura.Text), id);//elimina la materia escogida
+                    Session["_mensaje"] = $"{logicaM.Mensaje}";
+                    materias = logicaM.ListarMateriasMatriculadas(Convert.ToInt32(txtNumFactura.Text)); //obtiene en un dataset las materias matriculadas pertenecientes al numero de factura respectivo
+                    listaMatriculadas = CargarLista(materias);
+                    calcularCostos(listaMatriculadas); //se calculan costos
 
-                matriculaEstudiante = generarEntidad();//obtengo la matricula actual para modificarla
-                matricula.ModificarMatricula(matriculaEstudiante);//se modifica
+                    matriculaEstudiante = generarEntidad();//obtengo la matricula actual para modificarla
+                    logicaM.ModificarMatricula(matriculaEstudiante);//se modifica
 
-                CargarMateriasGridView(materias);//se carga la materia en el datagrid para poder verla
+                    CargarMateriasGridView(materias);//se carga la materia en el datagrid para poder verla
+                }
+                else
+                {
+                    Session["_mensaje"] = "El estudiante no puede volver a matricular, ni tampoco puede modificar la matrícula, porque tiene una matricula cancelada y activa la cual se muestra a continuación";
+                }
+
             }
             catch (Exception ex)
             {
@@ -356,26 +371,33 @@ namespace InterfazWeb
         {
             try
             {
-                if (!string.IsNullOrEmpty(txtNumFactura.Text))
+                LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
+                if (logicaM.VerificarMatriculaEstudiante(Session["_CarnetEstudiante"].ToString()) == 0) //verifica que no sea un estudiante con matricula cancelada y activa
                 {
-                    if (dropDownTipoPago.SelectedIndex != -1)
+                    if (!string.IsNullOrEmpty(txtNumFactura.Text))
                     {
-                        int resultado;
-                        LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
-                        Matricula matricula;
-                        matricula = generarEntidad();
-                        logicaM.ModificarMatricula(matricula);//modifica por ultima vez la informacion de la matricula
-                        resultado = logicaM.Facturar(matricula.NumeroFactura, dropDownTipoPago.SelectedValue.ToString());
-                        if (resultado > 0)
+                        if (dropDownTipoPago.SelectedIndex != -1)
                         {
-                            Session["_numFactura"] = txtNumFactura.Text;
-                            Response.Redirect("frmDetalleMatriculaFactura.aspx", false);
+                            int resultado;
+                            Matricula matricula;
+                            matricula = generarEntidad();
+                            logicaM.ModificarMatricula(matricula);//modifica por ultima vez la informacion de la matricula
+                            resultado = logicaM.Facturar(matricula.NumeroFactura, dropDownTipoPago.SelectedValue.ToString());
+                            if (resultado > 0)
+                            {
+                                Session["_numFactura"] = txtNumFactura.Text;
+                                Response.Redirect("frmDetalleMatriculaFactura.aspx", false);
+                            }
+                        }
+                        else
+                        {
+                            Session["_mensaje"] = "Debe escoger un tipo de pago";
                         }
                     }
-                    else
-                    {
-                        Session["_mensaje"] = "Debe escoger un tipo de pago";
-                    }
+                }
+                else
+                {
+                    Session["_mensaje"] = "El estudiante no puede volver a matricular, ni tampoco puede modificar la matrícula, porque tiene una matricula cancelada y activa la cual se muestra a continuación";
                 }
 
             }
