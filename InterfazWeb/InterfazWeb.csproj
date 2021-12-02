@@ -79,6 +79,7 @@
     <Content Include="frmBuscarCursosAbiertos.aspx" />
     <Content Include="frmBuscarMateriaAbier.aspx" />
     <Content Include="frmBuscarMaterias.aspx" />
+    <Content Include="frmDetalleMatriculaFactura.aspx" />
     <Content Include="FrmInicio.aspx" />
     <Content Include="FrmMatricular.aspx" />
     <Content Include="JQuery\jQuery.js" />
@@ -138,6 +139,13 @@
     </Compile>
     <Compile Include="frmBuscarMaterias.aspx.designer.cs">
       <DependentUpon>frmBuscarMaterias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmDetalleMatriculaFactura.aspx.cs">
+      <DependentUpon>frmDetalleMatriculaFactura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmDetalleMatriculaFactura.aspx.designer.cs">
+      <DependentUpon>frmDetalleMatriculaFactura.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmInicio.aspx.cs">
       <DependentUpon>FrmInicio.aspx</DependentUpon>

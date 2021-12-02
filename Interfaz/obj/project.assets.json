@@ -514,11 +514,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
+      "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
       "projectName": "Interfaz",
-      "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
+      "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
       "packagesPath": "C:\\Users\\Dany\\.nuget\\packages\\",
-      "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\obj\\",
+      "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Interfaz\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -539,11 +539,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
-              "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj"
+            "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
+              "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj"
             },
-            "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj": {
-              "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj"
+            "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj": {
+              "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj"
             }
           }
         }

@@ -59,7 +59,7 @@ namespace LogicaNegocio
 
         #region Metodos
         
-        public double calcularCostos(decimal descuentoEstudiante, DataSet materias, double montoMatricula)
+        public double calcularCostos(decimal descuentoEstudiante, List<MateriasAbiertas> materias, double montoMatricula)
         {
             double costos;
             ADMatricula accesoDatos = new ADMatricula(_cadenaConexion);//se instancia el acceso a los datos
@@ -161,6 +161,22 @@ namespace LogicaNegocio
             }
             _mensaje = accesoDatosMTR.Mensaje;
             return resultado;
+        }
+
+        public void ModificarMatricula(Matricula matricula)
+        {
+
+            ADMatricula accesoDatosMTR = new ADMatricula(_cadenaConexion);
+            try
+            {
+                accesoDatosMTR.ModificarMatricula(matricula);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            _mensaje = accesoDatosMTR.Mensaje;
+
         }
 
         public int Facturar(int numFactura, string tipoPago)

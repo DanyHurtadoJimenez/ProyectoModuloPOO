@@ -16,7 +16,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <%                                                                          //se muestra el mensaje y lo borra
-                //Session["_mensaje"] = null; 
+                Session["_mensaje"] = null;
             } %>
 
         <div class="row mb-3">
@@ -24,7 +24,15 @@
             <h4>Informacion de la matrícula:</h4>
 
             <div class="col">
-                <asp:Label ID="Label4" runat="server" Text="Num Factura:"></asp:Label>
+                <asp:Label ID="Label4" runat="server" Text="Num Factura:">
+                    <asp:RequiredFieldValidator ID="RfvNumFactura" runat="server"
+                        ErrorMessage="Para facturar debe de haber una factura cargada"
+                        Text="*"
+                        ControlToValidate="txtCarnet"
+                        ValidationGroup="2"
+                        ForeColor="#FF3300">
+                    </asp:RequiredFieldValidator>
+                </asp:Label>
                 <asp:TextBox CssClass="form-control" ID="txtNumFactura" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
 
@@ -156,9 +164,6 @@
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
 
-        <hr class="mb-2 mt-2" />
-
-
         <div class="row mb-2">
 
             <div class="col">
@@ -196,7 +201,7 @@
             </div>
         </div>
 
-        <div style="display:flex; justify-content:flex-end; align-items: baseline;">
+        <div style="display: flex; justify-content: flex-end; align-items: baseline;">
             <asp:Label ID="Label16" runat="server" CssClass="me-2" Text="Escoja un tipo de pago:"></asp:Label>
             <asp:DropDownList CssClass="me-3" ID="dropDownTipoPago" runat="server">
                 <asp:ListItem>Efectivo</asp:ListItem>
@@ -204,10 +209,11 @@
                 <asp:ListItem>Transferencia</asp:ListItem>
                 <asp:ListItem>Sinpe</asp:ListItem>
             </asp:DropDownList>
-            <asp:Button ID="btnFacturar" CssClass="btn btn-outline-primary mt-3" runat="server" ValidationGroup="1" Text="Pagar Matrícula" OnClick="btnFacturar_Click" />
+            <asp:Button ID="btnFacturar" CssClass="btn btn-outline-primary mt-3" runat="server" ValidationGroup="2" Text="Pagar Matrícula" OnClick="btnFacturar_Click" />
         </div>
 
         <asp:ValidationSummary CssClass="mt-2" ID="ValidationSummary1" Font-Italic="True" ForeColor="#CC0000" runat="server" ValidationGroup="1" />
+        <asp:ValidationSummary CssClass="mt-2" ID="ValidationSummary2" Font-Italic="True" ForeColor="#CC0000" runat="server" ValidationGroup="2" />
 
     </div>
 

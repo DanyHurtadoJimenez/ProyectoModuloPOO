@@ -16,7 +16,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <%                                                                          //se muestra el mensaje y lo borra
-                //Session["_mensaje"] = null; 
+                Session["_mensaje"] = null; 
             } %>
 
         <div class="row mt-5">

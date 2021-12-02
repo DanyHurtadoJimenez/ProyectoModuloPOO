@@ -34,15 +34,19 @@ namespace AccesoDatos
 
         #region Metodos
 
-        public double calcularCostos(decimal descuentoEstudiante, DataSet materias, ref double subtotal, ref double montoDescuentoE, ref double montoIVA, double montoMatricula)
+        public double calcularCostos(decimal descuentoEstudiante, List<MateriasAbiertas> materias, ref double subtotal, ref double montoDescuentoE, ref double montoIVA, double montoMatricula)
         {
             double totalPagar = 0;
 
-
-            for (int i = 0; i < materias.Tables[0].Rows.Count; i++)
+            for (int i = 0; i < materias.Count; i++)
             {
-                totalPagar += Convert.ToDouble(materias.Tables[0].Rows[0]["Costo"]); //sino hagalo con el dataset
+                totalPagar += Convert.ToDouble(materias[i].Costo);
             }
+
+            //for (int i = 0; i < materias.Tables[0].Rows.Count; i++)
+            //{
+            //    totalPagar += Convert.ToDouble(materias.Tables[0].Rows[0]["Costo"]); //sino hagalo con el dataset
+            //}
 
 
             subtotal = totalPagar + montoMatricula;
@@ -201,8 +205,7 @@ namespace AccesoDatos
         public int EliminarMateriasEscogidas(int numFactura, int codMateriaAbierta)
         {
             int resultado;
-            //DataTable dtaMateriasA = convertirArregloAdatatable(materiasA);//los horarios se convierten en un datatable para enviarlo como parametro al procedimiento del SQL
-            //dtaMateriasA.TableName = "dbo.MateriasEscogidasType";
+
 
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
@@ -212,7 +215,7 @@ namespace AccesoDatos
             comando.Connection = conexion;
             //parametro de entrada para el SP
             comando.Parameters.AddWithValue("@numFactura", numFactura);
-            comando.Parameters.AddWithValue("@CodMateriaAbierta", codMateriaAbierta); 
+            comando.Parameters.AddWithValue("@CodMateriaAbierta", codMateriaAbierta);
 
 
             //parametro de salida del SP
@@ -237,6 +240,45 @@ namespace AccesoDatos
             return resultado;
 
         }
+
+
+        public void ModificarMatricula(Matricula matricula)
+        {
+          
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+
+            comando.CommandText = "SP_Modificar_Matricula"; //nombre del procedimiento almacenado
+            comando.CommandType = CommandType.StoredProcedure;//se especifica que tipo de comando es, en este caso es un procedimiento almacenado
+            comando.Connection = conexion;
+            //parametro de entrada para el SP
+            comando.Parameters.AddWithValue("@numeroFactura", matricula.NumeroFactura);
+            comando.Parameters.AddWithValue("@carnetEstudiante", matricula.CarnetEstudiante.CarnetEstudiante);
+            comando.Parameters.AddWithValue("@fechaMatricula", matricula.FechaMatricula);
+            comando.Parameters.AddWithValue("@montoMatricula", matricula.MontoMatricula);
+
+
+            //parametro de salida del SP
+            comando.Parameters.Add("@msj", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;//definicion del parametro de salida del procedimiento almacenado
+            //comando.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//se declara otro parametro de retorno del SP que obtenga el retorno del SP
+
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery(); //ejecuta el SP y se llenan las variables de retorno del SP
+                //Convert.ToInt32(comando.Parameters["@resultado"].Value); //obtengo la variable de retorno
+                //se va a leer el parametro de salida del SP
+                _mensaje = comando.Parameters["@msj"].Value.ToString();//obtiene el mensaje que se devolvio del SP
+                conexion.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
 
         public DataTable convertirArregloAdatatable(List<MateriasAbiertas> materiasAbiertas)
         {

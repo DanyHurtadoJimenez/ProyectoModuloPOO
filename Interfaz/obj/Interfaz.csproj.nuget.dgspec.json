@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj": {}
+    "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj": {}
   },
   "projects": {
-    "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj": {
+    "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj",
+        "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj",
         "projectName": "AccesoDatos",
-        "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj",
+        "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj",
         "packagesPath": "C:\\Users\\Dany\\.nuget\\packages\\",
-        "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\AccesoDatos\\obj\\",
+        "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\AccesoDatos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
-                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj"
+              "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
+                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj"
               }
             }
           }
@@ -73,14 +73,14 @@
         }
       }
     },
-    "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
+    "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
+        "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
         "projectName": "Entidades",
-        "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
+        "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
         "packagesPath": "C:\\Users\\Dany\\.nuget\\packages\\",
-        "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\obj\\",
+        "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -134,14 +134,14 @@
         }
       }
     },
-    "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj": {
+    "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
+        "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
         "projectName": "Interfaz",
-        "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
+        "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Interfaz\\Interfaz.csproj",
         "packagesPath": "C:\\Users\\Dany\\.nuget\\packages\\",
-        "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Interfaz\\obj\\",
+        "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Interfaz\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -162,11 +162,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
-                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj"
+              "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
+                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj"
               },
-              "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj": {
-                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj"
+              "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj": {
+                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj"
               }
             }
           }
@@ -202,14 +202,14 @@
         }
       }
     },
-    "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj": {
+    "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj",
+        "projectUniqueName": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj",
         "projectName": "LogicaNegocio",
-        "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj",
+        "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\LogicaNegocio\\LogicaNegocio.csproj",
         "packagesPath": "C:\\Users\\Dany\\.nuget\\packages\\",
-        "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\LogicaNegocio\\obj\\",
+        "outputPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\LogicaNegocio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -230,11 +230,11 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj": {
-                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj"
+              "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj": {
+                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj"
               },
-              "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
-                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj"
+              "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj": {
+                "projectPath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj"
               }
             }
           }

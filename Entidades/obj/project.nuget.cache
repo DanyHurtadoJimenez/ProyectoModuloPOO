@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qjKpNl1KdF13rd79+RBSO//6YCSg33bOjRSEqbs8BHp0Y9YLP3zb1mzzUVfpyPuYqQeYyZhJUJd6HSHe9gVPUg==",
+  "dgSpecHash": "3l4hkOmjIvruSSB3B7vogJvcmSLpvXDXQ49tzEx8mjfvcz9TbUI24Sa9UKudgvGnbYt8Vg/xH++DZWAzIEqIBQ==",
   "success": true,
-  "projectFilePath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
+  "projectFilePath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\Entidades\\Entidades.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dany\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Dany\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"

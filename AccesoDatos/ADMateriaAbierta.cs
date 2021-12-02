@@ -298,7 +298,7 @@ namespace AccesoDatos
             materiaA.CodigoMateriaCarrera.CodigoCarreras = new Carreras();
             materiaA.CodigoMateriaCarrera.CodigoMateria = new Materias();
             materiaA.CodigoMateriaCarrera.Requisito = new Materias();
-            materiaA.CodigoMateriaCarrera.Corequisito = new Materias();
+           // materiaA.CodigoMateriaCarrera.Corequisito = new Materias();
             materiaA.CodigoProfesor = new Profesores();
             materiaA.CodigoAula = new Aulas();
 

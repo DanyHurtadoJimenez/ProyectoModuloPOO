@@ -12,9 +12,9 @@ namespace InterfazWeb
 {
     public partial class FrmMatricular : System.Web.UI.Page
     {
+        List<MateriasAbiertas> listaMatriculadas = new List<MateriasAbiertas>();
         protected void Page_Load(object sender, EventArgs e)
         {
-
             try
             {
                 if (!IsPostBack)
@@ -35,6 +35,7 @@ namespace InterfazWeb
                         if (numFactura > 0) //si el estudiante posee una matricula activa y pendiente entonces carguela en la pantalla
                         {
                             CargarMatricula(numFactura); //carga la informacion en la pantalla
+
                         }
                         else //sino la tiene entonces debe crearla
                         {
@@ -90,6 +91,24 @@ namespace InterfazWeb
 
         }
 
+        private List<MateriasAbiertas> CargarLista(DataSet materias)
+        { //convierte un dataset a una lista de materias abiertas
+
+            MateriasAbiertas materiasA = new MateriasAbiertas();
+            List<MateriasAbiertas> materiasAbiertasLista = new List<MateriasAbiertas>();
+
+            foreach (DataRow curso in materias.Tables[0].Rows)
+            {
+                materiasAbiertasLista.Add(new MateriasAbiertas
+                {
+                    CodigoMateriaAbierta = Convert.ToInt32(curso["CodMateriaAbierta"]),
+                    Costo = Convert.ToInt32(curso["Costo"])
+                });
+            }
+
+            return materiasAbiertasLista;
+        }
+
         private void CargarMatricula(int numFactura)
         {
             Matricula matriculaEstudiante;
@@ -107,11 +126,12 @@ namespace InterfazWeb
                     txtNombre.Text = matriculaEstudiante.CarnetEstudiante.Nombre;
                     txtEmail.Text = matriculaEstudiante.CarnetEstudiante.CorreoElectronico;
                     txtDescuento.Text = matriculaEstudiante.CarnetEstudiante.Descuento.ToString();
-                    //comboTipoPago.SelectedItem = matriculaEstudiante.TipoPago.ToString();
+                    dropDownTipoPago.SelectedValue = matriculaEstudiante.TipoPago.ToString();
                     materias = traerMatricula.ListarMateriasMatriculadas(matriculaEstudiante.NumeroFactura); //obtiene en un dataset las materias matriculadas pertenecientes al numero de factura respectivo
+                    listaMatriculadas = CargarLista(materias);
                     CargarMateriasGridView(materias);
 
-                    calcularCostos(materias); // se vuelven a calcular los costos
+                    calcularCostos(listaMatriculadas); // se vuelven a calcular los costos
                 }
                 else
                 {
@@ -124,7 +144,7 @@ namespace InterfazWeb
             }
         }
 
-        private void calcularCostos(DataSet materias)
+        private void calcularCostos(List<MateriasAbiertas> materias)
         { //esta funcion permite calcular los costos de la matricula
 
             LogicaMatricula costosM = new LogicaMatricula();
@@ -146,25 +166,25 @@ namespace InterfazWeb
 
         }
 
-        private Matricula generarEntidad()
+        private Matricula generarEntidad() //genera una entidad matricula
         {
-            LogicaMatricula traerMatricula = new LogicaMatricula(Configuracion.getConnectionString);
-            Matricula matricula;
+            Matricula matricula = new Matricula();
 
             if (!string.IsNullOrEmpty(txtNumFactura.Text))
             {
-                matricula = traerMatricula.ObtenerMatricula(Convert.ToInt32(txtNumFactura.Text));
-                matricula.Existe = true;
+                matricula.CarnetEstudiante = new Estudiantes();
+                matricula.NumeroFactura = (Convert.ToInt32(txtNumFactura.Text));
             }
             else
             {
                 matricula = new Matricula();
                 matricula.CarnetEstudiante = new Estudiantes();
                 matricula.NumeroFactura = -1;
-                matricula.CarnetEstudiante.CarnetEstudiante = txtCarnet.Text;
-                matricula.FechaMatricula = Convert.ToDateTime(txtFechaMatricula.Text);
-                matricula.MontoMatricula = Convert.ToDecimal(lblTotalPagar.Text);
+
             }
+            matricula.CarnetEstudiante.CarnetEstudiante = txtCarnet.Text;
+            matricula.FechaMatricula = Convert.ToDateTime(txtFechaMatricula.Text);
+            matricula.MontoMatricula = Convert.ToDecimal(lblTotalPagar.Text);
             return matricula;
         }
 
@@ -179,7 +199,7 @@ namespace InterfazWeb
                 LogicaMatricula logicaMatricula = new LogicaMatricula(Configuracion.getConnectionString);
                 LogicaHorarios logicaH = new LogicaHorarios(Configuracion.getConnectionString);
 
-                int estudianteCumple = 1;
+                int estudianteCumple = 1; //la variable cambia si el estudiante no cumple con los requisitos 
                 if (Session["_codCurso"] != null)
                 {
                     materiaAbierta = logicaMA.ObtenerMateriaAbierta(Convert.ToInt32(Session["_codCurso"]));
@@ -202,13 +222,15 @@ namespace InterfazWeb
                                         LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
                                         Matricula matricula;
                                         int numFactura;
+                                        listaMatriculadas.Add(materiaAbierta);//se aniade la materia que se quiere agregar a la lista de materias que tiene ya la matricula cargada
+                                        calcularCostos(listaMatriculadas); // se calculan los costos
 
                                         matricula = generarEntidad();
-                                        numFactura = logicaM.Insertar(matricula, Convert.ToInt32(Session["_codCurso"]), Convert.ToInt32(txtNumFactura.Text));
+                                        numFactura = logicaM.Insertar(matricula, Convert.ToInt32(Session["_codCurso"]), Convert.ToInt32(txtNumFactura.Text)); //modifica la matricula insertada, agregando la materia
 
                                         materias = logicaMatricula.ListarMateriasMatriculadas(numFactura); //obtiene en un dataset las materias matriculadas pertenecientes al numero de factura respectivo
                                         CargarMateriasGridView(materias);//se carga la materia en el datagrid para poder verla
-                                        calcularCostos(materias); // se calculan los costos
+                                        //calcularCostos(listaMatriculadas); // se calculan los costos
                                         Session["_codCurso"] = null; //borra la variable en session para evitar que vuelva a matricular la misma la proxima vez que cargue el forms
 
                                     }
@@ -228,8 +250,8 @@ namespace InterfazWeb
                             {
                                 Matricula matricula;
 
-                                materias = llenarDataset(materiaAbierta); //llena el dataset con la materia seleccionada para poder pasarla a calcular costos que necesita un dataset para calcular y mostrar montos
-                                calcularCostos(materias); // se calculan los costos
+                                listaMatriculadas.Add(materiaAbierta); //se aniade la materia que se quiere insertar, esto para poder calcular los costos antes de insertar la materia
+                                calcularCostos(listaMatriculadas); // se calculan los costos
                                 matricula = generarEntidad();
 
                                 int numFactura;
@@ -238,6 +260,7 @@ namespace InterfazWeb
 
                                 materias = logicaMatricula.ListarMateriasMatriculadas(numFactura); //obtiene en un dataset las materias matriculadas pertenecientes al numero de factura respectivo
                                 CargarMateriasGridView(materias);//se carga la materia en el datagrid para poder verla
+                                listaMatriculadas.Clear(); //se limpia la lista
                                 Session["_codCurso"] = null;
                             }
                         }
@@ -263,56 +286,70 @@ namespace InterfazWeb
 
         }
 
-        private DataSet llenarDataset(MateriasAbiertas materia)
-        {
-            DataSet DS = new DataSet();
+        //private DataSet llenarDataset(MateriasAbiertas materia)
+        //{
+        //    DataSet DS = new DataSet();
 
-            DataTable DT = new DataTable();
-            DataColumn column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Decimal");
-            column.ColumnName = "Costo";
-            DT.Columns.Add(column);
+        //    DataTable DT = new DataTable();
+        //    DataColumn column = new DataColumn();
+        //    column.DataType = System.Type.GetType("System.Decimal");
+        //    column.ColumnName = "Costo";
+        //    DT.Columns.Add(column);
 
-            DT.Rows.Add(new object[] { materia.Costo });
+        //    DT.Rows.Add(new object[] { materia.Costo });
 
-            DS.Tables.Add(DT);
+        //    DS.Tables.Add(DT);
 
-            return DS;
+        //    return DS;
 
-        }
+        //}
 
         protected void lnkEliminar_Command(object sender, CommandEventArgs e)
         {
             LogicaMatricula matricula = new LogicaMatricula(Configuracion.getConnectionString);
+            Matricula matriculaEstudiante;
             DataSet materias;
+            //listaMatriculadas.Clear();
             int id = int.Parse(e.CommandArgument.ToString());//obtiene el id
-            matricula.EliminarMateriasE(Convert.ToInt32(txtNumFactura.Text), id);
+
+            matricula.EliminarMateriasE(Convert.ToInt32(txtNumFactura.Text), id);//elimina la materia escogida
             Session["_mensaje"] = $"{matricula.Mensaje}";
             materias = matricula.ListarMateriasMatriculadas(Convert.ToInt32(txtNumFactura.Text)); //obtiene en un dataset las materias matriculadas pertenecientes al numero de factura respectivo
+            listaMatriculadas = CargarLista(materias);
+            calcularCostos(listaMatriculadas); //se calculan costos
+
+            matriculaEstudiante = generarEntidad();//obtengo la matricula actual para modificarla
+            matricula.ModificarMatricula(matriculaEstudiante);//se modifica
+
             CargarMateriasGridView(materias);//se carga la materia en el datagrid para poder verla
-            calcularCostos(materias); // se calculan los costos
         }
 
         protected void btnFacturar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (dropDownTipoPago.SelectedIndex != -1)
+                if (!string.IsNullOrEmpty(txtNumFactura.Text))
                 {
-                    int resultado;
-                    LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
-                    Matricula matricula;
-                    matricula = generarEntidad();
-                    resultado = logicaM.Facturar(matricula.NumeroFactura, dropDownTipoPago.SelectedValue.ToString());
-                    if (resultado > 0)
+                    if (dropDownTipoPago.SelectedIndex != -1)
                     {
-                        //aqui se mostraria el formulario del recibo de la matricula
+                        int resultado;
+                        LogicaMatricula logicaM = new LogicaMatricula(Configuracion.getConnectionString);
+                        Matricula matricula;
+                        matricula = generarEntidad();
+                        logicaM.ModificarMatricula(matricula);//modifica por ultima vez la informacion de la matricula
+                        resultado = logicaM.Facturar(matricula.NumeroFactura, dropDownTipoPago.SelectedValue.ToString());
+                        if (resultado > 0)
+                        {
+                            Session["_numFactura"] = txtNumFactura.Text;
+                            Response.Redirect("frmDetalleMatriculaFactura.aspx",true);
+                        }
+                    }
+                    else
+                    {
+                        Session["_mensaje"] = "Debe escoger un tipo de pago";
                     }
                 }
-                else
-                {
-                    Session["_mensaje"] = "Debe escoger un tipo de pago";
-                }
+
             }
             catch (Exception ex)
             {

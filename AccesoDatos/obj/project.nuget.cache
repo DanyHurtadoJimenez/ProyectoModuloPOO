@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "a5rf57UJWqqchxdpNqhCJ0S0JU3ddBKp7VBwUucEA/bYAbQvqBMtSL33kM9gmTrH2w8PXN5LIZVMI0hFnF6KNA==",
+  "dgSpecHash": "ivmURmsvLCBKExg27p2SbGxlPJMmEENIZC1j/hW54RPKSM90REjDQ5fVUAud/hmKAWmtg5w6EPepCvV+N9Lf0A==",
   "success": true,
-  "projectFilePath": "C:\\TareasC#\\ProyectoPOOFinal\\PROYECTOPOOACTUALIZADOO\\ProyectoPOOFinal\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj",
+  "projectFilePath": "C:\\TareasC#\\ProyectoPOOFinal\\ProyectoPOOFinalActaulizado\\ProyectoPOODanyHurtado\\AccesoDatos\\AccesoDatos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dany\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Dany\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

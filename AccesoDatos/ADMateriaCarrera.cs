@@ -76,7 +76,7 @@ namespace AccesoDatos
             SqlConnection conexion = new SqlConnection(_cadenaConexion);
             SqlCommand comando = new SqlCommand();
             SqlDataReader dataReader;//el data reader no tiene constructor para llenarlo es mediante un execute
-            string sentencia = string.Format("select CodMateriaCarrera,C.CodigoCarrera,M.CodigoMateria, MC.Requisito,MC.corequisito,M.NombreMateria,C.NombreCarrera, M.CreditosMateria" +
+            string sentencia = string.Format("select CodMateriaCarrera,C.CodigoCarrera,M.CodigoMateria, MC.Requisito,M.NombreMateria,C.NombreCarrera, M.CreditosMateria" +
                                              " from TBL_MateriasCarreras MC inner join TBL_Materias M on "+
                                              " MC.CodigoMateria = M.CodigoMateria inner join TBL_Carreras C "+
                                              " on MC.CodigoCarrera = C.CodigoCarrera "+
@@ -87,7 +87,7 @@ namespace AccesoDatos
             materiaC.CodigoCarreras = new Carreras(); // se instancian los atributos que posee la clase MateriasCarreras
             materiaC.CodigoMateria = new Materias();
             materiaC.Requisito = new Materias();
-            materiaC.Corequisito = new Materias();
+
 
             try
             {
@@ -104,13 +104,9 @@ namespace AccesoDatos
                     {
                         materiaC.Requisito.CodigoMateria = dataReader.GetString(3); //el requisito y correquisito pueden ser nulos por lo tanto se verifica que no lleguen nulos
                     }
-                    if (!dataReader.IsDBNull(4))
-                    {
-                        materiaC.Corequisito.CodigoMateria = dataReader.GetString(4);
-                    }
-                    materiaC.CodigoMateria.NombreMateria = dataReader.GetString(5);
-                    materiaC.CodigoCarreras.NombreCarrera = dataReader.GetString(6);
-                    materiaC.CodigoMateria.CreditosMateria = dataReader.GetByte(7);
+                    materiaC.CodigoMateria.NombreMateria = dataReader.GetString(4);
+                    materiaC.CodigoCarreras.NombreCarrera = dataReader.GetString(5);
+                    materiaC.CodigoMateria.CreditosMateria = dataReader.GetByte(6);
 
                 }
                 conexion.Close();
